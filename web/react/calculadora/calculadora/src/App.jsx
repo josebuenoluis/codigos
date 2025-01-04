@@ -23,10 +23,22 @@ function App() {
           setInput(valor);
         }
       }else{
-        setInput(input + valor);
+        if("0123456789".includes(valor)){
+          setInput(input + valor);
+        }else if(valor === "."){
+          if (validarDecimal()){
+            setInput(input + valor);
+          }
+        }else if("/*-+".includes(valor)){
+          if (validarOperador()){
+            setInput(input + valor);
+          }
+        }
       }
     }
-    else{
+    else if(input.length <= 20){
+      console.log("En agregar input: "+input);
+      debugger;
       setOperacion(false);
       setInput("0");
       if("0123456789".includes(valor)){
@@ -45,7 +57,6 @@ function App() {
   
   const validarDecimal = () => {
     let valido = false;
-    console.log("En validar decimal: "+input);
     let inputSplit = "";
     try{
       inputSplit = input.toString().split(/[\+\-\*\/]/);
@@ -64,7 +75,6 @@ function App() {
 
   const validarOperador = () => {
     let valido = false;
-    console.log("En validar operador: "+input);
     let inputSplit = "";
     try{
       inputSplit = input.split(/[\+\-\*\/]/);
@@ -74,6 +84,10 @@ function App() {
     let ultimoNumero = inputSplit.at(-1);
     if (ultimoNumero === "") {
       valido = false;
+    }
+    else if(ultimoNumero === "-"){
+      console.log("En validar operador: "+ultimoNumero);
+      valido = true;
     }else{
       valido = true;
     }
@@ -96,12 +110,12 @@ function App() {
     if(input){
       if (validarOperacion()){
         setCalculos("="+input);
-        setInput(evaluate(input));
+        setInput(evaluate(input).toString());
         setOperacion(true);
       }
     }else{
       alert("Por favor ingresar valores.");
-    }
+    }  
   };
     const handleTeclado = (event) => {
       if ("0123456789".includes(event.key)) {
@@ -120,12 +134,18 @@ function App() {
       else if (event.key === "Enter") {
         calcularResultado();
       }else if(event.key === "Escape"){
-        console.log("Borrar")
         setInput("0");
       }else if(event.key === "Backspace"){
-        setInput(input.slice(0,-1));
+        retroceso();
       }
     };
+
+    const retroceso = () => {
+      setInput(input.toString().slice(0,-1))
+      if(input.toString().length <= 1){
+        setInput("0");
+      }
+    }
 
     useEffect(() => {
       window.addEventListener('keyup', handleTeclado);
@@ -164,12 +184,7 @@ function App() {
         </div>
         <div className="fila">
           <BotonClear manejarClear={() => setInput("0")}>C</BotonClear>
-          <BotonBack manejarClear={() => {
-            setInput(input.slice(0,-1))
-              if(input.length === 1){
-                setInput("0");
-              }
-            }}>CE</BotonBack>
+          <BotonBack manejarClear={retroceso}>CE</BotonBack>
         </div>
       </div>
     </div>
