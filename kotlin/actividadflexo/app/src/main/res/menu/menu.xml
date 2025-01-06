@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/naranja"
+        android:title="Up naranja" />
+    <item android:id="@+id/azul"
+        android:title="Down azul" />
+    <item android:id="@+id/blanco"
+        android:title="All blanco"/>
+    <item android:id="@+id/direccion"
+        android:title=""
+        android:icon="@drawable/renewable"
+        android:showAsAction="always"/>
+</menu>

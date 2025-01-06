@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/padre2"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <EditText
+            android:id="@+id/direccionText"
+            android:layout_width="300dp"
+            android:layout_height="48dp"
+            android:hint="Ingrese la Ip del relé"
+            android:textSize="25sp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:gravity="center">
+        <Button
+            android:id="@+id/guardar"
+            android:layout_width="300dp"
+            android:layout_height="48dp"
+            android:text="Guardar"
+            android:textSize="30sp"
+            android:background="@color/naranjita"/>
+    </LinearLayout>
+
+</LinearLayout>
