@@ -6,17 +6,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-//public interface RetrofitService{
-//    @GET("rpc/Switch.Set")
-//    suspend fun controlRele(
-//        @Query("id") id: Int,
-//        @Query("on") on: Boolean
-//    )
-//}
-
-public interface RetrofitService{
-    @GET("/")
-    fun controlRele(): Call<Void>
+interface RetrofitService{
+    @GET("rpc/Switch.Set")
+     fun controlRele(
+        @Query("id") id: Int,
+        @Query("on") on: Boolean
+    ): Call<Unit>
 }
 
 object ClienteRetrofit{

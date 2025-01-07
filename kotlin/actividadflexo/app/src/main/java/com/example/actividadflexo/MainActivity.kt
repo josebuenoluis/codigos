@@ -22,7 +22,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
 import com.example.actividadflexo.ui.theme.ActividadflexoTheme
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
+import retrofit2.create
 
  class MainActivity : ComponentActivity() {
     private lateinit var linearPadre : LinearLayout
@@ -54,9 +58,10 @@ import retrofit2.Retrofit
     private fun cambioSwitch(){
         if(switchButton.isChecked){
             togglebutton.isChecked = true
-            peticion()
+            peticion(0,switchButton.isChecked)
             mostrarToast("Switch activado correctamente")
         }else{
+            peticion(0,switchButton.isChecked)
             togglebutton.isChecked = false
             mostrarToast("Switch desactivado correctamente")
         }
@@ -70,9 +75,10 @@ import retrofit2.Retrofit
     private fun cambioToggle(){
         if(togglebutton.isChecked){
             switchButton.isChecked = true
-            peticion()
+            peticion(0,togglebutton.isChecked)
             mostrarToast("Switch activado correctamente")
         }else{
+            peticion(0,togglebutton.isChecked)
             switchButton.isChecked = false
             mostrarToast("Switch desactivado correctamente")
         }
@@ -83,23 +89,29 @@ import retrofit2.Retrofit
         startActivity(intent)
     }
 
-    private fun peticion(){
-        var ip = intent.getStringExtra("ip")
-        ip = "http://$ip/"
-        println(ip)
-        clienteRetrofit = ClienteRetrofit.crearServicioRetrofit(ip)
-        lifecycleScope.launch{
-            try {
-                val response = clienteRetrofit.controlRele()
-                println("Conexion exitosa")
-            } catch (e: Exception) {
-                println("Conexion fallida")
-            }
-        }
+     private fun peticion(id:Int,encender:Boolean){
+         var ip = intent.getStringExtra("ip")
+         ip = "http://$ip/"
+         clienteRetrofit = ClienteRetrofit.crearServicioRetrofit(ip)
+         val llamada = clienteRetrofit.controlRele(id,encender)
+         llamada.enqueue(object : Callback<Unit> {
+             override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+                 if (response.isSuccessful) {
+                     println("Peticion exitosa")
+                 } else {
+                     println("Peticion fallida")
+                 }
+             }
 
-    }
+             override fun onFailure(call: Call<Unit>, t: Throwable) {
+                 println("Fallo en la conexion: " + t.message)
+                 mostrarToast("Fallo en la conexion")
+             }
+         })
+     }
 
-    override fun onMenuItemSelected(featureId: Int, item: MenuItem): Boolean {
+
+     override fun onMenuItemSelected(featureId: Int, item: MenuItem): Boolean {
         when(item.itemId){
             R.id.naranja -> {
                 println("Presiono naranja")
