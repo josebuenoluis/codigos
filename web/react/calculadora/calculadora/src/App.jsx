@@ -21,6 +21,10 @@ function App() {
         if ("0123456789".includes(valor)) {
           setInput("");
           setInput(valor);
+        }else if(valor=="-"){
+          if(validarNegativo()){
+            setInput(input+valor);
+          }
         }
       }else{
         if("0123456789".includes(valor)){
@@ -32,6 +36,10 @@ function App() {
         }else if("/*-+".includes(valor)){
           if (validarOperador()){
             setInput(input + valor);
+          }else if(valor=="-"){
+            if(validarNegativo()){
+              setInput(input+valor);
+            }
           }
         }
       }
@@ -67,6 +75,7 @@ function App() {
     console.log("En validar decimal: "+ultimoNumero+" - "+inputSplit);
     if (!ultimoNumero.includes(".")) {
       valido = true;
+    
     } else {  
       valido = false;
     }
@@ -82,6 +91,7 @@ function App() {
       inputSplit = "";
     }
     let ultimoNumero = inputSplit.at(-1);
+    debugger
     if (ultimoNumero === "") {
       valido = false;
     }
@@ -129,6 +139,10 @@ function App() {
           }else{
             agregarInput(event.key);
           }
+        }else if(event.key=="-"){
+          if(validarNegativo()){
+            agregarInput(event.key);
+          }
         }
       }
       else if (event.key === "Enter") {
@@ -139,6 +153,15 @@ function App() {
         retroceso();
       }
     };
+
+    const validarNegativo = () => {
+      let valido = false;
+      if(input.at(-1) != "-"){
+        valido = true;
+      }
+
+      return valido;
+    }
 
     const retroceso = () => {
       setInput(input.toString().slice(0,-1))
