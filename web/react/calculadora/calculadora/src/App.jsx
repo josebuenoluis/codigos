@@ -21,9 +21,13 @@ function App() {
         if ("0123456789".includes(valor)) {
           setInput("");
           setInput(valor);
-        }else if(valor=="-"){
-          if(validarNegativo()){
-            setInput(input+valor);
+        }else if("/*-+".includes(valor)){
+          if (validarOperador()){
+            setInput(input + valor);
+          }else if(valor=="-"){
+            if(validarNegativo()){
+              setInput(input+valor);
+            }
           }
         }
       }else{
