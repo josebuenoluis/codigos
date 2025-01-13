@@ -1,7 +1,9 @@
  package com.example.actividadflexo
 
 import android.content.ClipData.Item
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -35,6 +37,7 @@ import retrofit2.create
     private lateinit var linear1 : LinearLayout
     private lateinit var linear2 : LinearLayout
     private lateinit var clienteRetrofit : RetrofitService
+    private lateinit var archivo : SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -49,6 +52,8 @@ import retrofit2.create
         togglebutton.textOn = "Flexo On"
         togglebutton.textOff = "Flexo Off"
         togglebutton.setOnClickListener { cambioToggle() }
+
+        archivo = getSharedPreferences("direccion", Context.MODE_PRIVATE)
 
         switchButton = findViewById(R.id.switchButton)
         switchButton.setOnClickListener { cambioSwitch() }
@@ -90,24 +95,28 @@ import retrofit2.create
     }
 
      private fun peticion(id:Int,encender:Boolean){
-         var ip = intent.getStringExtra("ip")
-         ip = "http://$ip/"
-         clienteRetrofit = ClienteRetrofit.crearServicioRetrofit(ip)
-         val llamada = clienteRetrofit.controlRele(id,encender)
-         llamada.enqueue(object : Callback<Unit> {
-             override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
-                 if (response.isSuccessful) {
-                     println("Peticion exitosa")
-                 } else {
-                     println("Peticion fallida")
+         var ip = archivo.getString("ip","")
+         if(!ip.isNullOrEmpty()){
+             ip = "http://$ip/"
+             clienteRetrofit = ClienteRetrofit.crearServicioRetrofit(ip)
+             val llamada = clienteRetrofit.controlRele(id,encender)
+             llamada.enqueue(object : Callback<Unit> {
+                 override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+                     if (response.isSuccessful) {
+                         println("Peticion exitosa")
+                     } else {
+                         println("Peticion fallida")
+                     }
                  }
-             }
 
-             override fun onFailure(call: Call<Unit>, t: Throwable) {
-                 println("Fallo en la conexion: " + t.message)
-                 mostrarToast("Fallo en la conexion")
-             }
-         })
+                 override fun onFailure(call: Call<Unit>, t: Throwable) {
+                     println("Fallo en la conexion: " + t.message)
+                     mostrarToast("Fallo en la conexion")
+                 }
+             })
+         }else{
+             mostrarToast("Debe ingresar una direccion Ip")
+         }
      }
 
 
