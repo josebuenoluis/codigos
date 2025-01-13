@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/teal_200">
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cerrar sesion Icono"
+            android:textSize="16sp"
+            android:textColor="@color/black"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Menu Icono"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:background="@color/purple_700"
+        android:layout_below="@id/header"
+        >
+        <EditText
+            android:id="@+id/input"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:background="@color/white"
+            android:textSize="18sp"
+            android:hint="Mensaje..."
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"/>
+        <Button
+        android:id="@+id/boton"
+        android:text="Toast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/input"
+            android:layout_marginTop="20dp"/>
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,5 +1,21 @@
-import socket
-import threading
+import socket,subprocess,threading
+
+
+def comandos(cliente_socket,addr):
+    while True:
+        cliente_socket.send("#root>".encode('utf-8'))
+        comando = cliente_socket.recv(1024).decode('utf-8').lower()
+        if comando.strip() == "exit":
+            cliente_socket.send("Saliendo de consola...\n".encode('utf-8'))
+            break
+        try:
+            proceso = subprocess.run(["sudo","bash","-c",comando.strip()],stdout=subprocess.PIPE,text=True)
+            proceso.check_returncode()
+            cliente_socket.send(f"{proceso.stdout}\n".encode('utf-8'))
+        except:
+            cliente_socket.send(f"Error al ejecutar comando.\n".encode('utf-8'))
+        
+        
 
 def manejarCliente(cliente_socket,addr):
     datos = []
@@ -18,6 +34,7 @@ def manejarCliente(cliente_socket,addr):
             if len(datos) == 2:
                 if validarUsuario(user=datos[0],password=datos[1]):
                     cliente_socket.send("Sesion Iniciada.\n".encode('utf-8'))
+                    comandos(cliente_socket,addr)
                     datos.clear()
                 else:
                     datos.clear()
@@ -41,6 +58,7 @@ def iniciarTelnet():
             clienteSocket,addr = s.accept()
             print(f"\nConexion aceptada con la direccion IP: {addr[0]} PORT: {addr[1]}\n")
             hilo = threading.Thread(target=manejarCliente,args=(clienteSocket,addr))
+            hilo.daemon = True
             hilo.start()
     except Exception as error:
         print(f"ERROR AL INICIAR: {error}")
