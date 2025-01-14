@@ -50,7 +50,6 @@ function App() {
     }
     else if(input.length <= 20){
       console.log("En agregar input: "+input);
-      debugger;
       setOperacion(false);
       setInput("0");
       if("0123456789".includes(valor)){
@@ -95,7 +94,6 @@ function App() {
       inputSplit = "";
     }
     let ultimoNumero = inputSplit.at(-1);
-    debugger
     if (ultimoNumero === "") {
       valido = false;
     }
@@ -160,7 +158,8 @@ function App() {
 
     const validarNegativo = () => {
       let valido = false;
-      if(input.at(-1) != "-"){
+      let conteoNegativo = input.slice(-2,-1).split("-").length - 1;
+      if(conteoNegativo == 0){
         valido = true;
       }
 

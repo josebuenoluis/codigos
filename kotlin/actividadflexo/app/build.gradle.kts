@@ -3,7 +3,6 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
 }
-
 android {
     namespace = "com.example.actividadflexo"
     compileSdk = 35
@@ -38,6 +37,8 @@ android {
         compose = true
     }
 }
+
+
 
 dependencies {
 

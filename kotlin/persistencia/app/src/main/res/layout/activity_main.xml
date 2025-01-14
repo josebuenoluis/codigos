@@ -1,7 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:orientation="vertical"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/teal_200">
+    <RelativeLayout
+        android:id="@+id/padre2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/purple_500">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Persistencia Ip"
+            android:textSize="24sp"
+            android:textColor="@color/white"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:background="@color/purple_200"
+        android:layout_below="@id/padre2">
+        <EditText
+            android:id="@+id/clave"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"/>
+        <EditText
+            android:id="@+id/valor"
+            android:layout_width="150dp"
+            android:layout_height="40dp" />
+        <Button
+            android:id="@+id/boton"
+            android:layout_width="150dp"
+            android:layout_height="40dp" />
 
-</LinearLayout>
+    </RelativeLayout>
+
+
+</RelativeLayout>
