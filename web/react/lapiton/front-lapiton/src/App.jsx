@@ -1,13 +1,18 @@
 import { useState } from 'react'
-
+import { Routes,Route } from 'react-router-dom'
 import './App.css'
+import Inicio from './componentes/rutas/inicio'
+import Novedades from './componentes/rutas/novedades'
 
 function App() {
-
   return (
     <>
-      <h1>Hola en la aplicacion principa!</h1>
-      <h1>Hola en la aplicacion principal!</h1>
+      <div className="Aplicacion">
+      <Routes>
+        <Route path="/inicio" element={ <Inicio /> } />
+        <Route path="novedades" element={ <Novedades /> } />
+      </Routes>
+    </div>
     </>
   )
 }
