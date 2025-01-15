@@ -1,8 +1,8 @@
-
 import json
-from urllib import request
+from urllib import request,error
 import sys
 from datetime import datetime
+
 try:
     fecha = sys.argv[1]
 
@@ -15,5 +15,13 @@ try:
     fecha = datetime.fromtimestamp(float(resultado["prices"][0]["time"])).strftime("%d/%m/%y")
 
     print(f"\nEl valor del Bitcoin el {fecha} era de {resultado["prices"][0]["EUR"]}€")
-except:
+
+
+except IndexError:
     print("\nDebe ingresar una fecha valida.\n")
+except ValueError:
+    print("\nDebe ingresar una fecha en el formato <dia>/<mes>/<año>")
+except error.URLError:
+    print("\nError de conexion")
+except Exception as error:
+    print(f"Otro error {error} tipo {type(error)}")
