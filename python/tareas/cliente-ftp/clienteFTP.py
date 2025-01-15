@@ -1,6 +1,4 @@
-import ftplib
-import os
-import sys
+import ftplib,os,sys
 
 def subirArchivo(ftp_cliente: ftplib.FTP) -> None:
     try:
