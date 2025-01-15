@@ -6,4 +6,4 @@ function RankingComponent() {
   )
 }
 
-export default RankingComponent
+export default RankingComponent;
