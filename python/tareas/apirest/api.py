@@ -16,7 +16,6 @@ try:
 
     print(f"\nEl valor del Bitcoin el {fecha} era de {resultado["prices"][0]["EUR"]}€")
 
-
 except IndexError:
     print("\nDebe ingresar una fecha valida.\n")
 except ValueError:
