@@ -21,7 +21,6 @@ def descargarArchivo(ftp_cliente: ftplib.FTP) -> None:
         nombre_archivo = input("\nIngrese el nombre del archivo a descargar: ")
         with open(nombre_archivo, "wb") as archivo:
             def callback(data):
-                print(data)
                 archivo.write(data)
                 print(f"\rDescargando {nombre_archivo}...", end="")
             ftp_cliente.retrbinary(f"RETR {nombre_archivo}", callback)
