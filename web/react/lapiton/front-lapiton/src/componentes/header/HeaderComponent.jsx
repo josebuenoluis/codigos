@@ -5,8 +5,14 @@ import Logo from '../../assets/imagenLogoPiton.png'
 import '../css/HeaderComponent.css'
 
 function HeaderComponent() {
+
+  const [categorias,SetCategorias] = useState(["Accion","Multijugador","Supervivencia"]);
+
   function desplegableCategorias(){
-    console.log("DENTRO")
+    let lista = document.getElementById("#desplegable-categorias");
+    for(categoria in categorias){
+      lista.appendChild();
+    }
   }
   return (
     <header>
@@ -18,11 +24,9 @@ function HeaderComponent() {
           <ul>
             <li><Link to="/">Inicio</Link></li>
             <li>
+              <a href="#">Categorias</a>
               <ul id='desplegable-categorias' onMouseMove={desplegableCategorias}>
-                <li>Categorias</li>
-                <li>Accion</li>
-                <li>Multijugador</li>
-                <li>Supervivencia</li>
+                    
               </ul>
             </li>
             <li><Link to="ranking">Ranking</Link></li>
