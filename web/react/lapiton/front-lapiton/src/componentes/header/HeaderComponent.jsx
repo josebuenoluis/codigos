@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
 import Logo from '../../assets/imagenLogoPiton.png'
 import '../css/HeaderComponent.css'
 
@@ -14,10 +15,19 @@ function HeaderComponent() {
             <img src={Logo} alt="logo" />
         </div>
         <nav>
-            <Link to="/">Inicio</Link>
-            <a href="#" onMouseMove={desplegableCategorias}>Categorias</a>
-            <Link to="ranking">Ranking</Link>
-            <Link to="novedades">Novedades</Link>
+          <ul>
+            <li><Link to="/">Inicio</Link></li>
+            <li>
+              <ul id='desplegable-categorias' onMouseMove={desplegableCategorias}>
+                <li>Categorias</li>
+                <li>Accion</li>
+                <li>Multijugador</li>
+                <li>Supervivencia</li>
+              </ul>
+            </li>
+            <li><Link to="ranking">Ranking</Link></li>
+            <li><Link to="novedades">Novedades</Link></li>
+          </ul>
         </nav>
     </header>
   )

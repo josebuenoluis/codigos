@@ -35,6 +35,34 @@ header nav{
     margin-bottom: 5.62rem;
     margin-right: 5rem;
 }
+
+header nav ul{
+    display: flex;
+    list-style: none;
+}
+
+#desplegable-categorias{
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+#desplegable-categorias li{
+    font-family: "Cherry Bomb One", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.25rem;
+    padding: 15px 20px;
+    cursor: pointer;
+    background-color: white;
+    border: 1px solid black;
+}
+
+#desplegable-categorias li:hover{
+    opacity: .60;
+}
+
+
 header nav a{
     font-family: "Cherry Bomb One", system-ui;
     font-weight: 400;
