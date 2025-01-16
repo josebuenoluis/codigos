@@ -4,6 +4,9 @@ import Logo from '../../assets/imagenLogoPiton.png'
 import '../css/HeaderComponent.css'
 
 function HeaderComponent() {
+  function desplegableCategorias(){
+    console.log("DENTRO")
+  }
   return (
     <header>
         <div className="logo-header">
@@ -12,7 +15,7 @@ function HeaderComponent() {
         </div>
         <nav>
             <Link to="/">Inicio</Link>
-            <a href="#">Categorias</a>
+            <a href="#" onMouseMove={desplegableCategorias}>Categorias</a>
             <Link to="ranking">Ranking</Link>
             <Link to="novedades">Novedades</Link>
         </nav>

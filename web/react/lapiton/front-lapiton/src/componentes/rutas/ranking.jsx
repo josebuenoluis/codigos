@@ -1,8 +1,11 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom'
 function RankingComponent() {
   return (
-    <div>ranking</div>
+    <div>
+      <h1>Pagina de ranking</h1>
+      <Link to="/">Ir a inicio</Link>
+    </div>
   )
 }
 

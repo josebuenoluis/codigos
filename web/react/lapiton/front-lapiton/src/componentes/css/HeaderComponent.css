@@ -1,4 +1,8 @@
-
+body{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 header{
     background-color: #BDE46B;
     height: 10%;
@@ -38,5 +42,10 @@ header nav a{
     font-size: 1.25rem;
     text-decoration: none;
     color: black;
-    margin-right: 0.94rem;
+    padding: 15px 20px;
+}
+
+header nav a:hover{
+    background-color: white;
+    opacity: .60;
 }
