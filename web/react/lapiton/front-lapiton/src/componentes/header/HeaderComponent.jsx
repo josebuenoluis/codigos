@@ -7,11 +7,29 @@ import '../css/HeaderComponent.css'
 function HeaderComponent() {
 
   const [categorias,SetCategorias] = useState(["Accion","Multijugador","Supervivencia"]);
+  const [menuDesplegado,SetmenuDesplegado] = useState(false);
+  const [mouseMenu,SetMouseMenu] = useState(false);
+  const [mouseCategoria,SetMouseCategoria] = useState(false);
 
-  function desplegableCategorias(){
-    let lista = document.getElementById("#desplegable-categorias");
-    for(categoria in categorias){
-      lista.appendChild();
+  function desplegableCategorias(e){
+    let lista = document.getElementById("desplegable-categorias");  
+    let elemento = "";
+    if(!menuDesplegado){
+      for(var categoria in categorias){
+        elemento = document.createElement("li");
+        elemento.textContent = categorias.at(categoria);  
+        elemento.onMouseMove = desplegableCategorias;
+        lista.appendChild(elemento);
+      }
+      SetmenuDesplegado(true);
+    }
+  }
+
+  function cerrarMenu(e){
+      let lista = document.getElementById("desplegable-categorias");
+      for(var i = 0;i < lista.childElementCount+2;i++){
+        lista.removeChild(lista.childNodes.item(0));
+      SetmenuDesplegado(false);
     }
   }
   return (
@@ -24,9 +42,8 @@ function HeaderComponent() {
           <ul>
             <li><Link to="/">Inicio</Link></li>
             <li>
-              <a href="#">Categorias</a>
-              <ul id='desplegable-categorias' onMouseMove={desplegableCategorias}>
-                    
+              <a href="#" onMouseMove={desplegableCategorias}>Categorias</a>
+              <ul id='desplegable-categorias' onMouseMove={desplegableCategorias} onMouseLeave={cerrarMenu}>   
               </ul>
             </li>
             <li><Link to="ranking">Ranking</Link></li>

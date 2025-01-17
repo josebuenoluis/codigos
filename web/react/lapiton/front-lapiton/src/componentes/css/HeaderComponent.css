@@ -45,6 +45,7 @@ header nav ul{
     display: flex;
     flex-direction: column;
     padding: 0;
+    position:fixed;
 }
 
 #desplegable-categorias li{
