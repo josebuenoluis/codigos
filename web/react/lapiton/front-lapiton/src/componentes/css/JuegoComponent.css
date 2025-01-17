@@ -1,0 +1,63 @@
+.article-juego{
+    grid-column-start: 1;
+    grid-column-end: -1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 50px 1fr;
+    margin-bottom: 50px;
+    justify-content: center;
+}
+
+.puntaje{
+    border: 2px solid black;
+    grid-column-start: 2;
+    height: 50px;
+    border-radius: 10px;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    width: 25rem;
+}
+
+.puntaje p{
+    margin-left: 20px;
+    margin-right: 20px;
+    font-family: "Cherry Bomb One", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1rem;
+}
+
+.campo{
+    background-image: url('../../assets/campo-tiburon-2.svg');
+    grid-column-start: 2;
+    grid-row-start: 2;
+    width: 31.25rem;
+    height: 31.25rem;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+#tabla-ranking{
+    background-color: white;
+    width: 70%;
+    height: 80%;
+    border: 1px solid black;
+    grid-row-start: 2;
+    margin: auto;
+    text-align: center;
+}
+#tabla-ranking tr th{
+    font-size: 20px;
+}
+
+#tabla-ranking tr td{
+    font-size: 18px;
+    color: black;
+}
+
+#tabla-ranking tr th,td{
+    border: 1px solid black;
+}
