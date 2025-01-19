@@ -40,6 +40,13 @@ footer nav a{
     text-decoration: none;
     color: black;
     margin-right: 0.94rem;
+    padding: 15px 20px;
+    
+}
+
+footer nav a:hover{
+    background-color: white;
+    opacity: .60;
 }
 
 footer .iconos-social img{

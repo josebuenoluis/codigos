@@ -74,7 +74,18 @@ header nav a{
     padding: 15px 20px;
 }
 
-header nav a:hover{
+header nav .enlace:hover{
     background-color: white;
+    opacity: .60;
+}
+
+#user-icono{
+    width: 3.5rem;    
+    height: 3.5rem;    
+    position: relative;
+    bottom: 10px;
+}
+
+#user-icono:hover{
     opacity: .60;
 }
