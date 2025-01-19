@@ -77,4 +77,4 @@ if __name__ == '__main__':
         print("Error, debe pasar los siguientes argumentos <servidor> <usario>:<contraseña>")
 
     except ftplib.error_perm:
-        print("\nError, fallo al iniciar sesiñon.\n")
+        print("\nError, fallo al iniciar sesion.\n")

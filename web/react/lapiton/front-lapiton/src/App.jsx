@@ -4,7 +4,7 @@ import './App.css'
 import Inicio from './componentes/rutas/InicioComponent'
 import Novedades from './componentes/rutas/novedades'
 import Ranking from './componentes/rutas/ranking'
-import JuegoComponent from './componentes/rutas/JuegoComponent'
+import JuegoComponent from './componentes/rutas/tiburon/JuegoComponent'
 import './componentes/css/fonts.css'
 
 function App() {
