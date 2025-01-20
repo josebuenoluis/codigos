@@ -2,9 +2,50 @@ import React from "react";
 import HeaderComponent from "../header/HeaderComponent";
 import FooterComponent from "../footer/FooterComponent";
 import InputTextComponent from "../utils/InputTextComponent";
+import BotonRegistroComponent from "../utils/BotonRegistroComponent";
 import BotonComponent from "../utils/BotonComponent";
 import "../css/RegistroComponent.css";
 function RegistroComponent() {
+
+  function iniciarSesion(){
+    window.location.href = "/login"
+  }
+  
+  async function consultarAvatares(){
+    try {
+      const peticion = {
+      method: "GET",
+    }
+      const response = await fetch("http://127.0.0.1:5000/registrar/avatars");
+      if (response.ok) {
+        console.log("Exito");
+        debugger
+        const datos = await response.json();  
+        debugger
+        return datos;
+      }
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  }
+
+  function mostrarAvatars(){
+    const resultado = consultarAvatares().then(datos =>{
+      debugger
+      let lista = document.querySelector("#lista-avatares");
+      for(let pos in datos){
+        let avatar = datos.at(pos);
+        let listaItem = document.createElement("li");
+        let imagen = document.createElement("img");
+        imagen.src = avatar.imagen;
+        imagen.width = "50";
+        imagen.height  = "50";
+        listaItem.appendChild(imagen);
+        lista.appendChild(listaItem);
+      }
+    });
+  }
 
   return (
     <div>
@@ -34,10 +75,15 @@ function RegistroComponent() {
                 fill="black"
               />
             </svg>
+            <BotonComponent id={"btn-mostrar"} value={"Mostrar avatares"} className={"boton-component"} funcion={mostrarAvatars}/>
+            <ul id="lista-avatares">
+
+            </ul>
             <InputTextComponent type={"text"} id={"usuario"} className={"text-component"} placeholder={"Nombre de usuario..."} />
             <InputTextComponent type={"password"} id={"contraseña"} className={"text-component"} placeholder={"Contraseña."} />
             <InputTextComponent type={"password"} id={"repetir-contraseña"} className={"text-component"} placeholder={"Repetir contraseña."} />
-            <BotonComponent id={"confirmar"} value={"Confirmar"} className={"boton-component"} />
+            <BotonRegistroComponent id={"confirmar"} value={"Confirmar"} className={"boton-component"} />
+            <BotonComponent id={"btn-inicio-registro"} value={"Iniciar sesion"} className={"boton-component"} funcion={iniciarSesion}/>
           </div>
         </article>
       </section>
