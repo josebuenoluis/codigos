@@ -37,6 +37,7 @@ function LoginComponent() {
           debugger
           if (datos.valido) {
             console.log("Usuario encontrado");
+            window.location.href = "/";
           } else {
             console.log("Usuario no encontrado");
           }

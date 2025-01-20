@@ -54,13 +54,13 @@ function BotonComponent(props) {
   function registrarUsuario(){
     let usuario = document.querySelector("#usuario").value;
     let contraseña = document.querySelector("#contraseña").value;
+    let avatar = document.querySelector("#img-avatar").src;
     let contraseñaRepetida = document.querySelector("#repetir-contraseña").value;
-    debugger
     if(validarCampos(usuario,contraseña,contraseñaRepetida) == ""){
       const usuarioResponse = obtenerUsuario(usuario).then(datos => {
         console.log("Usuario consultado: ",datos);
         if(Object.keys(datos).length==0){
-          crearUsuario({"nombre":usuario,"contraseña":contraseña});
+          crearUsuario({"nombre":usuario,"contraseña":contraseña,"avatar":avatar});
           console.log("INsertar");
           window.location.href = "/";
         }else{

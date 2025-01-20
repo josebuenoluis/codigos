@@ -8,6 +8,34 @@ import FondoBestia from "../../assets/campo-bestia-1 1.svg"
 import { Link } from "react-router-dom";
 
 function Inicio() {
+  const peticionLog = async() =>{
+    try {
+      const peticion = {
+        method: "GET",
+      };
+      const response = await fetch(
+        "http://127.0.0.1:5000/",
+        peticion
+      );
+
+      if (response.ok) {
+        console.log("Exito");
+        const datos = await response.json();
+        return datos;
+      }
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  } 
+  const userLog = () =>{
+    peticionLog().then(datos =>{
+      if(datos.avatar!=""||datos!=null){
+        document.querySelector("#user-icono").src = datos.avatar
+      }
+    })
+  }
+  userLog()
   return (
     <div>
       <HeaderComponent />

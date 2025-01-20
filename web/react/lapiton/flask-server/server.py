@@ -1,4 +1,4 @@
-from flask import Flask,request
+from flask import Flask,request,session
 from urllib import request as request_api
 from models import *
 from flask_cors import CORS
@@ -8,10 +8,15 @@ import json
 
 app = Flask(__name__)
 CORS(app)
+app.secret_key = "prueba1234"
+app.config["SESSION_TYPE"] = "filesystem"
 
-@app.route('/')
+@app.route('/',methods=["GET"])
 def index():
-    return {'hello': 'world'}
+    usuario = {}
+    if "nombre" in session:
+        usuario = session["nombre"]
+    return usuario
 
 @app.route('/login/usuarios',methods=["GET"])
 def validarUsuario():
@@ -23,6 +28,8 @@ def validarUsuario():
         usuario = Usuarios.select().where(Usuarios.nombre==usuario).get()
         if(validarPassword(contraseña,usuario.sal,usuario.contraseña)):
             print("Sesion iniciada")
+            session["nombre"] = usuario.nombre
+            session["avatar"] = usuario.avatar
             resultado["valido"] = True
         else:
             print("Contraseña incorrecta")
@@ -49,7 +56,7 @@ def consultaUsuario():
 @app.route('/registrar/avatars',methods=["GET"])
 def listarAvatars():
     resultado = []
-    for id_super in range(1,11):
+    for id_super in range(1,13):
         response = request_api.urlopen(f"https://superheroapi.com/api/7693742abd0d2968a66bc4d38f33db24/{id_super}")
         avatar = json.loads(response.read().decode("utf-8"))
         imagen = avatar["image"]["url"]
@@ -62,9 +69,12 @@ def crearUsuario():
     data = request.get_json()
     try:
         contraseña,sal = generarHash(data["contraseña"])
-        usuario = Usuarios.create(nombre=data["nombre"],contraseña=contraseña,sal=sal)
-    except:
-        print("Error") 
+        usuario = Usuarios.create(nombre=data["nombre"],contraseña=contraseña,sal=sal,avatar=data["avatar"])
+        session["nombre"] = usuario.nombre
+        session["avatar"] = usuario.avatar
+        print(f"Sesion iniciada: {session["nombre"]}")
+    except Exception as error:
+        print("Error: ",error) 
     return data
 
 

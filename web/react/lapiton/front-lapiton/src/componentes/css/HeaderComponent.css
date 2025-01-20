@@ -84,6 +84,8 @@ header nav .enlace:hover{
     height: 3.5rem;    
     position: relative;
     bottom: 10px;
+    border-radius: 50%;
+    border:3px solid black ;
 }
 
 #user-icono:hover{
