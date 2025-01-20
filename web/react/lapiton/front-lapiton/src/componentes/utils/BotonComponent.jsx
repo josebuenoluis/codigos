@@ -12,12 +12,30 @@ function BotonComponent(props) {
       if (response.ok) {
         console.log("Exito");
         const datos = await response.json();  
-        console.log(datos);
         return datos;
       }
     } catch (error) {
       console.log(error);
       return null;
+    }
+  }
+
+  async function crearUsuario(usuario){
+    try {
+      const response = await fetch("http://127.0.0.1:5000/registrar/usuarios", {
+        // Definimos el metodo que vamos a utilizar GET,POST,PUT,DELETE,etc...
+        method: "POST",
+        //Definimos un headers que sera el tipo de dato que vamos a enviar
+        headers: { "Content-Type": "application/json" },
+        //Agregamos el contenido que vamos a enviar
+        body: JSON.stringify(usuario),
+      });
+      if (response.ok) {
+        let jsonResponse = JSON.stringify(usuario);
+        console.log(jsonResponse);
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -28,14 +46,8 @@ function BotonComponent(props) {
     }else if(contraseña.length < 8){
       mensaje = "La contraseña debe tener 8 o mas caracteres.";
     }else if(contraseña != contraseñaRepetida){
-      mensaje = "Las contraseñas no coinciden."
+      mensaje = "Las contraseñas no coinciden.";
     }
-    const usuarioResponse = obtenerUsuario(usuario).then(datos => {
-      if(datos.nombre==usuario){
-        mensaje = "El nombre de usuario ya existe."
-      }
-    });
-    
     return mensaje;
   }
 
@@ -43,7 +55,19 @@ function BotonComponent(props) {
     let usuario = document.querySelector("#usuario").value;
     let contraseña = document.querySelector("#contraseña").value;
     let contraseñaRepetida = document.querySelector("#repetir-contraseña").value;
-    console.log("Valido:"+" "+validarCampos(usuario,contraseña,contraseñaRepetida));
+    if(validarCampos(usuario,contraseña,contraseñaRepetida) == ""){
+      const usuarioResponse = obtenerUsuario(usuario).then(datos => {
+        console.log("Usuario consultado: ",datos);
+        if(Object.keys(datos).length==0){
+          crearUsuario({"nombre":usuario,"contraseña":contraseña});
+          console.log("INsertar");
+          window.location.href = "/";
+        }else{
+          console.log("El nombre de usuario ya existe.")
+        }
+      });
+
+    }
   }
   return (
     <input type="button" onClick={registrarUsuario} value={props.value} id={props.id} className={props.className} />

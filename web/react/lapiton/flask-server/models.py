@@ -11,4 +11,5 @@ class BaseModel(Model):
 class Usuarios(BaseModel):
     nombre = TextField()
     contraseña = TextField()
-
+    sal = BlobField()
+    

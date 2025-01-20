@@ -33,7 +33,7 @@ function Inicio() {
              <hr />
         </article>
         <article className="article-juegos">
-          <Link to="juego">
+          <Link to="/juego">
           <div className="juego">
             <img src={FondoTiburon} alt="fondo-juego" />
             <p>El tiburon</p>
@@ -41,7 +41,7 @@ function Inicio() {
           </Link>
         </article>
         <article className="article-juegos">
-          <Link to="juego">
+          <Link to="/juego">
             <div className="juego">
               <img src={FondoSerpiente} alt="fondo-juego" />
               <p>La Serpiente</p>
@@ -49,7 +49,7 @@ function Inicio() {
           </Link>
         </article>
         <article className="article-juegos">
-          <Link to="juego">
+          <Link to="/juego">
             <div className="juego">
               <img src={FondoBestia} alt="fondo-juego" />
               <p>La Bestia</p>
