@@ -2,6 +2,7 @@ from flask import Flask,request,session
 from urllib import request as request_api
 from models import *
 from flask_cors import CORS
+from datetime import timedelta
 import conexion
 from hash import generarHash,validarPassword
 import json
@@ -9,13 +10,11 @@ import json
 app = Flask(__name__)
 CORS(app)
 app.secret_key = "prueba1234"
-app.config["SESSION_TYPE"] = "filesystem"
 
 @app.route('/',methods=["GET"])
 def index():
     usuario = {}
-    if "nombre" in session:
-        usuario = session["nombre"]
+    print(session)
     return usuario
 
 @app.route('/login/usuarios',methods=["GET"])
@@ -24,13 +23,14 @@ def validarUsuario():
     contraseña = request.args.get("password")
     resultado = {"nombre":usuario,"valido":False}
     try:
-        print(usuario+" ",contraseña)
         usuario = Usuarios.select().where(Usuarios.nombre==usuario).get()
         if(validarPassword(contraseña,usuario.sal,usuario.contraseña)):
-            print("Sesion iniciada")
+            print(f"NOmbre prueba sesion: {session}")
             session["nombre"] = usuario.nombre
             session["avatar"] = usuario.avatar
             resultado["valido"] = True
+            resultado["avatar"] = usuario.avatar
+            print(f"Sesion en Inicio de sesion: {session}")
         else:
             print("Contraseña incorrecta")
             resultado["valido"] = False
@@ -38,7 +38,6 @@ def validarUsuario():
         print(f"Error: {error}")
         resultado["valido"] = False
     return resultado
-
 
 @app.route('/registrar/usuarios',methods=["GET"])
 def consultaUsuario():
@@ -70,15 +69,18 @@ def crearUsuario():
     try:
         contraseña,sal = generarHash(data["contraseña"])
         usuario = Usuarios.create(nombre=data["nombre"],contraseña=contraseña,sal=sal,avatar=data["avatar"])
+        session.permanent = True
         session["nombre"] = usuario.nombre
         session["avatar"] = usuario.avatar
-        print(f"Sesion iniciada: {session["nombre"]}")
+        print(f"Sesion iniciada en crear usuario: {session}")
     except Exception as error:
         print("Error: ",error) 
     return data
 
 
 if __name__ == '__main__':
+
+    login = ""
 
     db = conexion.conexion()
 
