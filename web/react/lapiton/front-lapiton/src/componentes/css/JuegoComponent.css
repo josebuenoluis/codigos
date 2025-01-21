@@ -17,8 +17,9 @@
     margin-bottom: 1.25rem;
     display: flex;
     justify-content: center;
+    margin: auto;
     background-color: white;
-    width: 25rem;
+    width: 20rem;
 }
 
 .puntaje p{
