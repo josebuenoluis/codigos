@@ -11,12 +11,6 @@ app = Flask(__name__)
 CORS(app)
 app.secret_key = "prueba1234"
 
-@app.route('/',methods=["GET"])
-def index():
-    usuario = {}
-    print(session)
-    return usuario
-
 @app.route('/login/usuarios',methods=["GET"])
 def validarUsuario():
     usuario = request.args.get("username")

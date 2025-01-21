@@ -1,7 +1,10 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import "../css/BotonRegistroComponent.css"
+import { userContext } from '../../context/userContext';
+import { useNavigate } from 'react-router-dom';
 function BotonComponent(props) {
-
+  const {user,setUser,loginUsuario} = useContext(userContext)
+  const navigate = useNavigate()
   async function obtenerUsuario(nombreUsuario){
     try {
       const peticion = {
@@ -61,8 +64,10 @@ function BotonComponent(props) {
         console.log("Usuario consultado: ",datos);
         if(Object.keys(datos).length==0){
           crearUsuario({"nombre":usuario,"contraseña":contraseña,"avatar":avatar});
+          debugger
+          loginUsuario({"nombre":usuario,"avatar":avatar})
           console.log("INsertar");
-          window.location.href = "/";
+          navigate("/");
         }else{
           console.log("El nombre de usuario ya existe.")
         }

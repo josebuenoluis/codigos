@@ -7,12 +7,14 @@ import BotonComponent from "../utils/BotonComponent";
 import UserIcon from "../../assets/user-icon.svg"
 import Serpiente from "../../assets/serpiente.svg"
 import "../css/RegistroComponent.css";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 function RegistroComponent() {
 
+  const navigate = useNavigate();
 
   function iniciarSesion(){
-    window.location.href = "/login"
+    navigate("/login");
   }
   
   async function consultarAvatares(){

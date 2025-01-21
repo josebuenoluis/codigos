@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useContext} from "react";
 import HeaderComponent from "../header/HeaderComponent";
 import FooterComponent from "../footer/FooterComponent";
 import "../css/InicioComponent.css";
@@ -6,36 +6,12 @@ import FondoTiburon from "../../assets/fondoTiburonInicio.svg"
 import FondoSerpiente from "../../assets/campo-serpiente-1 1.svg"
 import FondoBestia from "../../assets/campo-bestia-1 1.svg"
 import { Link } from "react-router-dom";
+import { userContext } from "../../context/userContext";
 
 function Inicio() {
-  const peticionLog = async() =>{
-    try {
-      const peticion = {
-        method: "GET",
-      };
-      const response = await fetch(
-        "http://127.0.0.1:5000/",
-        peticion
-      );
-
-      if (response.ok) {
-        console.log("Exito");
-        const datos = await response.json();
-        return datos;
-      }
-    } catch (error) {
-      console.log(error);
-      return null;
-    }
-  } 
-  const userLog = () =>{
-    peticionLog().then(datos =>{
-      if(datos.avatar!=""||datos!=null){
-        document.querySelector("#user-icono").src = datos.avatar
-      }
-    })
-  }
-  userLog()
+  
+  const {user,setUser} = useContext(userContext)
+  
   return (
     <div>
       <HeaderComponent />
