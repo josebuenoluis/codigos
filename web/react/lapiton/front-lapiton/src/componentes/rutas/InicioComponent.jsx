@@ -28,14 +28,14 @@ function Inicio() {
       return null;
     }
   } 
-  const userLog = () =>{
-    peticionLog().then(datos =>{
-      if(datos.avatar!=""||datos!=null){
-        document.querySelector("#user-icono").src = datos.avatar
-      }
-    })
-  }
-  userLog()
+  // const userLog = () =>{
+  //   peticionLog().then(datos =>{
+  //     if(datos.avatar!=""||datos!=null){
+  //       document.querySelector("#user-icono").src = datos.avatar
+  //     }
+  //   })
+  // }
+  // userLog()
   return (
     <div>
       <HeaderComponent />
