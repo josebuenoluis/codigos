@@ -1,11 +1,14 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import Logo from '../../assets/imagenLogoPiton.png'
 import UserIcon from '../../assets/user-icon.svg'
 import '../css/HeaderComponent.css'
+import { userContext } from '../../context/userContext'
 
 function HeaderComponent() {
+
+  const {user,setUser} = useContext(userContext)
 
   const [categorias,SetCategorias] = useState(["Accion","Multijugador","Supervivencia"]);
   const [menuDesplegado,SetmenuDesplegado] = useState(false);
@@ -51,7 +54,7 @@ function HeaderComponent() {
             <li><Link className='enlace' to="/novedades">Novedades</Link></li>
           <li>
             <Link to="/login">
-              <img src={UserIcon} id='user-icono' alt="" />
+              <img src={user.avatar} id='user-icono' alt="" />
             </Link>
           </li>
           </ul>

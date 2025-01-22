@@ -3,8 +3,13 @@ import HeaderComponent from "../header/HeaderComponent";
 import FooterComponent from "../footer/FooterComponent";
 import InputTextComponent from "../utils/InputTextComponent";
 import BotonComponent from "../utils/BotonComponent";
+import { useNavigate } from "react-router-dom";
+import { userContext } from "../../context/userContext";
+import { useContext } from "react";
 import "../css/LoginComponent.css";
 function LoginComponent() {
+  const navigate = useNavigate()
+  const {user,setUser,loginUsuario} = useContext(userContext)
   async function obtenerUsuario(nombreUsuario, contraseña) {
     try {
       const peticion = {
@@ -26,7 +31,7 @@ function LoginComponent() {
     }
   }
     function registro() {
-      window.location.href = "/registro";
+      navigate("/registro");
     }
 
     function iniciarSesion() {
@@ -37,7 +42,8 @@ function LoginComponent() {
           debugger
           if (datos.valido) {
             console.log("Usuario encontrado");
-            window.location.href = "/";
+            loginUsuario({"nombre":datos.nombre,"avatar":datos.avatar})
+            navigate("/");
           } else {
             console.log("Usuario no encontrado");
           }

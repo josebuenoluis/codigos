@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useContext} from "react";
 import HeaderComponent from "../header/HeaderComponent";
 import FooterComponent from "../footer/FooterComponent";
 import "../css/InicioComponent.css";
@@ -6,8 +6,10 @@ import FondoTiburon from "../../assets/fondoTiburonInicio.svg"
 import FondoSerpiente from "../../assets/campo-serpiente-1 1.svg"
 import FondoBestia from "../../assets/campo-bestia-1 1.svg"
 import { Link } from "react-router-dom";
+import { userContext } from "../../context/userContext";
 
 function Inicio() {
+<<<<<<< HEAD
   const peticionLog = async() =>{
     try {
       const peticion = {
@@ -36,6 +38,11 @@ function Inicio() {
   //   })
   // }
   // userLog()
+=======
+  
+  const {user,setUser} = useContext(userContext)
+  
+>>>>>>> af5701ca91593d76b9185f4af78acd71b916146a
   return (
     <div>
       <HeaderComponent />

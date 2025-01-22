@@ -1,0 +1,32 @@
+version: '3.3'
+
+services:
+    web:
+        image:  odoo:17 
+        container_name: odoo
+        user: root 
+        depends_on: 
+        - db
+        ports:
+        - 8069:8069
+        volumes:
+        - C:\Users\Usuario\Documents\codigos\docker\docker_ubuntu\volumesOdoo\addons:/mnt/extra-addons
+        - C:\Users\Usuario\Documents\codigos\docker\docker_ubuntu\volumesOdoo\filestore:/var/lib/odoo/filestore
+        - C:\Users\Usuario\Documents\codigos\docker\docker_ubuntu\volumesOdoo\sessions:/var/lib/odoo/sessions
+        - C:\Users\Usuario\Documents\codigos\docker\docker_ubuntu\volumesOdoo\config:/etc/odoo
+        environment:
+        - HOST=db
+        - USER=odoo
+        - PASSWORD=odoo
+        command: --dev=all
+    db:
+        image: postgres:15
+        container_name: odoopostgres
+        ports:
+        - 5433:5432
+        environment:
+        - POSTGRES_PASSWORD=odoo
+        - POSTGRES_USER=odoo
+        - POSTGRES_DB=postgres
+        volumes:
+        - C:\Users\Usuario\Documents\codigos\docker\docker_ubuntu\volumesOdoo\dataPG:/var/lib/postgresql/data
