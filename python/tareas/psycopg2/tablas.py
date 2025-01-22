@@ -1,28 +1,9 @@
 import psycopg2
 
-# a) Catálogo de discos: Registra información como el título, año de lanzamiento, 
-# géneros musicales y artistas involucrados. 
-# b) Gestión de artistas: Almacena información sobre los artistas, como nombre, 
-# apellido y nacionalidad. 
-# c) Registro de ventas: Incluye información sobre el cliente, la fecha de la venta y 
-# los discos vendidos. 
-
-# Tipos Compuestos: 
-# a) Define un tipo compuesto artist_type para representar la información de los 
-# artistas. 
-# b) Define un tipo compuesto sale_info para registrar información de las ventas. 
-
-# Arrays: 
-# a) Usa arrays para asociar varios géneros musicales a un disco. 
-# b) Usa arrays para manejar las relaciones entre discos y artistas.
-
-def crear_tablas():
+def crear_tablas(conexion):
+    """Funcion para crear las tablas de la base de datos si no existen."""
     try:
-        conexion = psycopg2.connect(host="localhost",dbname="musica",
-                        user="alumno",password="alumno")
-        
         cursor = conexion.cursor()
-
         command = """
         CREATE TYPE artist_type as (
             nombre text,
@@ -30,29 +11,53 @@ def crear_tablas():
             nacionalidad text
         );
 
+        CREATE TYPE sale_date as (
+            fecha date
+        );
+
+        CREATE TYPE items_purchased as (
+            id INTEGER,
+            articulos_comprados text[]
+        );
+
         CREATE TYPE sale_info as (
-            dni_cliente text,
-            fecha_venta date,
-            discos_vendidos text[]
+            customer_name VARCHAR(100),
+            fecha_venta sale_date,
+            discos_vendidos items_purchased
         );
 
         CREATE TABLE discos (
-            titulo text PRIMARY KEY,
+            id SERIAL PRIMARY KEY,
+            titulo text UNIQUE,
             año_lanzamiento int,
             generos_musicales text[],
             artistas_involucrados int[]
         );
 
-        CREATE TABLE artista (
-            id int PRIMARY KEY,
-            datos artist_type
+        CREATE TABLE artistas (
+            id SERIAL PRIMARY KEY,
+            datos artist_type NOT NULL
+        );
+
+        CREATE TABLE ventas (
+            id SERIAL PRIMARY KEY,
+            datos_venta sale_info NOT NULL
         );
     """
         cursor.execute(command)
+
         conexion.commit()
+
+        cursor.close()
+
         print("Tablas y tipos creados correctamente!")
+
+
     except psycopg2.OperationalError as error:
         print(f"\nFallo al conectar con la base de datos: {error}")
+        
     except psycopg2.IntegrityError as error:
         print(f"Error de integridad en la base de datos: {error}")
-crear_tablas()
+
+    except psycopg2.errors.DuplicateObject:
+        print(f"Hay tablas y tipos duplicados.")
