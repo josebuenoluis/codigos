@@ -11,6 +11,17 @@ app = Flask(__name__)
 CORS(app)
 app.secret_key = "prueba1234"
 
+@app.route("/",methods=["GET"])
+def index():    
+    juegos = Juegos.select()
+    listaJuegos = []
+    for juego in juegos:
+        diccionario = {}
+        diccionario["nombre"] = juego.nombre
+        diccionario["fondoIcono"] = juego.fondoIcono
+        listaJuegos.append(diccionario)
+    return listaJuegos
+
 @app.route('/login/usuarios',methods=["GET"])
 def validarUsuario():
     usuario = request.args.get("username")
@@ -80,6 +91,6 @@ if __name__ == '__main__':
 
     db.connect()
 
-    db.create_tables([Usuarios])
+    db.create_tables([Usuarios,Juegos])
 
     app.run(host='0.0.0.0',port=5000)
