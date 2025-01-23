@@ -22,6 +22,15 @@ def index():
         listaJuegos.append(diccionario)
     return listaJuegos
 
+@app.route("/ranking",methods=["GET"])
+def ranking():
+    juegos = Juegos.select(Juegos.categoria).distinct()
+    listaCategorias = []
+    for juego in juegos:
+        listaCategorias.append(juego.categoria)
+    print(listaCategorias)
+    return listaCategorias
+
 @app.route('/login/usuarios',methods=["GET"])
 def validarUsuario():
     usuario = request.args.get("username")

@@ -16,15 +16,35 @@ function RankingComponent() {
   }
 
   // Para hacer una peticion sobre las categorias de los juegos
-  function obtenerCategorias(){
+  async function obtenerCategorias(){
+    try{
+      const peticion = {
+        method: "GET",
+      };
+      const response = await fetch("http://127.0.0.1:5000/ranking",peticion)
 
+      if (response.ok) {
+        console.log("Exito");
+        const datos = await response.json();
+        return datos;
+      }
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
   }
 
-  // Para añadir las categorias al elemento Select
-  function listarCategorias(){
-
-  }
-
+  const categorias = obtenerCategorias().then(datos =>{
+    let desplegable = document.querySelector("#categoria-seleccionada")
+    for(var categoria in datos){
+      let opcion = document.createElement("option")
+      let categoriaAñadir = datos.at(categoria)
+      opcion.value = categoriaAñadir
+      opcion.name = categoriaAñadir
+      opcion.textContent = categoriaAñadir
+      desplegable.appendChild(opcion)
+    }
+  })
   return (
     <div>
       <HeaderComponent />
@@ -38,7 +58,7 @@ function RankingComponent() {
           <hr />
         </article>
         <article className='article-tabla'>
-          <table>
+          <table cellSpacing={0} cellPadding={0}>
             <thead>
               <tr>
                 <th>Posicion</th>

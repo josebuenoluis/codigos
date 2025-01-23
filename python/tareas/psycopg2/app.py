@@ -12,7 +12,7 @@ from tablas import crear_tablas
 def insertarArtista(cursor) -> bool:
     """Funcion para insertar un nuevo artista con
     un tipo de dato compuesto artist_type"""
-    pass
+    command = f""""""
 
 def insertarDisco(cursor) -> bool:
     """Funcion para insertar un nuevo disco con arrays que
@@ -44,18 +44,26 @@ if __name__ == '__main__':
     2. Insertar disco.
     3. Registrar venta.
     4. Salir.\n"""
-    
     while True:
         print(menu)
         user = input("\nIngrese una opcion: ")
-        
+        cursor = db.cursor()
         match user:
             case "1":
-                pass
+                if insertarArtista(cursor):
+                    print("\Artista insertado correctamente!")
+                else:
+                    print("\nNo se ha podido insertar el artista...")
             case "2":
-                pass
+                if insertarDisco(cursor):
+                    print("\nDisco insertado correctamente!")
+                else:
+                    print("\nNo se ha podido insertar el disco...")
             case "3":
-                pass
+                if registrarVenta(cursor):
+                    print("\nVenta registrada correctamente!")
+                else:
+                    print("\nNo se ha podido registrar la venta...")
             case "4":
                 print("\nSaliendo del programa!\n")
                 db.close()

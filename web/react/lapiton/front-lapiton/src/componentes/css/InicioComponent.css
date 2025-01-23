@@ -84,6 +84,11 @@ section{
     
 }
 
+.juego img{
+    border-bottom: 2px solid black;    
+    width:100%;
+}
+
 .article-juegos img{
     border-bottom: 2px solid black;    
     width:100%;

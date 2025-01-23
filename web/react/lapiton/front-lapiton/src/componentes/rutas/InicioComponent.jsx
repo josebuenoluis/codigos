@@ -20,12 +20,10 @@ function Inicio() {
       const peticion = {
         method: "GET",
       };
-      debugger
-      const response = fetch("http://127.0.0.1:5000/",peticion)
+      const response = await fetch("http://127.0.0.1:5000/",peticion)
 
       if (response.ok) {
         console.log("Exito");
-        debugger
         const datos = await response.json();
         return datos;
       }
@@ -36,26 +34,36 @@ function Inicio() {
   }
 
   const juegos = obtenerJuegos().then(datos => {
-    let articuloJuego = document.querySelector(".article-juegos")
+    let section = document.querySelector(".seccion-principal");
+    debugger
     for(var juego in datos){
       debugger
+      let articuloJuego = document.createElement("article")
+      articuloJuego.className = "article-juegos"
+      let enlace = document.createElement("a")
+      enlace.href = "/juego"
+      let objeto = datos.at(juego)
       let contenedor = document.createElement("div");
+      contenedor.className = "juego";
       let imagen = document.createElement("img");
       imagen.alt = "fondo-juego"
-      imagen.src = juego.fondoIcono;
+      imagen.src = objeto.fondoIcono;
       let titulo = document.createElement("p")
-      titulo.textContent = juego.nombre;
-      articuloJuego.appendChild(contenedor)
-      listaJuegos.push(contenedor)
+      titulo.textContent = objeto.nombre;
+      contenedor.appendChild(imagen)
+      contenedor.appendChild(titulo)
+      debugger
+      enlace.appendChild(contenedor)
+      articuloJuego.appendChild(enlace)
+      section.appendChild(articuloJuego)
     }
-    console.log(listaJuegos)
   })
 
   return (
     <div>
       <HeaderComponent />
 
-      <section>
+      <section className="seccion-principal">
         <article className="article-barra-busqueda">
           <BarraBusqueda />
         </article>
@@ -63,15 +71,8 @@ function Inicio() {
              <p>Supervivencia</p>
              <hr />
         </article>
-        <article className="article-juegos">
-          <Link to="/juego">
-          <div className="juego">
-            <img src={FondoTiburon} alt="fondo-juego" />
-            <p>El tiburon</p>
-          </div>
-          </Link>
-          
-        </article>
+        
+        
       </section>
       <FooterComponent />
     </div>
