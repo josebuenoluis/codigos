@@ -1,3 +1,5 @@
+
+
 let velocidadEnemigo = 1500;
 let puntaje = 0;
 let bola = document.querySelector(".bola");
@@ -44,30 +46,27 @@ function keyDownHandler(e) {
     // al pulsar la tecla derecha
     rightPressed = true;
     moverDerecha();
+    e.preventDefault(); 
   } else if (e.keyCode == 40) {
     moverAbajo();
-
+    e.preventDefault(); 
     downpressed = true;
   } else if (e.keyCode == 38) {
     uppressed = true;
     moverArriba();
+    e.preventDefault(); 
   } else if (e.keyCode == 37) {
-    //console.log("izquierda") // He añadido esta linea para comprobar que se esta ejecutando la funcion con la tecla
-    // izquierda
     leftPressed = true;
     moverIzquierda();
+    e.preventDefault(); 
   } else if (e.keyCode == 32) {
     console.log("inicio");
     iniciarJuego();
-  }else{
-    // document.body.style.overflow = "visible";
+    e.preventDefault(); 
   }
-
-function visibleScroll(e){
-  document.body.style.overflow = "visible";
 }
 
-}
+
 function keyUpHandler(e) {
   console.log("Evento: "+e.keyCode);
   if (e.keyCode == 39) {
@@ -91,19 +90,18 @@ let estadoInicial = function () {
   mensaje.className = "mensaje";
   mensaje.classList.add("mensaje");
   campo.appendChild(mensaje);
-  mensaje.style.width = "350px";
-  mensaje.style.height = "150px";
-  mensaje.style.borderRadius = "20px";
+  mensaje.style.width = "21.87rem";
+  mensaje.style.height = "9.37rem";
+  mensaje.style.borderRadius = "1.25rem";
   mensaje.style.border = "5px solid black";
-  mensaje.style.gridColumnStart = 5;
+  mensaje.style.gridColumnStart = 3;
   mensaje.style.gridRowStart = 4;
-  mensaje.style.marginTop = "200px";
   mensaje.style.background = "white";
   mensaje.style.display = "flex";
   mensaje.style.alignItems= "center";
   mensaje.style.justifyContent = "center";
   let texto = document.createElement("p");
-  texto.style.font = "20px";
+  texto.style.font = "1.25rem";
   texto.style.textAlign = "center";
   texto.style.verticalAlign = "center";
   texto.style.fontWeight = "bold";
@@ -125,77 +123,51 @@ function ventanaRegresar() {
     ventana.style.display = "flex";
     ventana.style.flexDirection = "column";
     ventana.style.justifyContent = "space-between";
+    ventana.style.alignItems = "center";
     campo.appendChild(ventana);
-    ventana.style.width = "300px";
-    ventana.style.height = "400px";
-    ventana.style.gridColumnStart = 5;
-    ventana.style.gridRowStart = 5;
+    ventana.style.width = "15rem";
+    ventana.style.height = "15rem";
+    ventana.style.gridColumnStart = 4;
+    ventana.style.gridRowStart = 3;
     ventana.style.background = "white";
     ventana.style.background = "#ccc";
+    ventana.style.borderRadius = "20px";
     ventana.style.alignItems = "center";
     ventana.style.justifyContent = "center";
     ventana.style.border = "5px solid black";
-    let p = document.createElement("p");
-    p.style.fontSize = "24px";
-    p.textContent = "Guardar puntos";
 
-    ventana.appendChild(p);
-    //Creacion de formulario
-    let formulario = document.createElement("form");
-    formulario.style.display = "flex";
-    formulario.style.flexDirection = "column";
-    formulario.style.justifyContent = "center";
-    // formulario.method = "post";
-    // Creacion de input para ingresar el nombre de usuario
-    let nombreUsuario = document.createElement("input");
-    nombreUsuario.type = "text";
-    nombreUsuario.name = "nombre";
-    nombreUsuario.maxLength = "20";
-    nombreUsuario.minLength = "4";
-    nombreUsuario.id = "nombre";
-    nombreUsuario.style.width = "200px";
-    nombreUsuario.style.height = "40px";
-    nombreUsuario.style.marginBottom = "40px";
-    nombreUsuario.style.fontSize = "16px";
-    nombreUsuario.style.textAlign = "center";
-    nombreUsuario.style.placeContent = "Nombre de usuario";
-    nombreUsuario.placeholder = "Ingrese su nombre: "; 
-    ventana.appendChild(nombreUsuario);
-    formulario.appendChild(nombreUsuario);
     // Creacion de input para guardar progreso del usuario en la base de datos
     let guardar = document.createElement("input");
     guardar.type = "submit";
-    guardar.style.width = "170px";
-    guardar.style.height = "50px";
-    guardar.style.marginBottom = "40px";
-    guardar.style.marginRight = "auto";
-    guardar.style.marginLeft = "auto";
-    guardar.style.fontSize = "20px";
+    guardar.style.width = "10.62rem";
+    guardar.style.height = "3.125rem";
+    guardar.style.margin = "auto";
+    guardar.style.fontSize = "1.25rem";
     guardar.style.fontWeight = "bold";
     guardar.style.borderRadius = "10px";
-    guardar.value = "Guardar";
+    guardar.style.fontSize = "1.25rem";
+    guardar.style.fontFamily = "Cherry Bomb One";
+    guardar.style.fontWeight = "400";
+    guardar.style.fontStyle = "normal";
+    guardar.value = "Guardar puntos";
     guardar.addEventListener("click", post);
-    guardar.addEventListener("click", redirigir);
     ventana.appendChild(guardar);
-    formulario.appendChild(guardar);
     // Creacion del boton para volver a jugar
     let volver = document.createElement("input");
     volver.type = "button";
-    volver.style.width = "170px";
-    volver.style.height = "50px";
+    volver.style.width = "10.625rem";
+    volver.style.height = "3.125rem";
     volver.style.margin = "auto";
     volver.style.fontWeight = "bold";
     volver.value = "Volver a Jugar";
-    volver.style.fontSize = "20px";
-    volver.style.borderRadius = "10px";
+    volver.style.fontSize = "1.25rem";
+    volver.style.fontFamily = "Cherry Bomb One";
+    volver.style.fontWeight = "400";
+    volver.style.fontStyle = "normal";
+    volver.style.borderRadius = "0.625rem";
     volver.addEventListener("click", regresar);
-    formulario.appendChild(volver);
-    ventana.appendChild(formulario);
+    ventana.appendChild(volver);
   }
-}
-
-function redirigir() {
-  window.location.href = "/";
 }
 
 // Funcion para guardar los datos del usuario en la base de datos
@@ -426,6 +398,7 @@ function comer() {
   if (posicionX == posicionEnemigoX && posicionY == posicionEnemigoY) {
     if (campo.contains(bola)) {
       bola.remove(campo);
+      clearInterval(reloj);
       //Llamamos a la funcion para preguntar si desea guardar los puntajes y volver a empezar
       ventanaRegresar();
     }

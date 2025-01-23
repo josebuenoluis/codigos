@@ -9,7 +9,7 @@ import { useContext } from "react";
 import "../css/LoginComponent.css";
 function LoginComponent() {
   const navigate = useNavigate()
-  const {user,setUser,loginUsuario} = useContext(userContext)
+  const {user,setUser,loginUsuario,setLocalStorage} = useContext(userContext)
   async function obtenerUsuario(nombreUsuario, contraseña) {
     try {
       const peticion = {
@@ -42,7 +42,8 @@ function LoginComponent() {
           debugger
           if (datos.valido) {
             console.log("Usuario encontrado");
-            loginUsuario({"nombre":datos.nombre,"avatar":datos.avatar})
+            let tiempoActual = new Date().getTime()
+            setLocalStorage({"nombre":datos.nombre,"avatar":datos.avatar,"tiempo":tiempoActual})
             navigate("/");
           } else {
             console.log("Usuario no encontrado");

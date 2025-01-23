@@ -8,7 +8,7 @@ import { userContext } from '../../context/userContext'
 
 function HeaderComponent() {
 
-  const {user,setUser} = useContext(userContext)
+  const {user,setLocalStorage} = useContext(userContext)
 
   const [categorias,SetCategorias] = useState(["Accion","Multijugador","Supervivencia"]);
   const [menuDesplegado,SetmenuDesplegado] = useState(false);
@@ -54,7 +54,7 @@ function HeaderComponent() {
             <li><Link className='enlace' to="/novedades">Novedades</Link></li>
           <li>
             <Link to="/login">
-              <img src={user.avatar} id='user-icono' alt="" />
+              <img src={user.avatar} id='user-icono' alt="" onChange={e => setLocalStorage({"nombre":user.nombre,"avatar":user.avatar,"tiempo":user.tiempo})} />
             </Link>
           </li>
           </ul>
