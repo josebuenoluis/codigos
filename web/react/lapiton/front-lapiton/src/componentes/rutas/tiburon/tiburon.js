@@ -261,7 +261,7 @@ function iniciarJuego() {
     crearLadrillo();
     crearEnemigo();
     setInterval(reloj,1000);
-    document.body.style.overflow = "hidden";
+    // document.body.style.overflow = "hidden";
     let mensaje = document.querySelector(".mensaje");
     mensaje.remove(campo);
     intervalo = setInterval(moverEnemigo, velocidadEnemigo);
@@ -279,7 +279,9 @@ function crearBola() {
   campo.appendChild(bola);
   bola.style.gridColumnStart = posicionX;
   bola.style.gridRowStart = posicionY;
-  bola.style.background = "url('../../../assets/pez.svg')";
+  bola.style.width = "90px";
+  bola.style.height = "60px";
+  bola.style.background = "url('/src/assets/pez.svg ')";
   bola.style.backgroundRepeat = "no-repeat";
 }
 
@@ -386,7 +388,7 @@ let crearEnemigo = function () {
   // enemigo.style.height = "50px";
   enemigo.style.gridColumnStart = poscicionEnemigo;
   enemigo.style.gridRowStart = poscicionEnemigo;
-  enemigo.style.background = "url('static/img/tiburon.svg')";
+  enemigo.style.background = "url('/src/assets/tiburon.svg ')";
   enemigo.style.backgroundRepeat = "no-repeat";
   enemigo.style.width = "200px";
   enemigo.style.height = "90px";

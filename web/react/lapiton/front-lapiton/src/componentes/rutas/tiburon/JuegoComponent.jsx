@@ -4,8 +4,17 @@ import FooterComponent from "../../footer/FooterComponent";
 import "../../css/JuegoComponent.css";
 
 function JuegoComponent() {
+  
+
+ useEffect(() =>{
+  setTimeout(() =>{
+    let script = document.createElement("script")
+    script.src = "http://localhost:5173/src/componentes/rutas/tiburon/tiburon.js "
+    document.body.appendChild(script)
+  },[])
+ })
   return (
-    <div>
+    <div className="main">
       <HeaderComponent />
       <section>
         <article className="article-categoria">
@@ -15,7 +24,7 @@ function JuegoComponent() {
         <article className="article-juego">
           <table id="tabla-ranking">
             <tr>
-              <th colspan="3">TOP 10</th>
+              <th colSpan="3">TOP 10</th>
             </tr>
             <tr>
               <th>Nombre</th>
