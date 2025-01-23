@@ -12,20 +12,26 @@ from tablas import crear_tablas
 def insertarArtista(cursor) -> bool:
     """Funcion para insertar un nuevo artista con
     un tipo de dato compuesto artist_type"""
-    command = f""""""
+    command = """INSERT INTO public.artistas(datos)
+	VALUES ((%s,%s,%s)::artist_type);"""
 
 def insertarDisco(cursor) -> bool:
     """Funcion para insertar un nuevo disco con arrays que
     contendran datos para relacionar estos discos con otros datos"""
-    pass
+    command = """INSERT INTO public.discos(
+	titulo, "año_lanzamiento", generos_musicales, artistas_involucrados)
+	VALUES (%s,%s,ARRAY[%s], ARRAY[%s]);"""
 
 def registrarVenta(cursor) -> bool:
     """Funcion para registrar una venta con tipos de 
     datos compuestos y un array para almacenar los id de discos"""
-    pass
-
+    command = """INSERT INTO public.ventas(
+	datos_venta)
+	VALUES (ROW(%s,ROW(%s)::sale_date,
+	ROW(ARRAY[%s])::items_purchased));"""
+    
 def eliminarArtista(cursor) -> bool:
-    """Funcion para eliminar un artista por su id."""
+    """Funcion para eliminar un artista por su nombre."""
     pass
 
 def eliminarDisco(cursor) -> bool:
@@ -51,7 +57,7 @@ if __name__ == '__main__':
         match user:
             case "1":
                 if insertarArtista(cursor):
-                    print("\Artista insertado correctamente!")
+                    print("\nArtista insertado correctamente!")
                 else:
                     print("\nNo se ha podido insertar el artista...")
             case "2":
