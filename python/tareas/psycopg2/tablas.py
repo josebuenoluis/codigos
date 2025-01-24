@@ -16,7 +16,6 @@ def crear_tablas(conexion):
         );
 
         CREATE TYPE items_purchased as (
-            id INTEGER,
             articulos_comprados text[]
         );
 
@@ -61,3 +60,5 @@ def crear_tablas(conexion):
 
     except psycopg2.errors.DuplicateObject:
         print(f"Hay tablas y tipos duplicados.")
+
+        

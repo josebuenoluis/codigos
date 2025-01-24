@@ -11,7 +11,6 @@ import LoginComponent from './componentes/rutas/LoginComponent'
 import StateComponent from './context/StateComponent'
 
 function App() {
-  
   return (
     <>
     <StateComponent>
