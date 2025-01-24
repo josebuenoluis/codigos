@@ -31,6 +31,10 @@ def ranking():
     print(listaCategorias)
     return listaCategorias
 
+@app.route("/ranking/puntos",methods=["POST"])
+def rankingPuntos():
+    pass
+
 @app.route('/login/usuarios',methods=["GET"])
 def validarUsuario():
     usuario = request.args.get("username")

@@ -1,5 +1,4 @@
 
-
 let velocidadEnemigo = 1500;
 let puntaje = 0;
 let bola = document.querySelector(".bola");
@@ -192,7 +191,7 @@ function crearUsuario() {
 const post = async () => {
   let usuario = crearUsuario();
   try {
-    const response = await fetch("/", {
+    const response = await fetch("http://127.0.0.1:5000/ranking/puntos", {
       // Definimos el metodo que vamos a utilizar GET,POST,PUT,DELETE,etc...
       method: "POST",
       //Definimos un headers que sera el tipo de dato que vamos a enviar
@@ -386,6 +385,11 @@ function moverEnemigo() {
   }
   enemigo.style.gridColumnStart = posicionEnemigoX;
   enemigo.style.gridRowStart = posicionEnemigoY;
+  if (enemigo.style.gridColumnStart >= 5){
+    enemigo.style.transform = "rotate(180deg)";
+  }else{
+    enemigo.style.transform = "rotate(0deg)";
+  }
 }
 
 // Intervalo para mover enemigo

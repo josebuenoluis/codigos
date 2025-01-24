@@ -3,7 +3,7 @@ import { userContext } from './userContext'
 
 function StateComponent({children}) {
   // 10 minutops
-  
+
   const setLocalStorage = value => {
     try{
       window.localStorage.setItem("user",JSON.stringify(value))

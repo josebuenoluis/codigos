@@ -13,6 +13,8 @@ function JuegoComponent() {
     document.body.appendChild(script)
   },[])
  })
+
+ 
   return (
     <div className="main">
       <HeaderComponent />
