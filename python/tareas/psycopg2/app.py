@@ -12,7 +12,7 @@ from tablas import crear_tablas
 def insertarArtista(cursor) -> bool:
     """Funcion para insertar un nuevo artista con
     un tipo de dato compuesto artist_type"""
-    command = f""""""
+    command = f"""INSERT INTO artistas"""
 
 def insertarDisco(cursor) -> bool:
     """Funcion para insertar un nuevo disco con arrays que
