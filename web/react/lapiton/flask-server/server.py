@@ -33,7 +33,7 @@ def ranking():
 
 @app.route("/ranking/puntos",methods=["POST"])
 def rankingPuntos():
-    pass
+    darta = request.get_json()
 
 @app.route('/login/usuarios',methods=["GET"])
 def validarUsuario():

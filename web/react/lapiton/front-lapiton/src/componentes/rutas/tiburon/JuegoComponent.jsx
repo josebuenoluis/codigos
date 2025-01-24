@@ -1,18 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useContext } from "react";
 import HeaderComponent from "../../header/HeaderComponent";
 import FooterComponent from "../../footer/FooterComponent";
 import "../../css/JuegoComponent.css";
-
+import { userContext } from "../../../context/userContext";
 function JuegoComponent() {
   
+  const {user,setLocalStorage} = useContext(userContext)
 
  useEffect(() =>{
   setTimeout(() =>{
     let script = document.createElement("script")
     script.src = "http://localhost:5173/src/componentes/rutas/tiburon/tiburon.js "
     document.body.appendChild(script)
+    window.localStorage.setItem("puntaje",JSON.stringify({"nombre":user.nombre,"puntaje":0,"dificultad":0}))
   },[])
  })
+
 
  
   return (

@@ -173,23 +173,26 @@ function ventanaRegresar() {
 function crearUsuario() {
   // Limpiamos el input de texto del nombre de usuario
   console.log("DATOS GUARDADOS.");
-  let nombreUsuario = document.querySelector("#nombre").value;
-  let puntosUsuario = puntaje;
-  let dificultadUsuario = dificultad;
-  //Creamos objeto de JavaScript Usuario
-  let usuario = {
-    nombre: nombreUsuario,
-    puntos: puntosUsuario,
-    dificultad: dificultadUsuario,
-  };
-  console.log(usuario);
+  let user = JSON.parse(window.localStorage.getItem("puntaje"));
+
+  // let nombreUsuario = document.querySelector("#nombre").value;
+  // let puntosUsuario = puntaje;
+  // let dificultadUsuario = dificultad;
+  // //Creamos objeto de JavaScript Usuario
+  // let usuario = {
+  //   nombre: nombreUsuario,
+  //   puntos: puntosUsuario,
+  //   dificultad: dificultadUsuario,
+  // };
+  console.log(user);
   // Creamos la peticion de fetch
   // La peticion FECTH recibe 2 argumentos: ('url',{method:"",contenido= headers:"Content-Type:=''",body:formato-headers=contenido})
-  return usuario;
+  return user;
 }
 
 const post = async () => {
   let usuario = crearUsuario();
+  console.log("Dentro de post: ",usuario);
   try {
     const response = await fetch("http://127.0.0.1:5000/ranking/puntos", {
       // Definimos el metodo que vamos a utilizar GET,POST,PUT,DELETE,etc...
