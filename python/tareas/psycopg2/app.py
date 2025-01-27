@@ -1,6 +1,8 @@
 from conexion import conexion
 from tablas import crear_tablas
+from datetime import datetime
 import re
+import psycopg2
 
 # Se debe crear un sistema para gestionar la información de una tienda de 
 # música. Este sistema permitirá registrar discos, artistas, géneros musicales y 
@@ -18,6 +20,13 @@ import re
 # c) ¿Cuáles son los artistas que han colaborado en un disco específico? 
 
 #==================== UTILS =========================
+
+def validar_fecha(fecha:str):
+    try:
+        fecha_valida = datetime.strptime(fecha,"%Y-%m-%d")
+        return True
+    except ValueError:
+        return False
 
 def mostrar_discos() -> tuple[list[str],str]:
     """Funcion para obtener los nombres de los discos
@@ -64,6 +73,7 @@ def obtener_generos() -> list[str]:
     un bucle."""
     generos_musicales = []
     while True:
+        print(f"\nGeneros añadidos: {generos_musicales}")
         genero = input("\nIngrese genero musical o ENTER para salir: ")
         if genero != "":
             generos_musicales.append(genero)
@@ -102,6 +112,7 @@ def obtener_artistas() -> list[int]:
     while True:
         id_artistas,mostrar = mostrar_artistas()
         print(f"\nArtistas existentes: {mostrar}")
+        print(f"\nArtistas seleccionados: {artistas_involucrados}")
         artista_id = input("\nIngrese ID del artista o presione ENTER para salir: ")
         if artista_id.isdigit():
             artista_id = int(artista_id)
@@ -159,14 +170,17 @@ def insertar_artista() -> bool:
     apellido = input("\nIngrese apellido del artista: ").strip()
     nacionalidad = input("\nIngrese nacionalidad: ").strip()
     artista = (nombre,apellido,nacionalidad)
-    if nombre != "" and apellido != "" and nacionalidad != "":
+    if nombre.isalpha() and apellido.isalpha() and nacionalidad.isalpha():
         command = """INSERT INTO artistas(datos)
         VALUES ((%s,%s,%s)::artist_type);"""
         cursor.execute(command,artista)
         db.commit()
         cursor.close()
+        print("\nArtista insertado correctamente.")
+    elif nombre == "" and apellido == "" and nacionalidad == "":
+        print("\nERROR: Los campos no pueden estar vacios.")
     else:
-        print("\nLos campos no pueden estar vacios.")
+        print("\nERROR: Los campos deben ser valores alfabeticos.")
 
 def insertar_disco() -> None:
     """Funcion para insertar un nuevo disco con arrays que
@@ -185,8 +199,10 @@ def insertar_disco() -> None:
         db.commit()
         cursor.close()
         print("\nDisco insertado correctamente...")
+    elif len(generos_musicales) == 0 and len(artistas_involucrados) == 0:
+        print("\nERROR: Las listas de generos musicales o artistas involucrados, no pueden estar vacias.")
     else:
-        print("\nLos datos ingresados no son validos.")
+        print("\nERROR: Los datos ingresados no son validos.")
 
 def registrar_venta() -> bool:
     """Funcion para registrar una venta con tipos de 
@@ -200,7 +216,7 @@ def registrar_venta() -> bool:
     cliente = input("\nIngrese el nombre del cliente: ")
     fecha_venta = input("\nIngrese fecha de la venta: ")
     discos_vendidos = obtener_discos()
-    if cliente != "" and fecha_venta != "" and len(discos_vendidos) > 0:
+    if cliente.isalpha() and validar_fecha(fecha_venta) and len(discos_vendidos) > 0:
         cursor = db.cursor()
         cursor.execute(command,(cliente,fecha_venta,discos_vendidos))
         db.commit()
@@ -213,36 +229,41 @@ def registrar_venta() -> bool:
 def consulta_genero_especifico() -> None:
     """Funcion para consultar los discos que
     incluyen un genero musical especifico."""
-    command = """SELECT array_position(generos_musicales,%s)
-    FROM discos;"""
     cursor = db.cursor()
     consulta_generos = "SELECT distinct(unnest(generos_musicales)) FROM discos;"
     cursor.execute(consulta_generos)
     resultado = cursor.fetchall()
-    generos = [genero[0] for genero in resultado]
-    print(" ")
-    print("\n".join([f"{genero+1}. {generos[genero]}" for genero in range(len(generos))]))
-    print(" ")
-    cursor.close()
-    user = input("\nIngrese el genero para consultar los discos: ")
-    if user.isdigit():
-        user = int(user)
-        if user-1 <= len(generos) or user-1 >= len(generos):
-            genero = generos[user-1]
-            consulta = """
-            SELECT *
-            FROM discos
-            WHERE array_position(generos_musicales,%s) > 0;"""
-            cursor = db.cursor()
-            cursor.execute(consulta,(genero,))
-            resultado = cursor.fetchall()
-            print(f"\nDiscos dentro del genero '{genero}':")
-            for disco in resultado:
-                cadena = f"""
-            Titulo: {disco[1]}
-            Año de estreno: {disco[2]}
-            Generos musicales: {disco[3]}"""
-                print(cadena)
+    if len(resultado) > 0:
+        generos = [genero[0] for genero in resultado]
+        print(" ")
+        print("\n".join([f"{genero+1}. {generos[genero]}" for genero in range(len(generos))]))
+        print(" ")
+        cursor.close()
+        user = input("\nIngrese el genero para consultar los discos: ")
+        if user.isdigit():
+            user = int(user)
+            if user <= len(generos) and user > 0:
+                genero = generos[user-1]
+                consulta = """
+                SELECT *
+                FROM discos
+                WHERE array_position(generos_musicales,%s) > 0;"""
+                cursor = db.cursor()
+                cursor.execute(consulta,(genero,))
+                resultado = cursor.fetchall()
+                print(f"\nDiscos dentro del genero '{genero}':")
+                for disco in resultado:
+                    cadena = f"""
+                Titulo: {disco[1]}
+                Año de estreno: {disco[2]}
+                Generos musicales: {disco[3]}"""
+                    print(cadena)
+            else:
+                print("\nEl valor ingresado no corresponde con ningun genero de la lista.")
+        else:
+            print("\nDebe ingresar un valor numerico.")
+    else:
+        print("\nNo se encuentran generos...")
 
 def consulta_cliente_determinado() -> None:
     """Funcion para consultar los discos que 
@@ -250,21 +271,28 @@ def consulta_cliente_determinado() -> None:
     consulta_clientes = "SELECT (datos_venta).customer_name FROM ventas;"
     cursor = db.cursor()
     cursor.execute(consulta_clientes)
-    print("\nCliente: ")
-    for cliente in cursor.fetchall():
-        print(f"- {cliente[0]}")
-    user = input("\nIngrese el nombre del cliente: ")
-    if user != "":
-        consulta = """SELECT array_to_string(((datos_venta).discos_vendidos).articulos_comprados,',')
-        FROM ventas
-        where (datos_venta).customer_name LIKE %s;"""
-        cursor = db.cursor()
-        cursor.execute(consulta,(user,))
-        resultado = cursor.fetchall()
-        print(f"\nDiscos comprados por el cliente '{user}': \n")
-        for disco in resultado[0][0].split(","):
-            print(f"- {disco}")
-    
+    resultado_clientes = cursor.fetchall()
+    if len(resultado_clientes) > 0:
+        print("\nCliente: ")
+        clientes = [cliente[0] for cliente in resultado_clientes]
+        print(" ")
+        print("\n".join([f"- {clientes[cliente]}" for cliente in range(len(clientes))]))
+        print(" ")
+        user = input("\nIngrese el nombre del cliente: ")
+        if user != "" and user in clientes:
+            consulta = """SELECT array_to_string(((datos_venta).discos_vendidos).articulos_comprados,',')
+            FROM ventas
+            where (datos_venta).customer_name LIKE %s;"""
+            cursor = db.cursor()
+            cursor.execute(consulta,(user,))
+            resultado = cursor.fetchall()
+            print(f"\nDiscos comprados por el cliente '{user}': \n")
+            for disco in resultado[0][0].split(","):
+                print(f"- Titulo: {disco}")
+        else:
+            print("\nEl cliente ingresado no se encuentra...")
+    else:
+        print("\nNo se encuentran clientes.")
 def consulta_artistas_disco_colaborado() -> None:
     """Funcion para consultar los artistas que
     han colaborado en un disco especifico."""
@@ -274,15 +302,19 @@ def consulta_artistas_disco_colaborado() -> None:
     if user != "":
         if user in titulo_disco:
             consulta = """
-            SELECT (datos).nombre
+            SELECT (datos).nombre,(datos).apellido
             FROM discos,artistas
             WHERE titulo LIKE %s AND artistas.id = ANY(artistas_involucrados);"""
             cursor = db.cursor()
             cursor.execute(consulta,(user,))
             resultado = cursor.fetchall()
+            print("\nArtistas: ")
             for artista in resultado:
-                print(f"- Nombre Artista: {artista[0]}")
-
+                print(f"- Nombre Artista: {artista[0]} {artista[1]}")
+        else:
+            print("\nEl titulo ingresado no se encuentra...")
+    else:
+        print("\nEl campo no puede estar vacio.")
 
 # =========================================================
 
@@ -377,32 +409,28 @@ def actualizar_disco() -> None:
             if user in titulo_discos:
                 if campo == "1" or campo == "2":
                     nuevo_valor = nuevo_valor = input("\nIngrese el nuevo valor: ")
-                    if nuevo_valor != "":
+                    if nuevo_valor != "" and campo_string == "Titulo" or \
+                        nuevo_valor.isdigit() and campo_string == "año_lanzamiento":
                         command = f"""
                         UPDATE discos
                         SET {campo_string} = '{nuevo_valor}'
                         WHERE titulo LIKE '{user}';
                         """
-                    else:
+                    elif nuevo_valor == "":
                         print("\nEl nuevo valor no puede estar vacio.")
+                        continue
+                    else:
+                        print("\nEl nuevo valor es valido.")
                         continue
                 else:
                     print(f"\n1. Añadir un elemento a '{campo_string}'    2. Eliminar un elemento de '{campo_string}'")
                     accion = input(f"Que desea hacer?[1][2]: ")
-                    if accion == "1":
-                        valor_array = input("\nIngrese el valor a añadir: ")
+                    if accion == "1" or accion == "2":
+                        valor_array = input(f"\nIngrese el valor a {"añadir" if accion == "1" else "eliminar"}: ")
+                        instruccion = "array_append" if accion == "1" else "array_remove"
                         if valor_array != "":
                             command = f"""UPDATE discos
-                            SET {campo_string} = array_append({campo_string},'{valor_array}')
-                            WHERE titulo LIKE '{user}';"""
-                        else:
-                            print("\nEl valor no puede estar vacio.")
-                            continue
-                    elif accion == "2":
-                        valor_array = input("\nIngrese el valor a eliminar: ")
-                        if valor_array != "":
-                            command = f"""UPDATE discos
-                            SET {campo_string} = array_remove({campo_string},'{valor_array}')
+                            SET {campo_string} = {instruccion}({campo_string},'{valor_array}')
                             WHERE titulo LIKE '{user}';"""
                         else:
                             print("\nEl valor no puede estar vacio.")
@@ -442,39 +470,43 @@ def actualizar_venta() -> None:
                 if user in id_ventas:
                     if campo == "1" or campo == "2":
                         nuevo_valor = input(f"\nIngrese el nuevo valor para '{campo_string}': ")
-                        if nuevo_valor != "":
+                        if nuevo_valor != "" and campo_string == "customer_name" or \
+                            nuevo_valor != "" and campo_string == "fecha_venta" and validar_fecha(nuevo_valor):
                             command = f"""UPDATE ventas
                             SET datos_venta.{campo_string} = '{nuevo_valor}'
                             WHERE id = {user};"""
-                        else:
+                        elif nuevo_valor == "":
                             print("\nEl nuevo valor no puede estar vacio, vuelva a intentar.")
+                            continue
+                        else:
+                            print("\nLos datos ingresados no son validos.")
                             continue
                     elif campo == "3":
                         print(f"\n1. Añadir un elemento a '{campo_string}'    2. Eliminar un elemento de '{campo_string}'")
                         accion = input(f"Que desea hacer?[1][2]: ")
-                        if accion == "1":
-                            valor_array = input("\nIngrese el valor a añadir: ")
+                        if accion == "1" or accion == "2":
+                            valor_array = input(f"\nIngrese el valor a {"añadir" if accion == "1" else "eliminar"}: ")
+                            instruccion = "array_append" if accion == "1" else "array_remove"
                             if valor_array != "":
-                                command = f"""UPDATE ventas
-                                SET datos_venta = (
-                                    (datos_venta).customer_name,               
-                                    (datos_venta).fecha_venta,                            
-                                    ROW(array_append(((datos_venta).discos_vendidos).articulos_comprados, '{valor_array}'))::items_purchased
-                                )::sale_info
-                                WHERE id = {user};"""
-                            else:
-                                print("\nEl valor no puede estar vacio.")
-                                continue
-                        elif accion == "2":
-                            valor_array = input("\nIngrese el valor a eliminar: ")
-                            if valor_array != "":
-                                command = f"""UPDATE ventas
-                                SET datos_venta = (
+                                if instruccion == "array_remove":
+                                    command = f"""UPDATE ventas
+                                    SET datos_venta = (
                                     (datos_venta).customer_name,               
                                     (datos_venta).fecha_venta,                            
                                     ROW(array_remove(((datos_venta).discos_vendidos).articulos_comprados, '{valor_array}'))::items_purchased
-                                )::sale_info
-                                WHERE id = {user};"""
+                                    )::sale_info
+                                    WHERE id = {user} AND array_position((datos_venta).discos_vendidos.articulos_comprados,'{valor_array}') > 0;
+                                    """
+                                else:
+                                    command = f"""UPDATE ventas
+                                    SET datos_venta = (
+                                    (datos_venta).customer_name,               
+                                    (datos_venta).fecha_venta,
+                                    ROW(array_append((array_remove(((datos_venta).discos_vendidos).articulos_comprados,'{valor_array}')),'{valor_array}'))::items_purchased
+                                    )::sale_info
+                                    WHERE id = {user} AND (SELECT count(titulo)
+                                    FROM discos 
+                                    WHERE titulo LIKE '{valor_array}') > 0;"""
                             else:
                                 print("\nEl valor no puede estar vacio.")
                                 continue
@@ -487,8 +519,14 @@ def actualizar_venta() -> None:
                     cursor = db.cursor()
                     cursor.execute(command)
                     db.commit()
+                    if cursor.rowcount > 0:
+                        print(f"\n'{campo_string}' actualizado correctamente.")
+                    else:
+                        if accion == "2":
+                            print(f"\n'{campo_string}' no se pudo actualizar.")
+                        else:
+                            print(f"\n'{campo_string}' no se pudo actualizar,\n el disco ingresado no existe.")
                     cursor.close()
-                    print(f"\n'{campo_string}' actualizado correctamente.")  
                 else:
                     print("\nEl ID ingresado no existe.")
             elif user == "":
@@ -616,20 +654,28 @@ if __name__ == '__main__':
         db = conexion()
         crear_tablas(db)
         while True:
-            print(MENU)
-            user = input("\nIngrese una opcion: ")
-            match user:
-                case "1":
-                    submenu_inserciones()
-                case "2":
-                    submenu_consultas()
-                case "3":
-                    submenu_actualizaciones()
-                case "4":
-                    submenu_borrado()
-                case "5":
-                    print("\nSaliendo del programa!\n")
-                    db.close()
-                    break
+            try:
+                print(MENU)
+                user = input("\nIngrese una opcion: ")
+                match user:
+                    case "1":
+                        submenu_inserciones()
+                    case "2":
+                        submenu_consultas()
+                    case "3":
+                        submenu_actualizaciones()
+                    case "4":
+                        submenu_borrado()
+                    case "5":
+                        print("\nSaliendo del programa!\n")
+                        db.close()
+                        break
+            except psycopg2.IntegrityError as error:
+                print(f"\nError de integridad: {error}")
+                db.rollback()
+            except Exception as error:
+                print(f"\nError: {error}")
+    except psycopg2.OperationalError as error:
+        print(f"\nFallo al conectar con la base de datos: {error}")
     except Exception as error:
-        print(f"Error: {error}")
+        print(f"Otro error: {error}")

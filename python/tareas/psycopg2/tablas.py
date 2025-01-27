@@ -61,4 +61,3 @@ def crear_tablas(conexion):
     except psycopg2.errors.DuplicateObject:
         print(f"\nLas tablas y tipos ya han sido creadas.")
         conexion.rollback()        
-        
