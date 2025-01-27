@@ -54,11 +54,11 @@ def crear_tablas(conexion):
 
     except psycopg2.OperationalError as error:
         print(f"\nFallo al conectar con la base de datos: {error}")
-        
+
     except psycopg2.IntegrityError as error:
-        print(f"Error de integridad en la base de datos: {error}")
-
+        print(f"\nError de integridad en la base de datos: {error}")
+        conexion.rollback()        
     except psycopg2.errors.DuplicateObject:
-        print(f"Hay tablas y tipos duplicados.")
-
+        print(f"\nLas tablas y tipos ya han sido creadas.")
+        conexion.rollback()        
         
