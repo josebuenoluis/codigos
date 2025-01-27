@@ -273,9 +273,10 @@ def consulta_artistas_disco_colaborado() -> None:
     user = input("\nIngrese el titulo del disco: ")
     if user != "":
         if user in titulo_disco:
-            consulta = """SELECT (datos).nombre
-            FROM artistas A INNER JOIN discos D
-            ON A.id = D.artistas_involucrados[array_position(D.artistas_involucrados,%s)];"""
+            consulta = """
+            SELECT (datos).nombre
+            FROM discos,artistas
+            WHERE titulo LIKE %s AND artistas.id = ANY(artistas_involucrados);"""
             cursor = db.cursor()
             cursor.execute(consulta,(user,))
             resultado = cursor.fetchall()
