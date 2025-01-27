@@ -60,12 +60,14 @@ function BotonComponent(props) {
     let avatar = document.querySelector("#img-avatar").src;
     let contraseñaRepetida = document.querySelector("#repetir-contraseña").value;
     if(validarCampos(usuario,contraseña,contraseñaRepetida) == ""){
+      debugger
       const usuarioResponse = obtenerUsuario(usuario).then(datos => {
         console.log("Usuario consultado: ",datos);
         if(Object.keys(datos).length==0){
+          debugger
           crearUsuario({"nombre":usuario,"contraseña":contraseña,"avatar":avatar});
           debugger
-          loginUsuario({"nombre":usuario,"avatar":avatar})
+          loginUsuario(JSON.stringify({"nombre":usuario,"avatar":avatar}))
           console.log("INsertar");
           navigate("/");
         }else{
