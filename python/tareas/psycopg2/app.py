@@ -268,15 +268,19 @@ def consulta_cliente_determinado() -> None:
 def consulta_artistas_disco_colaborado() -> None:
     """Funcion para consultar los artistas que
     han colaborado en un disco especifico."""
-    id_discos,mostrar = mostrar_discos()
+    titulo_disco,mostrar = mostrar_discos()
     print(mostrar)
-    user = input("\nIngrese el ID del disco: ")
-    if user.isdigit():
-        user = int(user)
-        if user in id_discos:
-            consulta = """SELECT *
-            FROM discos
-            where array_position(artistas_involucrados,%s) > 0;"""
+    user = input("\nIngrese el titulo del disco: ")
+    if user != "":
+        if user in titulo_disco:
+            consulta = """SELECT (datos).nombre
+            FROM artistas A INNER JOIN discos D
+            ON A.id = D.artistas_involucrados[array_position(D.artistas_involucrados,%s)];"""
+            cursor = db.cursor()
+            cursor.execute(consulta,(user,))
+            resultado = cursor.fetchall()
+            for artista in resultado:
+                print(f"- Nombre Artista: {artista[0]}")
 
 
 # =========================================================
