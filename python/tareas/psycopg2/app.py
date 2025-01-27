@@ -4,21 +4,6 @@ from datetime import datetime
 import re
 import psycopg2
 
-# Se debe crear un sistema para gestionar la información de una tienda de 
-# música. Este sistema permitirá registrar discos, artistas, géneros musicales y 
-# las ventas realizadas. Cada disco puede involucrar varios artistas y estar 
-# clasificado en múltiples géneros. Además, las ventas deben incluir información 
-# sobre los clientes y los discos vendidos.
-
-# a) Create: Insertar nuevos discos, artistas y ventas. 
-# b) Read: Consultar información de discos, artistas y ventas. 
-# c) Update: Actualizar información de discos y ventas. 
-# d) Delete: Eliminar discos, artistas o ventas de la base de datos. 
-
-# a) ¿Qué discos incluyen un género musical específico? 
-# b) ¿Qué discos ha comprado un cliente determinado? 
-# c) ¿Cuáles son los artistas que han colaborado en un disco específico? 
-
 #==================== UTILS =========================
 
 def validar_fecha(fecha:str):
@@ -48,6 +33,8 @@ def mostrar_discos() -> tuple[list[str],str]:
             discos_existentes.append(disco[1])
             cadena.append(datos_disco)
         cadena = "\n".join(cadena)
+    else:
+        cadena = "\nNo se encuentran resultados."
     return discos_existentes,cadena
 
 
@@ -58,6 +45,7 @@ def obtener_discos() -> list[str]:
     discos_existentes,mostrar = mostrar_discos()
     while True:
         print(mostrar)
+        print(f"\nDiscos seleccionados: {discos_vendidos}")
         disco = input("\nIngrese el nombre del disco o presione ENTER para salir: ")
         if disco in discos_existentes:
             discos_vendidos.append(disco)
@@ -102,6 +90,8 @@ def mostrar_artistas() -> tuple[list[int],str]:
             cadena.append(artista_string)
             id_artistas.append(artista[0])
         cadena = "\n".join(cadena)
+    else:
+        cadena = "\nNo se encuentran resultados."
     cursor.close()
     return (id_artistas,cadena)
 
@@ -156,6 +146,8 @@ def mostrar_ventas() -> tuple[list[int],str]:
             cadena.append(venta_string)
             id_ventas.append(venta[0])
         cadena = "\n".join(cadena)
+    else:
+        cadena = "\nNo se encuentran resultados."
     cursor.close()
     return (id_ventas,cadena)
 # =====================================================
@@ -287,8 +279,11 @@ def consulta_cliente_determinado() -> None:
             cursor.execute(consulta,(user,))
             resultado = cursor.fetchall()
             print(f"\nDiscos comprados por el cliente '{user}': \n")
-            for disco in resultado[0][0].split(","):
-                print(f"- Titulo: {disco}")
+            if len(resultado) > 0:
+                for disco in resultado[0][0].split(","):
+                    print(f"- Titulo: {disco}")
+            else:
+                print("\nNo se encontraron resultados.")
         else:
             print("\nEl cliente ingresado no se encuentra...")
     else:
@@ -309,8 +304,11 @@ def consulta_artistas_disco_colaborado() -> None:
             cursor.execute(consulta,(user,))
             resultado = cursor.fetchall()
             print("\nArtistas: ")
-            for artista in resultado:
-                print(f"- Nombre Artista: {artista[0]} {artista[1]}")
+            if len(resultado) > 0:
+                for artista in resultado:
+                    print(f"- Nombre Artista: {artista[0]} {artista[1]}")
+            else:
+                print("\nNo se encontraron artistas.")
         else:
             print("\nEl titulo ingresado no se encuentra...")
     else:
@@ -420,7 +418,7 @@ def actualizar_disco() -> None:
                         print("\nEl nuevo valor no puede estar vacio.")
                         continue
                     else:
-                        print("\nEl nuevo valor es valido.")
+                        print("\nEl nuevo valor no es valido.")
                         continue
                 else:
                     print(f"\n1. Añadir un elemento a '{campo_string}'    2. Eliminar un elemento de '{campo_string}'")
@@ -639,6 +637,30 @@ def submenu_consultas() -> None:
             case _:
                 print("\nDebe ingresar una opcion valida.")
 
+def submenu_mostrar_tablas() -> None:
+    """Funcion para mostrar opciones de tablas
+    para mostrar."""
+    SUB_MENU = """
+        1. Mostrar discos.
+        2. Mostrar artistas.
+        3. Mostrar ventas.
+        """
+    while True:
+        print(SUB_MENU)
+        user_sub = input("\nIngrese una opcion o presione ENTER para salir: ")
+        match user_sub:
+            case "1":
+                print(mostrar_discos()[1])
+            case "2":
+                print(mostrar_artistas()[1])
+            case "3":
+                print(mostrar_ventas()[1])
+            case "":
+                print("\nSaliendo a menu principal...")
+                break
+            case _:
+                print("\nDebe ingresar una opcion valida.")
+
 # ===========================================================
 
 if __name__ == '__main__':
@@ -649,7 +671,8 @@ if __name__ == '__main__':
     2. Consultar registros.
     3. Actualizar registros.
     4. Eliminar registros.
-    5. Salir.\n"""
+    5. Mostrar tablas.
+    6. Salir.\n"""
     try:
         db = conexion()
         crear_tablas(db)
@@ -667,6 +690,8 @@ if __name__ == '__main__':
                     case "4":
                         submenu_borrado()
                     case "5":
+                        submenu_mostrar_tablas()
+                    case "6":
                         print("\nSaliendo del programa!\n")
                         db.close()
                         break
