@@ -10,7 +10,7 @@ function JuegoComponent() {
  useEffect(() =>{
   setTimeout(() =>{
     let script = document.createElement("script")
-    script.src = "http://localhost:5173/src/componentes/rutas/tiburon/tiburon.js "
+    script.src = "http://127.0.0.1:5173/src/componentes/rutas/tiburon/tiburon.js "
     document.body.appendChild(script)
     window.localStorage.setItem("puntaje",JSON.stringify({"nombre":user.nombre,"puntaje":0,"dificultad":0,"categoria":"supervivencia","juego":"El Tiburon"}))
   },[])
@@ -22,7 +22,7 @@ function JuegoComponent() {
         const peticion = {
           method: "GET",
         };
-        const response = await fetch("http://10.102.9.204:5000/ranking",peticion)
+        const response = await fetch("http://127.0.0.1:5000/ranking",peticion)
   
         if (response.ok) {
           console.log("Exito");

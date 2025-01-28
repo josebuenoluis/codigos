@@ -1,10 +1,10 @@
 import React from "react";
 import "../css/BarraBusqueda.css"
 
-function BarraBusqueda() {
+function BarraBusqueda(props) {
   return (
     <div className="barra-busqueda">
-      <input type="text" id="busqueda" placeholder="Buscar..." />
+      <input type="text" id="busqueda" onClick={props.funcion} placeholder="Buscar..." />
       <button>
         <svg
           xmlns="http://www.w3.org/2000/svg"

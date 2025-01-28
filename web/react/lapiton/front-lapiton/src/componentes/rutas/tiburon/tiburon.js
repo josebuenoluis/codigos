@@ -192,7 +192,7 @@ const post = async () => {
   console.log("Dentro de post: ",usuario);
   if(usuario.nombre!=""){   
       try {
-        const response = await fetch("http://10.102.9.204:5000/ranking/puntos", {
+        const response = await fetch("http://127.0.0.1:5000/ranking/puntos", {
           // Definimos el metodo que vamos a utilizar GET,POST,PUT,DELETE,etc...
           method: "POST",
           //Definimos un headers que sera el tipo de dato que vamos a enviar

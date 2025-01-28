@@ -3,14 +3,14 @@ import "../css/BotonRegistroComponent.css"
 import { userContext } from '../../context/userContext';
 import { useNavigate } from 'react-router-dom';
 function BotonComponent(props) {
-  const {user,setUser,loginUsuario} = useContext(userContext)
+  const {user,setUser,loginUsuario,setLocalStorage} = useContext(userContext)
   const navigate = useNavigate()
   async function obtenerUsuario(nombreUsuario){
     try {
       const peticion = {
       method: "GET",
     }
-      const response = await fetch("http://10.102.9.204:5000/registrar/usuarios?username="+nombreUsuario,peticion);
+      const response = await fetch("http://127.0.0.1:5000/registrar/usuarios?username="+nombreUsuario,peticion);
       
       if (response.ok) {
         console.log("Exito");
@@ -25,7 +25,7 @@ function BotonComponent(props) {
 
   async function crearUsuario(usuario){
     try {
-      const response = await fetch("http://10.102.9.204:5000/registrar/usuarios", {
+      const response = await fetch("http://127.0.0.1:5000/registrar/usuarios", {
         // Definimos el metodo que vamos a utilizar GET,POST,PUT,DELETE,etc...
         method: "POST",
         //Definimos un headers que sera el tipo de dato que vamos a enviar
@@ -67,7 +67,9 @@ function BotonComponent(props) {
           debugger
           crearUsuario({"nombre":usuario,"contraseña":contraseña,"avatar":avatar});
           debugger
-          loginUsuario(JSON.stringify({"nombre":usuario,"avatar":avatar}))
+          // loginUsuario(JSON.stringify({"nombre":usuario,"avatar":avatar}))
+          let tiempoActual = new Date().getTime()
+          setLocalStorage({"nombre":usuario,"avatar":avatar,"tiempo":tiempoActual})
           console.log("INsertar");
           navigate("/");
         }else{

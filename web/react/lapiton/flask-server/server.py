@@ -6,6 +6,7 @@ from datetime import timedelta
 import conexion
 from hash import generarHash,validarPassword
 import json
+from peewee import fn
 
 app = Flask(__name__)
 CORS(app)
@@ -27,9 +28,32 @@ def ranking():
     #Ejecutamos una consulta para obtener a los 10 o tantos mejores jugadores,
     #segun los filtros aplicados, los filtros seran pasados
     # en los Headers de la peticion
+    filtro_categoria = request.args.get("categoria")
+    filtro_busqueda = request.args.get("busqueda")
+    
     data = {}
     juegos = Juegos.select(Juegos.categoria).distinct()
-    jugadores = Ranking.select().order_by(Ranking.puntaje.desc()).limit(10)
+    if filtro_categoria == None and filtro_busqueda == None:
+        jugadores = Ranking.select(
+            Ranking.usuario_fk,Ranking.juego,Ranking.categoria,fn.MAX(Ranking.dificultad),fn.MAX(Ranking.puntaje)
+        ).group_by(Ranking.usuario_fk,Ranking.juego,Ranking.categoria).order_by(Ranking.puntaje.desc()).limit(10)
+    elif filtro_categoria != None and filtro_busqueda == None:
+        jugadores = Ranking.select(
+            Ranking.usuario_fk,Ranking.juego,Ranking.categoria,fn.MAX(Ranking.dificultad),fn.MAX(Ranking.puntaje)
+        ).where(Ranking.categoria==filtro_categoria).group_by(Ranking.usuario_fk,Ranking.juego,Ranking.categoria).order_by(Ranking.puntaje.desc()).limit(10)
+    elif filtro_categoria == None and filtro_busqueda != None:
+        jugadores = Ranking.select(
+            Ranking.usuario_fk,Ranking.juego,Ranking.categoria,fn.MAX(Ranking.dificultad),fn.MAX(Ranking.puntaje)
+        ).where(
+            Ranking.juego==filtro_busqueda
+        ).group_by(Ranking.usuario_fk,Ranking.juego,Ranking.categoria).order_by(Ranking.puntaje.desc()).limit(10)
+    elif filtro_categoria != None and filtro_busqueda != None:
+        jugadores = Ranking.select(
+            Ranking.usuario_fk,Ranking.juego,Ranking.categoria,fn.MAX(Ranking.dificultad),fn.MAX(Ranking.puntaje)
+        ).where(
+            (Ranking.categoria==filtro_categoria) &
+            (Ranking.juego==filtro_busqueda)
+        ).group_by(Ranking.usuario_fk,Ranking.juego,Ranking.categoria).order_by(Ranking.puntaje.desc()).limit(10)
     listaCategorias = []
     listaJugadores = []
     #Para obtener la lista de categorias
@@ -105,7 +129,6 @@ def listarAvatars():
         avatar = json.loads(response.read().decode("utf-8"))
         imagen = avatar["image"]["url"]
         resultado.append({"id_avatar":id_super,"imagen":imagen})
-    print(resultado)
     return resultado
 
 @app.route('/registrar/usuarios',methods=["POST"])
