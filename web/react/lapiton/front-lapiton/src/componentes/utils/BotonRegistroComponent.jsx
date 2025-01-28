@@ -10,7 +10,7 @@ function BotonComponent(props) {
       const peticion = {
       method: "GET",
     }
-      const response = await fetch("http://127.0.0.1:5000/registrar/usuarios?username="+nombreUsuario,peticion);
+      const response = await fetch("http://10.102.9.204:5000/registrar/usuarios?username="+nombreUsuario,peticion);
       
       if (response.ok) {
         console.log("Exito");
@@ -25,7 +25,7 @@ function BotonComponent(props) {
 
   async function crearUsuario(usuario){
     try {
-      const response = await fetch("http://127.0.0.1:5000/registrar/usuarios", {
+      const response = await fetch("http://10.102.9.204:5000/registrar/usuarios", {
         // Definimos el metodo que vamos a utilizar GET,POST,PUT,DELETE,etc...
         method: "POST",
         //Definimos un headers que sera el tipo de dato que vamos a enviar

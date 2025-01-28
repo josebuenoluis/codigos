@@ -20,7 +20,7 @@ function Inicio() {
       const peticion = {
         method: "GET",
       };
-      const response = await fetch("http://127.0.0.1:5000/",peticion)
+      const response = await fetch("http://10.102.9.204:5000/",peticion)
 
       if (response.ok) {
         console.log("Exito");

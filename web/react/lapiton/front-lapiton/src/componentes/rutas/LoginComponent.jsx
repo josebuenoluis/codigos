@@ -16,7 +16,7 @@ function LoginComponent() {
         method: "GET",
       };
       const response = await fetch(
-        `http://127.0.0.1:5000/login/usuarios?username=${nombreUsuario}&password=${contraseña}`,
+        `http://10.102.9.204:5000/login/usuarios?username=${nombreUsuario}&password=${contraseña}`,
         peticion
       );
 

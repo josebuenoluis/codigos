@@ -24,17 +24,44 @@ def index():
 
 @app.route("/ranking",methods=["GET"])
 def ranking():
+    #Ejecutamos una consulta para obtener a los 10 o tantos mejores jugadores,
+    #segun los filtros aplicados, los filtros seran pasados
+    # en los Headers de la peticion
+    data = {}
     juegos = Juegos.select(Juegos.categoria).distinct()
+    jugadores = Ranking.select().order_by(Ranking.puntaje.desc()).limit(10)
     listaCategorias = []
+    listaJugadores = []
+    #Para obtener la lista de categorias
     for juego in juegos:
         listaCategorias.append(juego.categoria)
-    print(listaCategorias)
-    return listaCategorias
+    # #Para obtener el top de los jugadores
+    for jugador in jugadores:
+        # listaJugadores.append({"puntaje":10})
+        listaJugadores.append({"puntaje":jugador.puntaje,"dificultad":jugador.dificultad,"nombre":jugador.usuario_fk.nombre,"juego":jugador.juego,"categoria":jugador.categoria})
+
+    data["categorias"] = listaCategorias
+    data["jugadores"] = listaJugadores
+    # print(listaCategorias)
+    # print(listaJugadores)
+    return data
 
 @app.route("/ranking/puntos",methods=["POST"])
 def rankingPuntos():
-    darta = request.get_json()
-
+    data = request.get_json()
+    print(data)
+    try:
+        # Guardamos los puntos del usuario en la tabla ranking con el 
+        #nombre del juego y la categoria del juego, hay que consultar
+        # el puntaje mas alto de ese usuario y si es mas alto lo guardamos
+        # y si no, no lo guardaremos en la tabla ranking, sera otra tabla a futuro.
+        # 
+        Ranking.create(puntaje=data["puntaje"],dificultad=data["dificultad"],juego=data["juego"],categoria=data["categoria"],usuario_fk=data["nombre"])
+        print("Puntos guardados correctamente.")
+    except Exception as error:
+        print(f"Error: {error}")
+    return data
+    
 @app.route('/login/usuarios',methods=["GET"])
 def validarUsuario():
     usuario = request.args.get("username")
@@ -104,6 +131,6 @@ if __name__ == '__main__':
 
     db.connect()
 
-    db.create_tables([Usuarios,Juegos])
+    db.create_tables([Usuarios,Juegos,Ranking])
 
     app.run(host='0.0.0.0',port=5000)

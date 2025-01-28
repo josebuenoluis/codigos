@@ -3,26 +3,31 @@ import { userContext } from './userContext'
 
 function StateComponent({children}) {
   // 10 minutops
+  debugger
 
-  const setLocalStorage = value => {
-    try{
-      window.localStorage.setItem("user",JSON.stringify(value))
-      loginUsuario(window.localStorage.getItem("user"))
-      debugger
-      console.log(window.localStorage.getItem("user"))
-    }catch(error){
-      console.error(error)
-    }
+  const tiempoMaximo = 300000
+  let tiempoActual = new Date().getTime()
+  console.log(tiempoActual)
+
+  let objetoUsuario = JSON.parse(window.localStorage.getItem("user"))
+  if(objetoUsuario==null){
+    window.localStorage.setItem("user",JSON.stringify({"nombre":"","avatar":"src/assets/user-icon.svg","tiempo":0}))
   }
-    const tiempoMaximo = 300000
-    let tiempoActual = new Date().getTime()
-    console.log(tiempoActual)
-    let objetoUsuario = JSON.parse(window.localStorage.getItem("user"))
-    let tiempoGuardado = objetoUsuario.tiempo;
-    console.log(tiempoGuardado)
-    if(tiempoActual-tiempoGuardado > tiempoMaximo && tiempoGuardado != 0){
-      console.log("Deslogueando")
-      window.localStorage.setItem("user",JSON.stringify({"nombre":"","avatar":"src/assets/user-icon.svg","tiempo":0}))
+  let tiempoGuardado = objetoUsuario.tiempo;
+  console.log(tiempoGuardado)
+  if(tiempoActual-tiempoGuardado > tiempoMaximo && tiempoGuardado != 0){
+    console.log("Deslogueando")
+    window.localStorage.setItem("user",JSON.stringify({"nombre":"","avatar":"src/assets/user-icon.svg","tiempo":0}))
+  }
+    const setLocalStorage = value => {
+      try{
+        window.localStorage.setItem("user",JSON.stringify(value))
+        loginUsuario(window.localStorage.getItem("user"))
+        debugger
+        console.log(window.localStorage.getItem("user"))
+      }catch(error){
+        console.error(error)
+      }
     }
     const [user,setUser] = useState(
       JSON.parse(window.localStorage.getItem("user"))
