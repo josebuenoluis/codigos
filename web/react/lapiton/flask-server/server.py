@@ -85,7 +85,7 @@ def rankingPuntos():
     except Exception as error:
         print(f"Error: {error}")
     return data
-    
+
 @app.route('/login/usuarios',methods=["GET"])
 def validarUsuario():
     usuario = request.args.get("username")
