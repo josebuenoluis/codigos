@@ -73,6 +73,11 @@ section{
     display: flex;
     flex-direction: column;
     border: 2px solid black;
+    box-shadow: 10px 10px 5px #888888;
+}
+
+.juego:hover{
+    opacity: .85;
 }
 
 .juego p{

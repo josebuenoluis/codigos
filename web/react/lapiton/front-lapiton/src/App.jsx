@@ -9,6 +9,7 @@ import './componentes/css/fonts.css'
 import RegistroComponent from './componentes/rutas/RegistroComponent'
 import LoginComponent from './componentes/rutas/LoginComponent'
 import StateComponent from './context/StateComponent'
+import VentanaAgregarComponent from './componentes/rutas/VentanaAgregarComponent'
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="juego" element={ <JuegoComponent /> } />
           <Route path="registro" element={<RegistroComponent />} />
           <Route path="login" element={<LoginComponent />} />
+          <Route path="agregar" element={<VentanaAgregarComponent />} />
         </Routes>
       </div>
     </StateComponent>

@@ -73,7 +73,6 @@ def ranking():
 @app.route("/ranking/puntos",methods=["POST"])
 def rankingPuntos():
     data = request.get_json()
-    print(data)
     try:
         # Guardamos los puntos del usuario en la tabla ranking con el 
         #nombre del juego y la categoria del juego, hay que consultar
@@ -111,7 +110,6 @@ def validarUsuario():
 @app.route('/registrar/usuarios',methods=["GET"])
 def consultaUsuario():
     data = request.args.get("username")
-    print(data)
     try:
         usuario = Usuarios.select().where(Usuarios.nombre==data).get()
         usuario = {"nombre":usuario.nombre,"contraseña":usuario.contraseña}
@@ -146,6 +144,29 @@ def crearUsuario():
     return data
 
 
+@app.route("/novedades/agregar",methods=["POST"])
+def subirNovedad():
+    data = request.get_json()
+    try:
+        novedad = Novedades.create(titulo=data["titulo"],descripcion=data["descripcion"]
+                                   ,imagen=data["imagen"])
+        print(f"Novedad subida con exito.")
+    except Exception as error:
+        print("Error: ",error) 
+    return data
+
+@app.route("/novedades",methods=["GET"])
+def obtenerNovedades():
+    novedades = Novedades.select()
+    listaNovedades = []
+    for novedad in novedades:
+        diccionario = {}
+        diccionario["titulo"] = novedad.titulo
+        diccionario["imagen"] = novedad.imagen
+        diccionario["descripcion"] = novedad.descripcion
+        listaNovedades.append(diccionario)
+    return listaNovedades
+
 if __name__ == '__main__':
 
     login = ""
@@ -154,6 +175,6 @@ if __name__ == '__main__':
 
     db.connect()
 
-    db.create_tables([Usuarios,Juegos,Ranking])
+    db.create_tables([Usuarios,Juegos,Ranking,Novedades])
 
     app.run(host='0.0.0.0',port=5000)

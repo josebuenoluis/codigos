@@ -48,3 +48,14 @@ section{
 .article-tabla table tr th,td{
     border: 2px solid black;
 }
+
+.article-tabla table tr{
+    height: 4rem;
+}
+
+.article-tabla table th{
+    font-size: 1.6rem;
+    font-family: "Cherry Bomb One", system-ui;
+    font-weight: 400;
+    text-align: center;
+}

@@ -18,7 +18,7 @@ class Juegos(BaseModel):
     nombre = TextField()
     categoria = TextField()
     fondoIcono = TextField()
-    fecha_lanzamiento = DateField(default=datetime.now())
+    fecha_lanzamiento = DateField(default=datetime.now().date())
 
 class Ranking(BaseModel):
     puntaje = IntegerField()
@@ -27,4 +27,8 @@ class Ranking(BaseModel):
     dificultad = IntegerField()
     usuario_fk = ForeignKeyField(Usuarios,column_name = "usuario_fk",on_update="CASCADE",on_delete="CASCADE")
 
-
+class Novedades(BaseModel):
+    titulo = CharField(primary_key=True,max_length=100)
+    descripcion = TextField()
+    imagen = TextField()
+    fecha_novedad = DateField(default=datetime.now().date())

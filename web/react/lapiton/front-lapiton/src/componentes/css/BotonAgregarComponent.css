@@ -1,0 +1,10 @@
+
+#id-btn-agregar{
+    border: none;
+    background: none;
+}
+
+#id-btn-agregar:hover{
+    opacity: .80;
+    cursor: pointer;
+}
