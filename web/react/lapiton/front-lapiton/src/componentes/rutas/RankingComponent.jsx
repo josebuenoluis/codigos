@@ -50,7 +50,7 @@ function RankingComponent() {
 
   function mostrarFiltrosCategoria(){
     debugger
-      limpiarTabla()
+      limpiarTabla( )
       obtenerRankingFiltros().then(datos =>{
       let tablaJugadores = document.querySelector("#tabla-jugadores")
       let contador = 0
