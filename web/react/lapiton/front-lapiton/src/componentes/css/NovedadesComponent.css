@@ -1,9 +1,14 @@
 section{
     height: 80%;
     width: 100%;
-    background-color:#F8F5C1;
+    /* background-color:#F8F5C1; */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    background-image: url("src/assets/fondoJungla.jpg");
+    /* background-color: rgba(248, 245, 193);  */
+    background-color: rgba(248, 245, 193, .6);
+    background-attachment: fixed;
+    background-blend-mode: overlay;
 }
 .article-agregar-eliminar{
     grid-column-start: 1;
@@ -29,6 +34,7 @@ section{
 
 .novedad{
     width: 20rem;
+    min-height: 20rem;
     background-color: white;
     text-align: center;
     display: flex;
@@ -39,6 +45,7 @@ section{
 
 .novedad:hover{
     opacity: .85;
+    cursor: pointer;
 }
 
 .novedad p{
@@ -56,11 +63,19 @@ section{
     height: 100%;
 }
 
-.article-contenido img{
-    border-bottom: 2px solid black;    
-    width:100%;
-}
-
 .botones{
     margin-right: 6.25rem;
 }
+
+@keyframes vibrar {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(5px); }
+}
+
+.vibracion{
+    animation: vibrar 0.3s ease-in-out infinite;
+}
+

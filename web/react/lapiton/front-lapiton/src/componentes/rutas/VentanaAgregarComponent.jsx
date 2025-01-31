@@ -76,7 +76,7 @@ function VentanaAgregarComponent() {
                 className={"text-component"}
                 placeholder={"Titulo de novedad..."}
               />
-                <DescripcionComponent placeholder={"Ingrese una descripción"}
+                <DescripcionComponent placeholder={"Ingrese una descripción..."}
                  id={"descripcion"} />
                 <BotonComponent
                 id={"subir-novedad"}

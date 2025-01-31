@@ -266,6 +266,11 @@ function moverDerecha() {
   if (posicionX < 10) {
     posicionX += 1;
     bola.style.gridColumnStart = posicionX;
+    if (bola.style.gridColumnStart >= 5){
+      bola.style.transform = "rotateY(180deg)";
+    }else{
+      bola.style.transform = "rotateY(0deg)";
+    }
     detectarColision();
   } else {
     bola.remove(campo);
@@ -277,6 +282,11 @@ function moverIzquierda() {
   if (posicionX - 1 > 0 || posicionX != 0) {
     posicionX -= 1;
     bola.style.gridColumnStart = posicionX;
+    if (bola.style.gridColumnStart >= 5){
+      bola.style.transform = "rotateY(180deg)";
+    }else{
+      bola.style.transform = "rotateY(0deg)";
+    }
     detectarColision();
   } else {
     bola.remove(campo);
@@ -287,6 +297,11 @@ function moverArriba() {
   if (posicionY - 1 > 0 || posicionY != 0) {
     posicionY -= 1;
     bola.style.gridRowStart = posicionY;
+    if (bola.style.gridColumnStart >= 5){
+      bola.style.transform = "rotateY(180deg)";
+    }else{
+      bola.style.transform = "rotateY(0deg)";
+    }
     detectarColision();
     //document.body.style.overflow = "hidden";
   } else {
@@ -300,6 +315,11 @@ function moverAbajo() {
   if (posicionY < 10) {
     posicionY += 1;
     bola.style.gridRowStart = posicionY;
+    if (bola.style.gridColumnStart >= 5){
+      bola.style.transform = "rotateY(180deg)";
+    }else{
+      bola.style.transform = "rotateY(0deg)";
+    }
     detectarColision();
     //document.body.style.overflow = "hidden";
   } else {
@@ -391,9 +411,9 @@ function moverEnemigo() {
   enemigo.style.gridColumnStart = posicionEnemigoX;
   enemigo.style.gridRowStart = posicionEnemigoY;
   if (enemigo.style.gridColumnStart >= 5){
-    enemigo.style.transform = "rotate(180deg)";
+    enemigo.style.transform = "rotateY(180deg)";
   }else{
-    enemigo.style.transform = "rotate(0deg)";
+    enemigo.style.transform = "rotateY(0deg)";
   }
 }
 

@@ -1,8 +1,12 @@
 section{
     height: 80%;
     width: 100%;
-    background-color:#F8F5C1;
+    /* background-color:#F8F5C1; */
+    background-image: url("src/assets/fondoJungla.jpg");
+    background-color: rgba(248, 245, 193, .6);
+    background-blend-mode: overlay;
     display: grid;
+    background-attachment: fixed;
     grid-template-columns: 1fr 1fr 1fr;
 }
 

@@ -3,7 +3,7 @@ import { userContext } from './userContext'
 
 function StateComponent({children}) {
   // 10 minutops
-  debugger
+
 
   const tiempoMaximo = 300000
   let tiempoActual = new Date().getTime()
@@ -23,7 +23,7 @@ function StateComponent({children}) {
       try{
         window.localStorage.setItem("user",JSON.stringify(value))
         loginUsuario(window.localStorage.getItem("user"))
-        debugger
+
         console.log(window.localStorage.getItem("user"))
       }catch(error){
         console.error(error)
@@ -33,14 +33,18 @@ function StateComponent({children}) {
       JSON.parse(window.localStorage.getItem("user"))
     )
 
+    const [novedad,SetNovedad] = useState("");
+
+    const [Vibrando,SetVibrando] = useState(false)
+
     const loginUsuario = (usuario) =>{
-      debugger
+
         setUser(JSON.parse(usuario))
     }
 
   return (
     <userContext.Provider
-    value={{user,setUser,loginUsuario,setLocalStorage}}>
+    value={{user,setUser,loginUsuario,setLocalStorage,novedad,SetNovedad,Vibrando,SetVibrando}}>
         { children }
     </userContext.Provider>
   )

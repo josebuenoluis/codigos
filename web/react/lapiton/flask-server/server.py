@@ -167,6 +167,33 @@ def obtenerNovedades():
         listaNovedades.append(diccionario)
     return listaNovedades
 
+@app.route("/novedades/novedad")
+def obtenerNovedad():
+    titulo = request.args.get("titulo")
+    data = {}
+    try:
+        novedad = Novedades.select().where(Novedades.titulo==titulo).get()
+        data["titulo"] = novedad.titulo
+        data["imagen"] = novedad.imagen
+        data["descripcion"] = novedad.descripcion
+        print(f"Novedad obtenida con exito.")
+    except Exception as error:
+        print("Error: ",error) 
+    return data
+
+@app.route("/novedades/eliminar",methods=["DELETE"])
+def eliminarNovedad():
+    titulo = request.args.get("titulo")
+    data = {}
+    try:
+        novedad = Novedades.delete().where(Novedades.titulo==titulo).execute()
+        data["realizada"] = True
+        print(f"Novedad eliminada con exito.")
+    except Exception as error:
+        print("Error: ",error) 
+        data["realizada"] = False
+    return data
+
 if __name__ == '__main__':
 
     login = ""

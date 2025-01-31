@@ -11,7 +11,8 @@ section{
     background-blend-mode: overlay;
 }
 
-.article-titulo-ranking{
+
+.article-titulo-novedad{
     grid-column-start: 1;
     grid-column-end: -1;
     text-align: center;
@@ -19,48 +20,49 @@ section{
     font-family: "Cherry Bomb One", system-ui;
     font-weight: 400;
 }
-.article-titulo-ranking hr{
+
+.article-titulo-novedad hr{
     width: 80%;
     height: 4px;
     background-color: black;
 }
 
-.article-filtros{
+.article-novedad{    
     grid-column-start: 1;
     grid-column-end: -1;
+}
+
+.contenedor-novedad{
+    margin: auto;
     display: flex;
-    justify-content: space-around;
+    background-color: #BADE57;
+    width:50rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 40px;
+    border: 4px solid black;
+    margin-bottom: 3.12rem;
     margin-top: 2.5rem;
 }
-
-.article-tabla{
-    grid-column-start: 1;
-    grid-column-end: -1;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 2rem;
-}
-
-.article-tabla table{
-    width: 90%;
+.container-imagen{
     background-color: white;
-    font-size: 1.25rem;
+    width: 70%;
+    min-height: 20rem;
+    margin-top: 2rem;
+    display: flex;
+    flex: auto;
+}
+
+#imagen-novedad{
+    width: 100%;
+}
+
+.descripcion-novedad{
+    text-align: center;
+    font-size: 2rem;
     font-family: "Cherry Bomb One", system-ui;
     font-weight: 400;
-    text-align: center;
+    width: 80%;
 }
 
-.article-tabla table tr th,td{
-    border: 2px solid black;
-}
-
-.article-tabla table tr{
-    height: 4rem;
-}
-
-.article-tabla table th{
-    font-size: 1.6rem;
-    font-family: "Cherry Bomb One", system-ui;
-    font-weight: 400;
-    text-align: center;
-}

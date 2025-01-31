@@ -10,6 +10,7 @@ import RegistroComponent from './componentes/rutas/RegistroComponent'
 import LoginComponent from './componentes/rutas/LoginComponent'
 import StateComponent from './context/StateComponent'
 import VentanaAgregarComponent from './componentes/rutas/VentanaAgregarComponent'
+import NovedadComponent from './componentes/rutas/NovedadComponent'
 
 function App() {
   return (
@@ -24,6 +25,8 @@ function App() {
           <Route path="registro" element={<RegistroComponent />} />
           <Route path="login" element={<LoginComponent />} />
           <Route path="agregar" element={<VentanaAgregarComponent />} />
+          <Route path="novedades/novedad" element={<NovedadComponent />} />
+          
         </Routes>
       </div>
     </StateComponent>

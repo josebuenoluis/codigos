@@ -42,19 +42,18 @@ function RankingComponent() {
 
   function limpiarTabla(){
     let tablaJugadores = document.querySelector("#tabla-jugadores")
-    for(var row=0;row<tablaJugadores.childNodes.length;row++){
-        tablaJugadores.removeChild(tablaJugadores.childNodes.item(1))
-    }
+    let filas = tablaJugadores.querySelectorAll(".jugador-ranking");
+    filas.forEach((fila) => {
+        tablaJugadores.removeChild(fila);
+      });
   }
 
   function mostrarFiltrosCategoria(){
     debugger
       limpiarTabla()
       obtenerRankingFiltros().then(datos =>{
-      debugger
       let tablaJugadores = document.querySelector("#tabla-jugadores")
       let contador = 0
-      debugger
       console.log(datos)
       for(var jugador in datos.jugadores){
         contador += 1
