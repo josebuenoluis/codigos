@@ -4,7 +4,7 @@ body{
     padding: 0;
 }
 header{
-    background-color: #BDE46B;
+    background-color: #b3ca83;
     height: 10%;
     display: flex;
     justify-content: space-between;
@@ -19,7 +19,8 @@ header{
 }
 
 .logo-header img{
-    width: 6.25rem;
+    width:20rem;
+    height: 10rem;
 }
 .logo-header p{
     font-family: "Sonsie One", system-ui;
@@ -45,7 +46,7 @@ header nav ul{
     display: flex;
     flex-direction: column;
     padding: 0;
-    position:fixed;
+    position:absolute;
 }
 
 #desplegable-categorias li{

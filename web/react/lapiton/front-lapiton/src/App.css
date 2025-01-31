@@ -1,0 +1,32 @@
+.container-ventana{
+    width: 100%;
+    height: 95%;
+    background-color: rgb(190, 186, 186,.7);
+}
+
+.container-mensaje{
+    width: 20rem;
+    height:15rem;
+    background-color: #ccc;
+    border-radius: 60px;
+    border: 4px solid black;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+
+#imagen-ventana{
+    width: 8rem;
+    border-radius: 60px;
+    min-height: 3rem;
+}
+
+#texto-ventana{
+    font-size: 1rem;
+    font-family: "Cherry Bomb One", system-ui;
+    font-weight: 400;
+    text-align: center;
+}

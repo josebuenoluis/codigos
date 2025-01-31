@@ -1,7 +1,7 @@
 import React,{useContext} from 'react'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
-import Logo from '../../assets/imagenLogoPiton.png'
+import Logo from '../../assets/logo-piton.svg'
 import UserIcon from '../../assets/user-icon.svg'
 import '../css/HeaderComponent.css'
 import { userContext } from '../../context/userContext'
@@ -25,28 +25,42 @@ function HeaderComponent() {
         elemento.onMouseMove = desplegableCategorias;
         lista.appendChild(elemento);
       }
+      debugger
+      if(e.target.className=="enlace"){
+        SetMouseCategoria(false)
+        SetMouseMenu(true)
+      }else{
+        SetMouseMenu(false)
+        SetMouseCategoria(false)
+      }
+      console.log(e.target)
       SetmenuDesplegado(true);
     }
   }
 
   function cerrarMenu(e){
+    debugger
       let lista = document.getElementById("desplegable-categorias");
-      for(var i = 0;i < lista.childElementCount+2;i++){
-        lista.removeChild(lista.childNodes.item(0));
+      let enlaceCategoria = document.getElementById('enlace-categorias');
+      SetMouseCategoria(false)
+      SetMouseMenu(false)
+      if(mouseCategoria == false && mouseMenu == false){
+        for(var i = 0;i < lista.childElementCount+2;i++){
+          lista.removeChild(lista.childNodes.item(0));
+      }
       SetmenuDesplegado(false);
     }
   }
   return (
     <header>
         <div className="logo-header">
-            <p>laPiton</p>
             <img src={Logo} alt="logo" />
         </div>
         <nav>
           <ul>
             <li><Link className='enlace' to="/">Inicio</Link></li>
             <li>
-              <a href="#" className='enlace' onMouseMove={desplegableCategorias}>Categorias</a>
+              <a href="#" className='enlace' id='enlace-categorias' onMouseMove={desplegableCategorias} onMouseLeave={cerrarMenu}>Categorias</a>
               <ul id='desplegable-categorias' onMouseMove={desplegableCategorias} onMouseLeave={cerrarMenu}>   
               </ul>
             </li>

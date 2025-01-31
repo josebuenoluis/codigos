@@ -50,16 +50,50 @@ function VentanaAgregarComponent() {
           if (response.ok) {
             let jsonResponse = JSON.stringify(novedad);
             console.log(jsonResponse);
+            ventanaEmergente("Novedad subida con exito.","src/assets/check-green.svg")
           }
         } catch (error) {
           console.log(error);
         }
       }
 
+      function cerrarVentana(e){
+        let seccion = document.querySelector("#seccion-principal")
+        let ventana = document.querySelector(".container-ventana")
+        seccion.removeChild(ventana)
+      }
+  
+      function ventanaEmergente(mensaje,imagen){
+        let ventana = document.createElement("div");
+        ventana.className = "container-ventana";
+        ventana.style.display = "flex";
+        ventana.style.flexDirection = "column";
+        ventana.style.alignItems = "center";
+        ventana.style.justifyContent = "center";
+        ventana.onclick = cerrarVentana;
+        ventana.style.margin = "auto";
+        ventana.style.position = "absolute";
+        let contenedorMensaje = document.createElement("div");
+        contenedorMensaje.className = "container-mensaje";
+        let imagenVentana = document.createElement("img");
+        imagenVentana.id = "imagen-ventana";
+        imagenVentana.src = imagen;
+        let parrafo = document.createElement("p")
+        parrafo.id = "texto-ventana";
+        parrafo.textContent = mensaje;
+        parrafo.style.color = "rgb(20, 174, 92)"
+        contenedorMensaje.appendChild(imagenVentana);
+        contenedorMensaje.appendChild(parrafo);
+        ventana.appendChild(contenedorMensaje);
+        let panel = document.querySelector(".panel-inicio-sesion")
+        let seccion = document.querySelector("#seccion-principal")
+        seccion.appendChild(ventana)
+      }
+
   return (
     <div>
         <HeaderComponent />
-        <section>
+        <section id='seccion-principal'>
           <article className="article-titulo-agregar">
             <p>Agregar novedad</p>
             <hr />
