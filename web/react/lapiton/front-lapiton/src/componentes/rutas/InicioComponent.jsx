@@ -13,7 +13,6 @@ function Inicio() {
   
   const {user,setUser} = useContext(userContext)
   console.log("Desde el inicio ",user.avatar)
-  let listaJuegos = [];
   
  async function obtenerJuegos(){
     try{

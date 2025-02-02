@@ -1,6 +1,6 @@
 
 footer{
-    background-color: #BDE46B;
+    background-color: #b3ca83;
     height: 10%;
     display: flex;
     justify-content: space-between;
@@ -15,7 +15,8 @@ footer{
 }
 
 .logo-footer img{
-    width: 6.25rem;
+    width:20rem;
+    height: 10rem;
 }
 .logo-footer p{
     font-family: "Sonsie One", system-ui;

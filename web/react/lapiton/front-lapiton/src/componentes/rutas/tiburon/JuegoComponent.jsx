@@ -55,9 +55,9 @@ function JuegoComponent() {
   )
  
   return (
-    <div className="main">
+    <div>
       <HeaderComponent />
-      <section>
+      <section className="main">
         <article className="article-categoria">
           <p>El tiburon</p>
           <hr />

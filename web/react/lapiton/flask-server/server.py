@@ -151,8 +151,10 @@ def subirNovedad():
         novedad = Novedades.create(titulo=data["titulo"],descripcion=data["descripcion"]
                                    ,imagen=data["imagen"])
         print(f"Novedad subida con exito.")
+        data["subida"] = True
     except Exception as error:
         print("Error: ",error) 
+        data["subida"] = False
     return data
 
 @app.route("/novedades",methods=["GET"])

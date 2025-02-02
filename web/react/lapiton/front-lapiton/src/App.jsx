@@ -12,11 +12,23 @@ import StateComponent from './context/StateComponent'
 import VentanaAgregarComponent from './componentes/rutas/VentanaAgregarComponent'
 import NovedadComponent from './componentes/rutas/NovedadComponent'
 
+
+
 function App() {
+
+  function actualizarTiempo(){
+    let user = JSON.parse(window.localStorage.getItem("user"));
+    if(user.nombre != ""){
+      console.log("Actividad")
+      let tiempoActual = new Date().getTime()
+      window.localStorage.setItem("user",JSON.stringify({"nombre":user.nombre,"avatar":user.avatar,"tiempo":tiempoActual}))
+    }
+  }
+  
   return (
     <>
     <StateComponent>
-      <div className="Aplicacion">
+      <div className="Aplicacion" onClick={actualizarTiempo}>
         <Routes>
           <Route path="/" element={ <Inicio  /> } />
           <Route path="novedades" element={ <NovedadesComponent /> } />

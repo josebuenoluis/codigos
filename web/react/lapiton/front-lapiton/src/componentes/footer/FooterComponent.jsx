@@ -1,7 +1,7 @@
 import React from 'react';
 import '../css/FooterComponent.css';
 import { Link } from 'react-router-dom';
-import Logo  from "../../assets/imagenLogoPiton.png"
+import Logo  from "../../assets/logo-piton.svg"
 function FooterComponent() {
   return (
     <footer>
@@ -16,7 +16,6 @@ function FooterComponent() {
         <a href='#'><img width="50" height="50" src="https://img.icons8.com/ios/50/twitterx--v2.png" alt="twitterx--v2"/></a>
       </div>
       <div className="logo-footer">
-        <p>laPiton</p>
         <img src={Logo} alt="logo" />
       </div>
     </footer>

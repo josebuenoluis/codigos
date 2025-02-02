@@ -59,7 +59,8 @@ function BotonComponent(props) {
     let contraseña = document.querySelector("#contraseña").value;
     let avatar = document.querySelector("#img-avatar").src;
     let contraseñaRepetida = document.querySelector("#repetir-contraseña").value;
-    if(validarCampos(usuario,contraseña,contraseñaRepetida) == ""){
+    let mensajeError = validarCampos(usuario,contraseña,contraseñaRepetida)
+    if(mensajeError == ""){
       debugger
       const usuarioResponse = obtenerUsuario(usuario).then(datos => {
         console.log("Usuario consultado: ",datos);
@@ -74,10 +75,44 @@ function BotonComponent(props) {
           navigate("/");
         }else{
           console.log("El nombre de usuario ya existe.")
+          ventanaEmergente("El nombre de usuario ya existe.","src/assets/user-icon-red.svg")
         }
       });
-
+    }else{
+      ventanaEmergente(mensajeError,"src/assets/user-icon-red.svg")
     }
+  }
+
+  function cerrarVentana(e){
+    let seccion = document.querySelector("#seccion-principal")
+    let ventana = document.querySelector(".container-ventana")
+    seccion.removeChild(ventana)
+  }
+
+  function ventanaEmergente(mensaje,imagen){
+    let ventana = document.createElement("div");
+    ventana.className = "container-ventana";
+    ventana.style.display = "flex";
+    ventana.style.flexDirection = "column";
+    ventana.style.alignItems = "center";
+    ventana.style.justifyContent = "center";
+    ventana.onclick = cerrarVentana;
+    ventana.style.margin = "auto";
+    ventana.style.position = "absolute";
+    let contenedorMensaje = document.createElement("div");
+    contenedorMensaje.className = "container-mensaje";
+    let imagenVentana = document.createElement("img");
+    imagenVentana.id = "imagen-ventana";
+    imagenVentana.src = imagen;
+    let parrafo = document.createElement("p")
+    parrafo.id = "texto-ventana";
+    parrafo.textContent = mensaje;
+    parrafo.style.color ="rgb(236, 111, 111)";
+    contenedorMensaje.appendChild(imagenVentana);
+    contenedorMensaje.appendChild(parrafo);
+    ventana.appendChild(contenedorMensaje);
+    let seccion = document.querySelector("#seccion-principal")
+    seccion.appendChild(ventana)
   }
 
   return (

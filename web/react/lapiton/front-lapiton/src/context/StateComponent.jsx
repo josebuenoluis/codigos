@@ -7,7 +7,6 @@ function StateComponent({children}) {
 
   const tiempoMaximo = 300000
   let tiempoActual = new Date().getTime()
-  console.log(tiempoActual)
 
   let objetoUsuario = JSON.parse(window.localStorage.getItem("user"))
   if(objetoUsuario==null){

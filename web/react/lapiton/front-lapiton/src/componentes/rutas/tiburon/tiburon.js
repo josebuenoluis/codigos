@@ -28,7 +28,7 @@ nivel.textContent = dificultad;
 // Funcion para contar el timepo que dura el jugador
 function reloj() {
   segundos += 1;
-  console.log(segundos);
+  // console.log(segundos);
 }
 
 // Definimos los cursores del usuario
@@ -210,8 +210,41 @@ const post = async () => {
     }
   }else{
     console.log("Debe registrarse para poder guardar puntos.");
+    ventanaEmergente("Debe registrarse para guardar puntos.","src/assets/user-icon-red.svg")
   }
 };
+
+function cerrarVentana(e){
+  let seccion = document.querySelector(".main")
+  let ventana = document.querySelector(".container-ventana")
+  seccion.removeChild(ventana)
+}
+
+function ventanaEmergente(mensaje,imagen){
+  let ventana = document.createElement("div");
+  ventana.className = "container-ventana";
+  ventana.style.display = "flex";
+  ventana.style.flexDirection = "column";
+  ventana.style.alignItems = "center";
+  ventana.style.justifyContent = "center";
+  ventana.onclick = cerrarVentana;
+  ventana.style.margin = "auto";
+  ventana.style.position = "absolute";
+  let contenedorMensaje = document.createElement("div");
+  contenedorMensaje.className = "container-mensaje";
+  let imagenVentana = document.createElement("img");
+  imagenVentana.id = "imagen-ventana";
+  imagenVentana.src = imagen;
+  let parrafo = document.createElement("p")
+  parrafo.id = "texto-ventana";
+  parrafo.textContent = mensaje;
+  parrafo.style.color = "rgb(236, 111, 111)";
+  contenedorMensaje.appendChild(imagenVentana);
+  contenedorMensaje.appendChild(parrafo);
+  ventana.appendChild(contenedorMensaje);
+  let seccion = document.querySelector(".main")
+  seccion.appendChild(ventana)
+}
 
 function regresar() {
   puntaje = 0;
@@ -274,6 +307,7 @@ function moverDerecha() {
     detectarColision();
   } else {
     bola.remove(campo);
+    document.querySelector(".enemigo").remove(campo);
     ventanaRegresar();
   }
 }
@@ -290,6 +324,7 @@ function moverIzquierda() {
     detectarColision();
   } else {
     bola.remove(campo);
+    document.querySelector(".enemigo").remove(campo);
     ventanaRegresar();
   }
 }
@@ -306,6 +341,7 @@ function moverArriba() {
     //document.body.style.overflow = "hidden";
   } else {
     bola.remove(campo);
+    document.querySelector(".enemigo").remove(campo);
     ventanaRegresar();
     //document.body.style.overflow = "hidden";
   }
@@ -324,6 +360,7 @@ function moverAbajo() {
     //document.body.style.overflow = "hidden";
   } else {
     bola.remove(campo);
+    document.querySelector(".enemigo").remove(campo);
     ventanaRegresar();
     //document.body.style.overflow = "hidden";
   }
@@ -427,6 +464,7 @@ function comer() {
   if (posicionX == posicionEnemigoX && posicionY == posicionEnemigoY) {
     if (campo.contains(bola)) {
       bola.remove(campo);
+      enemigo.remove(campo)
       clearInterval(reloj);
       //Llamamos a la funcion para preguntar si desea guardar los puntajes y volver a empezar
       ventanaRegresar();

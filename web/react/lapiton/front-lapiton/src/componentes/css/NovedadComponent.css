@@ -49,6 +49,7 @@ section{
     background-color: white;
     width: 70%;
     min-height: 20rem;
+    border: 4px solid black;
     margin-top: 2rem;
     display: flex;
     flex: auto;

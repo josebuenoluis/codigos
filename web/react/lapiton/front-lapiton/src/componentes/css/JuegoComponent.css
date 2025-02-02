@@ -49,13 +49,16 @@
     background-color: white;
     width: 70%;
     height: 80%;
-    border: 1px solid rgb(7, 5, 5);
     grid-row-start: 2;
     margin: auto;
     text-align: center;
+    font-family: "Cherry Bomb One", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1rem;
 }
 #tabla-ranking tr th{
-    font-size: 20px;
+    font-size: 1.6rem;
 }
 
 #tabla-ranking tr td{
@@ -64,5 +67,5 @@
 }
 
 #tabla-ranking tr th,td{
-    border: 1px solid black;
+    border: 2px solid black;
 }

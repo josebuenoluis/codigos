@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { userContext } from "../../context/userContext";
 import { useContext } from "react";
 import "../css/LoginComponent.css";
+import VentanaAgregarComponent from "./VentanaAgregarComponent";
 function LoginComponent() {
   const navigate = useNavigate()
   const {user,setUser,loginUsuario,setLocalStorage} = useContext(userContext)
@@ -34,6 +35,39 @@ function LoginComponent() {
       navigate("/registro");
     }
 
+    function cerrarVentana(e){
+      let seccion = document.querySelector("#seccion-principal")
+      let ventana = document.querySelector(".container-ventana")
+      seccion.removeChild(ventana)
+    }
+
+    function ventanaEmergente(mensaje,imagen){
+      let ventana = document.createElement("div");
+      ventana.className = "container-ventana";
+      ventana.style.display = "flex";
+      ventana.style.flexDirection = "column";
+      ventana.style.alignItems = "center";
+      ventana.style.justifyContent = "center";
+      ventana.onclick = cerrarVentana;
+      ventana.style.margin = "auto";
+      ventana.style.position = "absolute";
+      let contenedorMensaje = document.createElement("div");
+      contenedorMensaje.className = "container-mensaje";
+      let imagenVentana = document.createElement("img");
+      imagenVentana.id = "imagen-ventana";
+      imagenVentana.src = imagen;
+      let parrafo = document.createElement("p")
+      parrafo.id = "texto-ventana";
+      parrafo.textContent = mensaje;
+      parrafo.style.color ="rgb(236, 111, 111)";
+      contenedorMensaje.appendChild(imagenVentana);
+      contenedorMensaje.appendChild(parrafo);
+      ventana.appendChild(contenedorMensaje);
+      let panel = document.querySelector(".panel-inicio-sesion")
+      let seccion = document.querySelector("#seccion-principal")
+      seccion.appendChild(ventana)
+    }
+
     function iniciarSesion() {
       let usuario = document.querySelector("#usuario").value;
       let contraseña = document.querySelector("#contraseña").value;
@@ -46,16 +80,17 @@ function LoginComponent() {
             setLocalStorage({"nombre":datos.nombre,"avatar":datos.avatar,"tiempo":tiempoActual})
             navigate("/");
           } else {
-            console.log("Usuario no encontrado");
+            console.log("Usuario o contraseña son incorrectos");
+            ventanaEmergente("Usuario o contraseña son incorrectos","src/assets/user-icon-red.svg");
           }
         }
       );
     }
 
     return (
-      <div>
+      <div id="container-principal">
         <HeaderComponent />
-        <section>
+        <section id="seccion-principal">
           <article className="article-titulo-iniciar-sesion">
             <p>Iniciar sesión</p>
             <hr />

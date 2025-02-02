@@ -9,6 +9,7 @@ import Serpiente from "../../assets/serpiente.svg"
 import "../css/RegistroComponent.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import CheckBoxComponent from "../utils/CheckBoxComponent";
 function RegistroComponent() {
 
   const navigate = useNavigate();
@@ -70,7 +71,7 @@ function RegistroComponent() {
     <div>
       <HeaderComponent />
 
-      <section>
+      <section id="seccion-principal">
         <article className="article-titulo-registro">
           <p>Registro de usuario</p>
           <hr />
@@ -92,6 +93,7 @@ function RegistroComponent() {
             <InputTextComponent type={"text"} id={"usuario"} className={"text-component"} placeholder={"Nombre de usuario..."} />
             <InputTextComponent type={"password"} id={"contraseña"} className={"text-component"} placeholder={"Contraseña."} />
             <InputTextComponent type={"password"} id={"repetir-contraseña"} className={"text-component"} placeholder={"Repetir contraseña."} />
+            <CheckBoxComponent id={"id-check"} name={"terminos"} label={"Terminos y condiciones."} />
             <BotonRegistroComponent id={"confirmar"} value={"Confirmar"} className={"boton-component"} />
             <BotonComponent id={"btn-inicio-registro"} value={"Iniciar sesion"} className={"boton-component"} funcion={iniciarSesion}/>
           </div>
