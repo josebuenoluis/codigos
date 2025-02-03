@@ -12,7 +12,7 @@ function HeaderComponent() {
   const navigate = useNavigate();
 
   const {user,setLocalStorage} = useContext(userContext)
-  const [categorias,SetCategorias] = useState(["Accion","Multijugador","Supervivencia"]);
+  const [categorias,SetCategorias] = useState(["Acción","Multijugador","Supervivencia"]);
   const [menuDesplegado,SetmenuDesplegado] = useState(false);
 
   function cerrarSesion(){
