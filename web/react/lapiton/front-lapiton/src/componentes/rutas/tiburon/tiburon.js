@@ -16,7 +16,7 @@ let uppressed = false;
 let posicionEnemigoX = 0;
 let posicionEnemigoY = 0;
 let listaLadrillos = [];
-let interval = 0;
+let intervalo = 0;
 let __ = 0;
 let nivel = document.querySelector("#dificultad");
 let juegoIniciado = false;
@@ -250,8 +250,11 @@ function regresar() {
   __ = 0;
   velocidadEnemigo = 1500;
   nivel.textContent = __;
+  posicionX = 1;
+  posicionY = 1;
   puntos.textContent = _;
   clearInterval(reloj);
+  clearInterval(intervalo);
   let ventana = document.querySelector(".ventana");
   juegoIniciado = false;
   ventanActivada = false;
@@ -269,7 +272,6 @@ function iniciarJuego() {
     crearLadrillo();
     crearEnemigo();
     setInterval(reloj,1000);
-    // document.body.style.overflow = "hidden";
     let mensaje = document.querySelector(".mensaje");
     mensaje.remove(campo);
     intervalo = setInterval(moverEnemigo, velocidadEnemigo);
@@ -416,8 +418,6 @@ let crearEnemigo = function () {
   let enemigo = document.createElement("div");
   campo.appendChild(enemigo);
   enemigo.className = "enemigo";
-  // enemigo.style.width = "50px";
-  // enemigo.style.height = "50px";
   enemigo.style.gridColumnStart = poscicionEnemigo;
   enemigo.style.gridRowStart = poscicionEnemigo;
   enemigo.style.background = "url('/src/assets/tiburon.svg ')";
@@ -425,7 +425,6 @@ let crearEnemigo = function () {
   enemigo.style.width = "200px";
   enemigo.style.height = "90px";
 };
-// crearEnemigo();
 
 // Funcion para mover enemigo
 function moverEnemigo() {
@@ -453,8 +452,6 @@ function moverEnemigo() {
   }
 }
 
-// Intervalo para mover enemigo
-// intervalo = setInterval(moverEnemigo, velocidadEnemigo);
 
 // Funcion para que el enemigo se coma al usuario
 function comer() {
