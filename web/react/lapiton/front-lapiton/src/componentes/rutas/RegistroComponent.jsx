@@ -95,7 +95,7 @@ function RegistroComponent() {
             <InputTextComponent type={"password"} id={"repetir-contraseña"} className={"text-component"} placeholder={"Repetir contraseña."} />
             <CheckBoxComponent id={"id-check"} name={"terminos"} label={"Términos y condiciones."} />
             <BotonRegistroComponent id={"confirmar"} value={"Confirmar"} className={"boton-component"} />
-            <BotonComponent id={"btn-inicio-registro"} value={"Iniciar sesion"} className={"boton-component"} funcion={iniciarSesion}/>
+            <BotonComponent id={"btn-inicio-registro"} value={"Iniciar sesión"} className={"boton-component"} funcion={iniciarSesion}/>
           </div>
         </article>
       </section>
