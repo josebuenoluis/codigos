@@ -17,7 +17,7 @@ function LoginComponent() {
         method: "GET",
       };
       const response = await fetch(
-        `http://127.0.0.1:5000/login/usuarios?username=${nombreUsuario}&password=${contraseña}`,
+        `http://lapiton.zapto.org:5000/login/usuarios?username=${nombreUsuario}&password=${contraseña}`,
         peticion
       );
 

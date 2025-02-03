@@ -18,7 +18,7 @@ function NovedadComponent() {
         method: "GET",
       };
       const response = await fetch(
-        `http://127.0.0.1:5000/novedades/novedad?titulo=${titulo}`,
+        `http://lapiton.zapto.org:5000/novedades/novedad?titulo=${titulo}`,
         peticion
       );
 

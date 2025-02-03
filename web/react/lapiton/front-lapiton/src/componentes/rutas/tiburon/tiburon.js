@@ -1,11 +1,11 @@
 
 let velocidadEnemigo = 1500;
-let puntaje = 0;
+let _ = 0;
 let bola = document.querySelector(".bola");
 let campo = document.querySelector(".campo");
 let puntos = document.querySelector("#puntos");
 let dificultadText = document.querySelector("#dificultad");
-puntos.textContent = puntaje;
+puntos.textContent = _;
 let posicionX = 1;
 let posicionY = 1;
 let direccion = 1;
@@ -17,18 +17,17 @@ let posicionEnemigoX = 0;
 let posicionEnemigoY = 0;
 let listaLadrillos = [];
 let interval = 0;
-let dificultad = 0;
+let __ = 0;
 let nivel = document.querySelector("#dificultad");
 let juegoIniciado = false;
 let segundos = 0;
 let ventanActivada = false;
-nivel.textContent = dificultad;
+nivel.textContent = __;
 
 
 // Funcion para contar el timepo que dura el jugador
 function reloj() {
   segundos += 1;
-  // console.log(segundos);
 }
 
 // Definimos los cursores del usuario
@@ -177,11 +176,11 @@ function crearUsuario() {
   let user_puntos = JSON.parse(window.localStorage.getItem("puntaje"));
   let user = JSON.parse(window.localStorage.getItem("user"));
   user_puntos.nombre = user.nombre;
-  user_puntos.puntaje = puntaje;
-  user_puntos.dificultad = dificultad;
+  user_puntos.puntaje = _;
+  user_puntos.dificultad = __;
   
   console.log("Usuario logueado: ",user);
-  console.log("Usuario puntaje: ",user_puntos);
+  console.log("Usuario _: ",user_puntos);
   // Creamos la peticion de fetch
   // La peticion FECTH recibe 2 argumentos: ('url',{method:"",contenido= headers:"Content-Type:=''",body:formato-headers=contenido})
   return user_puntos;
@@ -192,7 +191,7 @@ const post = async () => {
   console.log("Dentro de post: ",usuario);
   if(usuario.nombre!=""){   
       try {
-        const response = await fetch("http://127.0.0.1:5000/ranking/puntos", {
+        const response = await fetch("http://lapiton.zapto.org:5000/ranking/puntos", {
           // Definimos el metodo que vamos a utilizar GET,POST,PUT,DELETE,etc...
           method: "POST",
           //Definimos un headers que sera el tipo de dato que vamos a enviar
@@ -247,11 +246,11 @@ function ventanaEmergente(mensaje,imagen){
 }
 
 function regresar() {
-  puntaje = 0;
-  dificultad = 0;
+  _ = 0;
+  __ = 0;
   velocidadEnemigo = 1500;
-  nivel.textContent = dificultad;
-  puntos.textContent = puntaje;
+  nivel.textContent = __;
+  puntos.textContent = _;
   clearInterval(reloj);
   let ventana = document.querySelector(".ventana");
   juegoIniciado = false;
@@ -389,14 +388,14 @@ function detectarColision() {
     bola.style.gridColumnStart == ladrillo.style.gridColumnStart &&
     bola.style.gridRowStart == ladrillo.style.gridRowStart
   ) {
-    puntaje += 1;
+    _ += 1;
     console.log("DETECTADA");
-    if (puntaje % 2 == 0 && dificultad != 13) {
-      dificultad += 1;
-      nivel.textContent = dificultad;
+    if (_ % 2 == 0 && __ != 13) {
+      __ += 1;
+      nivel.textContent = __;
       incrementarVelocidad();
     }
-    puntos.textContent = puntaje;
+    puntos.textContent = _;
     ladrillo.remove(campo);
     crearLadrillo();
   }

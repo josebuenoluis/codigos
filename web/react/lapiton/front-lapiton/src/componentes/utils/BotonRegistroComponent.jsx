@@ -25,7 +25,7 @@ function BotonComponent(props) {
 
   async function crearUsuario(usuario){
     try {
-      const response = await fetch("http://127.0.0.1:5000/registrar/usuarios", {
+      const response = await fetch("http://lapiton.zapto.org:5000/registrar/usuarios", {
         // Definimos el metodo que vamos a utilizar GET,POST,PUT,DELETE,etc...
         method: "POST",
         //Definimos un headers que sera el tipo de dato que vamos a enviar
@@ -61,14 +61,10 @@ function BotonComponent(props) {
     let contraseñaRepetida = document.querySelector("#repetir-contraseña").value;
     let mensajeError = validarCampos(usuario,contraseña,contraseñaRepetida)
     if(mensajeError == ""){
-      debugger
       const usuarioResponse = obtenerUsuario(usuario).then(datos => {
         console.log("Usuario consultado: ",datos);
         if(Object.keys(datos).length==0){
-          debugger
           crearUsuario({"nombre":usuario,"contraseña":contraseña,"avatar":avatar});
-          debugger
-          // loginUsuario(JSON.stringify({"nombre":usuario,"avatar":avatar}))
           let tiempoActual = new Date().getTime()
           setLocalStorage({"nombre":usuario,"avatar":avatar,"tiempo":tiempoActual})
           console.log("INsertar");

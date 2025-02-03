@@ -42,7 +42,7 @@ function VentanaAgregarComponent() {
     async function subirNovedad(){
         let novedad = obtenerNovedad()
         try {
-          const response = await fetch("http://127.0.0.1:5000/novedades/agregar", {
+          const response = await fetch("http://lapiton.zapto.org:5000/novedades/agregar", {
             // Definimos el metodo que vamos a utilizar GET,POST,PUT,DELETE,etc...
             method: "POST",
             //Definimos un headers que sera el tipo de dato que vamos a enviar

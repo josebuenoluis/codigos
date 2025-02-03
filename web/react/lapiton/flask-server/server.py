@@ -68,24 +68,24 @@ def ranking():
     if filtro_categoria == None and filtro_busqueda == None:
         jugadores = Ranking.select(
             Ranking.usuario_fk,Ranking.juego,Ranking.categoria,fn.MAX(Ranking.dificultad),fn.MAX(Ranking.puntaje)
-        ).group_by(Ranking.usuario_fk,Ranking.juego,Ranking.categoria).order_by(Ranking.puntaje.desc()).limit(10)
+        ).group_by(Ranking.usuario_fk,Ranking.juego,Ranking.categoria).order_by(fn.MAX(Ranking.puntaje).desc()).limit(10)
     elif filtro_categoria != None and filtro_busqueda == None:
         jugadores = Ranking.select(
             Ranking.usuario_fk,Ranking.juego,Ranking.categoria,fn.MAX(Ranking.dificultad),fn.MAX(Ranking.puntaje)
-        ).where(Ranking.categoria==filtro_categoria).group_by(Ranking.usuario_fk,Ranking.juego,Ranking.categoria).order_by(Ranking.puntaje.desc()).limit(10)
+        ).where(Ranking.categoria==filtro_categoria).group_by(Ranking.usuario_fk,Ranking.juego,Ranking.categoria).order_by(fn.MAX(Ranking.puntaje).desc()).limit(10)
     elif filtro_categoria == None and filtro_busqueda != None:
         jugadores = Ranking.select(
             Ranking.usuario_fk,Ranking.juego,Ranking.categoria,fn.MAX(Ranking.dificultad),fn.MAX(Ranking.puntaje)
         ).where(
             Ranking.juego**f'%{filtro_busqueda}%'
-        ).group_by(Ranking.usuario_fk,Ranking.juego,Ranking.categoria).order_by(Ranking.puntaje.desc()).limit(10)
+        ).group_by(Ranking.usuario_fk,Ranking.juego,Ranking.categoria).order_by(fn.MAX(Ranking.puntaje).desc()).limit(10)
     elif filtro_categoria != None and filtro_busqueda != None:
         jugadores = Ranking.select(
             Ranking.usuario_fk,Ranking.juego,Ranking.categoria,fn.MAX(Ranking.dificultad),fn.MAX(Ranking.puntaje)
         ).where(
             (Ranking.categoria==filtro_categoria) &
             (Ranking.juego**f'%{filtro_busqueda}%')
-        ).group_by(Ranking.usuario_fk,Ranking.juego,Ranking.categoria).order_by(Ranking.puntaje.desc()).limit(10)
+        ).group_by(Ranking.usuario_fk,Ranking.juego,Ranking.categoria).order_by(fn.MAX(Ranking.puntaje).desc()).limit(10)
     listaCategorias = []
     listaJugadores = []
     #Para obtener la lista de categorias
@@ -93,13 +93,10 @@ def ranking():
         listaCategorias.append(juego.categoria)
     # #Para obtener el top de los jugadores
     for jugador in jugadores:
-        # listaJugadores.append({"puntaje":10})
         listaJugadores.append({"puntaje":jugador.puntaje,"dificultad":jugador.dificultad,"nombre":jugador.usuario_fk.nombre,"juego":jugador.juego,"categoria":jugador.categoria})
 
     data["categorias"] = listaCategorias
     data["jugadores"] = listaJugadores
-    # print(listaCategorias)
-    # print(listaJugadores)
     return data
 
 @app.route("/ranking/puntos",methods=["POST"])
@@ -219,8 +216,6 @@ def obtenerNovedad():
 def eliminarNovedad():
     titulo = request.args.get("titulo")
     clave = request.args.get("clave")
-    # usuario = Usuarios.select().where(Usuarios.nombre==usuario).get()
-    #     if(validarPassword(contraseña,usuario.sal,usuario.contraseña)):
     user_admin = Usuarios.select().where(Usuarios.nombre=="admin").get()
     data = {}
     if(validarPassword(clave,user_admin.sal,user_admin.contraseña)):            

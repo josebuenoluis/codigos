@@ -16,13 +16,13 @@ function RankingComponent() {
       let filtro_categoria = document.querySelector("#categoria-seleccionada").value
       let response = ""
       if(filtro_busqueda=="" && filtro_categoria!=""){
-        response = await fetch(`http://127.0.0.1:5000/ranking?categoria=${filtro_categoria}`,peticion)
+        response = await fetch(`http://lapiton.zapto.org:5000/ranking?categoria=${filtro_categoria}`,peticion)
       }else if(filtro_busqueda!="" && filtro_categoria!=""){
-        response = await fetch(`http://127.0.0.1:5000/ranking?categoria=${filtro_categoria}&busqueda=${filtro_busqueda}`,peticion)
+        response = await fetch(`http://lapiton.zapto.org:5000/ranking?categoria=${filtro_categoria}&busqueda=${filtro_busqueda}`,peticion)
       }else if(filtro_busqueda!="" && filtro_categoria==""){
-        response = await fetch(`http://127.0.0.1:5000/ranking?busqueda=${filtro_busqueda}`,peticion)
+        response = await fetch(`http://lapiton.zapto.org:5000/ranking?busqueda=${filtro_busqueda}`,peticion)
       }else{
-        response = await fetch("http://127.0.0.1:5000/ranking",peticion)
+        response = await fetch("http://lapiton.zapto.org:5000/ranking",peticion)
       }
 
       if (response.ok) {
@@ -82,7 +82,7 @@ function RankingComponent() {
       const peticion = {
         method: "GET",
       };
-      const response = await fetch("http://127.0.0.1:5000/ranking",peticion)
+      const response = await fetch("http://lapiton.zapto.org:5000/ranking",peticion)
 
       if (response.ok) {
         console.log("Exito");

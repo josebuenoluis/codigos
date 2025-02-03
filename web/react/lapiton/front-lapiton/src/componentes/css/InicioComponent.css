@@ -1,6 +1,7 @@
 section{
     height: 80%;
     width: 100%;
+    min-height: 20rem;
     /* background-color:#F8F5C1; */
     background-image: url("src/assets/fondoJungla.jpg");
     background-color: rgba(248, 245, 193, .6);

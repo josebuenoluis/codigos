@@ -3,10 +3,6 @@ import { useLocation } from "react-router-dom";
 import HeaderComponent from "../header/HeaderComponent";
 import FooterComponent from "../footer/FooterComponent";
 import "../css/InicioComponent.css";
-import FondoTiburon from "../../assets/fondoTiburonInicio.svg"
-import FondoSerpiente from "../../assets/campo-serpiente-1 1.svg"
-import FondoBestia from "../../assets/campo-bestia-1 1.svg"
-import { Link } from "react-router-dom";
 import { userContext } from "../../context/userContext";
 import BarraBusqueda from "../utils/BarraBusqueda";
 import { useNavigate } from "react-router-dom";
@@ -23,7 +19,7 @@ function Inicio() {
       const peticion = {
         method: "GET",
       };
-      const response = await fetch("http://127.0.0.1:5000/",peticion)
+      const response = await fetch("http://lapiton.zapto.org:5000/",peticion)
 
       if (response.ok) {
         console.log("Exito");
@@ -41,7 +37,7 @@ function Inicio() {
       const peticion = {
         method: "GET",
       };
-      const response = await fetch(`http://127.0.0.1:5000/?titulo=${titulo}`,peticion)
+      const response = await fetch(`http://lapiton.zapto.org:5000/?titulo=${titulo}`,peticion)
       if (response.ok) {
         debugger
         console.log("Exito");
@@ -110,14 +106,11 @@ function Inicio() {
   }
 
   if(parametros.size == 0){
-    debugger
     console.log(window.location.pathname)
     const juegos = obtenerJuegos().then(datos => {
       limpiarSeccion()
       let section = document.querySelector(".seccion-principal");
       for(var categoria in datos){
-        console.log(categoria)
-        console.log(datos.categoria)
         let articuloCategoria = document.createElement("article")
         articuloCategoria.className = "article-categoria"
         let tituloCategoria = document.createElement("p")

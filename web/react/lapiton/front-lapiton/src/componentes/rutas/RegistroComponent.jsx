@@ -23,7 +23,7 @@ function RegistroComponent() {
       const peticion = {
       method: "GET",
     }
-      const response = await fetch("http://127.0.0.1:5000/registrar/avatars");
+      const response = await fetch("http://lapiton.zapto.org:5000/registrar/avatars");
       if (response.ok) {
         console.log("Exito");
         const datos = await response.json();  

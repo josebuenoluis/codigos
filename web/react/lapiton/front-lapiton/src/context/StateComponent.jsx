@@ -2,9 +2,7 @@ import React, { useState } from 'react'
 import { userContext } from './userContext'
 
 function StateComponent({children}) {
-  // 10 minutops
-
-
+  
   const tiempoMaximo = 300000
   let tiempoActual = new Date().getTime()
 

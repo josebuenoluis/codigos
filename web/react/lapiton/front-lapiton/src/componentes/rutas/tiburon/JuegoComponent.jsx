@@ -26,7 +26,7 @@ function JuegoComponent() {
         const peticion = {
           method: "GET",
         };
-        const response = await fetch("http://127.0.0.1:5000/ranking",peticion)
+        const response = await fetch("http://lapiton.zapto.org:5000/ranking",peticion)
   
         if (response.ok) {
           console.log("Exito");
@@ -44,7 +44,7 @@ function JuegoComponent() {
         const peticion = {
           method: "GET",
         };
-        const response = await fetch(`http://127.0.0.1:5000/juego/relacionados?titulo=${titulo}`,peticion)
+        const response = await fetch(`http://lapiton.zapto.org:5000/juego/relacionados?titulo=${titulo}`,peticion)
         if (response.ok) {
           console.log("Exito");
           const datos = await response.json();
