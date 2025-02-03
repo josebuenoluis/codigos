@@ -14,15 +14,47 @@ app.secret_key = "prueba1234"
 
 @app.route("/",methods=["GET"])
 def index():    
-    juegos = Juegos.select()
-    listaJuegos = []
-    for juego in juegos:
-        diccionario = {}
-        diccionario["nombre"] = juego.nombre
-        diccionario["fondoIcono"] = juego.fondoIcono
-        listaJuegos.append(diccionario)
-    return listaJuegos
+    categoria = request.args.get("categoria")
+    titulo = request.args.get("titulo")
+    if categoria != None and categoria != "Categorias"\
+        and titulo == None:
+        juegos = Juegos.select().where(Juegos.categoria==categoria)
+    elif categoria == None and titulo != None:
+        juegos = Juegos.select().where(Juegos.nombre**f'%{titulo}%')
+    elif categoria != None and categoria != "Categorias" and titulo != None:
+        juegos = Juegos.select().where((Juegos.categoria==categoria)&(Juegos.nombre**f'%{titulo}%')) 
+    else:
+        juegos = Juegos.select()
 
+    diccionario = {}
+    for juego in juegos: 
+        if juego.categoria not in diccionario:
+            diccionario[juego.categoria] = []
+        objeto_juego = {}
+        objeto_juego["nombre"] = juego.nombre
+        objeto_juego["fondoIcono"] = juego.fondoIcono
+        diccionario[juego.categoria].append(objeto_juego)
+    return diccionario
+
+@app.route("/juego/relacionados")
+def obtenerJuegosRelacionados():
+    titulo = request.args.get("titulo")
+    diccionario = {}
+    if titulo != "" and titulo != None:
+        try:
+            categoria = Juegos.select(Juegos.categoria).distinct().where(Juegos.nombre==titulo).get().categoria
+            juegos = Juegos.select().where(Juegos.categoria==categoria)
+            diccionario = {}
+            for juego in juegos: 
+                if juego.categoria not in diccionario:
+                    diccionario[juego.categoria] = []
+                objeto_juego = {}
+                objeto_juego["nombre"] = juego.nombre
+                objeto_juego["fondoIcono"] = juego.fondoIcono
+                diccionario[juego.categoria].append(objeto_juego)
+        except:
+            diccionario = {}
+    return diccionario
 @app.route("/ranking",methods=["GET"])
 def ranking():
     #Ejecutamos una consulta para obtener a los 10 o tantos mejores jugadores,
@@ -45,14 +77,14 @@ def ranking():
         jugadores = Ranking.select(
             Ranking.usuario_fk,Ranking.juego,Ranking.categoria,fn.MAX(Ranking.dificultad),fn.MAX(Ranking.puntaje)
         ).where(
-            Ranking.juego==filtro_busqueda
+            Ranking.juego**f'%{filtro_busqueda}%'
         ).group_by(Ranking.usuario_fk,Ranking.juego,Ranking.categoria).order_by(Ranking.puntaje.desc()).limit(10)
     elif filtro_categoria != None and filtro_busqueda != None:
         jugadores = Ranking.select(
             Ranking.usuario_fk,Ranking.juego,Ranking.categoria,fn.MAX(Ranking.dificultad),fn.MAX(Ranking.puntaje)
         ).where(
             (Ranking.categoria==filtro_categoria) &
-            (Ranking.juego==filtro_busqueda)
+            (Ranking.juego**f'%{filtro_busqueda}%')
         ).group_by(Ranking.usuario_fk,Ranking.juego,Ranking.categoria).order_by(Ranking.puntaje.desc()).limit(10)
     listaCategorias = []
     listaJugadores = []
@@ -186,14 +218,19 @@ def obtenerNovedad():
 @app.route("/novedades/eliminar",methods=["DELETE"])
 def eliminarNovedad():
     titulo = request.args.get("titulo")
+    clave = request.args.get("clave")
+    # usuario = Usuarios.select().where(Usuarios.nombre==usuario).get()
+    #     if(validarPassword(contraseña,usuario.sal,usuario.contraseña)):
+    user_admin = Usuarios.select().where(Usuarios.nombre=="admin").get()
     data = {}
-    try:
-        novedad = Novedades.delete().where(Novedades.titulo==titulo).execute()
-        data["realizada"] = True
-        print(f"Novedad eliminada con exito.")
-    except Exception as error:
-        print("Error: ",error) 
-        data["realizada"] = False
+    if(validarPassword(clave,user_admin.sal,user_admin.contraseña)):            
+        try:
+            novedad = Novedades.delete().where(Novedades.titulo==titulo).execute()
+            data["realizada"] = True
+            print(f"Novedad eliminada con exito.")
+        except Exception as error:
+            print("Error: ",error) 
+            data["realizada"] = False
     return data
 
 if __name__ == '__main__':

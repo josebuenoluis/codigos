@@ -69,3 +69,11 @@
 #tabla-ranking tr th,td{
     border: 2px solid black;
 }
+
+.control{
+    display: flex;
+    justify-content: center;
+}
+.control img{
+    width: 70%;
+}

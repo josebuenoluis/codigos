@@ -77,7 +77,8 @@ function LoginComponent() {
           if (datos.valido) {
             console.log("Usuario encontrado");
             let tiempoActual = new Date().getTime()
-            setLocalStorage({"nombre":datos.nombre,"avatar":datos.avatar,"tiempo":tiempoActual})
+            debugger
+            setLocalStorage({"nombre":datos.nombre,"avatar":datos.avatar,"tiempo":tiempoActual,"clave":contraseña})
             navigate("/");
           } else {
             console.log("Usuario o contraseña son incorrectos");

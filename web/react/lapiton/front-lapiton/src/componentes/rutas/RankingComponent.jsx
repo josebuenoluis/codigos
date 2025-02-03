@@ -12,12 +12,8 @@ function RankingComponent() {
       const peticion = {
         method: "GET",
       };
-      debugger
       let filtro_busqueda = document.querySelector("#busqueda").value
       let filtro_categoria = document.querySelector("#categoria-seleccionada").value
-      debugger
-      console.log(filtro_categoria)
-      console.log(filtro_busqueda)
       let response = ""
       if(filtro_busqueda=="" && filtro_categoria!=""){
         response = await fetch(`http://127.0.0.1:5000/ranking?categoria=${filtro_categoria}`,peticion)
@@ -141,7 +137,7 @@ function RankingComponent() {
       <section>
         <article className='article-filtros'>
           <DesplegableComponent funcion={mostrarFiltrosCategoria} />
-          <BarraBusqueda funcion={mostrarFiltrosCategoria} />
+          <BarraBusqueda funcion={mostrarFiltrosCategoria} placeholder={"Buscar juego..."} />
         </article>
         <article className="article-titulo-ranking">
           <p>Ranking de jugadores</p>

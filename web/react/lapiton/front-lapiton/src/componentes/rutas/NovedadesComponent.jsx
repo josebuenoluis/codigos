@@ -14,33 +14,72 @@ import { userContext } from "../../context/userContext";
 function Novedades() {
   const navigate = useNavigate();
 
-  const { novedad, SetNovedad, Vibrando, SetVibrando } =
+  const { novedad, SetNovedad, Vibrando, SetVibrando,user } =
     useContext(userContext);
+    function cerrarVentana(e){
+      let seccion = document.querySelector(".seccion-principal")
+      let ventana = document.querySelector(".container-ventana")
+      seccion.removeChild(ventana)
+    }
 
+    function ventanaEmergente(mensaje,imagen){
+      let ventana = document.createElement("div");
+      ventana.className = "container-ventana";
+      ventana.style.display = "flex";
+      ventana.style.flexDirection = "column";
+      ventana.style.alignItems = "center";
+      ventana.style.justifyContent = "center";
+      ventana.onclick = cerrarVentana;
+      ventana.style.margin = "auto";
+      ventana.style.position = "absolute";
+      let contenedorMensaje = document.createElement("div");
+      contenedorMensaje.className = "container-mensaje";
+      let imagenVentana = document.createElement("img");
+      imagenVentana.id = "imagen-ventana";
+      imagenVentana.src = imagen;
+      let parrafo = document.createElement("p")
+      parrafo.id = "texto-ventana";
+      parrafo.textContent = mensaje;
+      parrafo.style.color ="rgb(236, 111, 111)";
+      contenedorMensaje.appendChild(imagenVentana);
+      contenedorMensaje.appendChild(parrafo);
+      ventana.appendChild(contenedorMensaje);
+      let panel = document.querySelector(".panel-inicio-sesion")
+      let seccion = document.querySelector(".seccion-principal")
+      seccion.appendChild(ventana)
+    }
   function ventanaAgregar() {
-    navigate("/agregar");
+    if(user.nombre=="admin"){
+      navigate("/agregar");
+    }else{
+      ventanaEmergente("Debe ser usuario admin para agregar novedades","src/assets/user-icon-red.svg")
+    }
   }
 
   function ventanaEliminar() {
-    let divs = document.querySelectorAll(".novedad");
-    let section = document.querySelector(".seccion-principal");
-    let vibracion = false;
-    debugger;
-    if (Vibrando == false) {
-      for (var div in divs) {
-        let novedad = divs.item(div);
-        if (novedad.className == "novedad") {
-          novedad.onclick = eliminarNovedad;
-          novedad.classList.add("vibracion");
+    if(user.nombre=="admin"){
+      let divs = document.querySelectorAll(".novedad");
+      let section = document.querySelector(".seccion-principal");
+      let vibracion = false;
+      debugger;
+      if (Vibrando == false) {
+        for (var div in divs) {
+          let novedad = divs.item(div);
+          if (novedad.className == "novedad") {
+            novedad.onclick = eliminarNovedad;
+            novedad.classList.add("vibracion");
+          }
         }
+        SetVibrando(true);
+      } else {
+        let articles = section.querySelectorAll(".article-contenido");
+        articles.forEach((article) => {
+          section.removeChild(article);
+        });
+        SetVibrando(false);
       }
-      SetVibrando(true);
-    } else {
-      let articles = section.querySelectorAll(".article-contenido");
-      articles.forEach((article) => {
-        section.removeChild(article);
-      });
-      SetVibrando(false);
+    }else{
+      ventanaEmergente("Debe ser usuario admin para eliminar novedades","src/assets/user-icon-red.svg")
     }
   }
 
@@ -68,7 +107,7 @@ function Novedades() {
       const peticion = {
         method: "DELETE",
       };
-      const response = await fetch(`http://127.0.0.1:5000/novedades/eliminar?titulo=${titulo}`, peticion);
+      const response = await fetch(`http://127.0.0.1:5000/novedades/eliminar?titulo=${titulo}&clave=${user.clave}`, peticion);
 
       if (response.ok) {
         console.log("Exito");

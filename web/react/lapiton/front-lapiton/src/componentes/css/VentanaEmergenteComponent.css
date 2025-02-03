@@ -1,7 +1,3 @@
-/* <div className='container-ventana'>
-<img src={props.imagen} alt="Imagen ventana" className="imagen-ventana" />
-<p className="texto-mensaje"></p>
-</div> */
 
 .container-ventana{
     width: 100%;

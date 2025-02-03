@@ -4,8 +4,8 @@ import "../css/BarraBusqueda.css"
 function BarraBusqueda(props) {
   return (
     <div className="barra-busqueda">
-      <input type="text" id="busqueda" onClick={props.funcion} placeholder="Buscar..." />
-      <button>
+      <input type="text" id="busqueda" placeholder={props.placeholder} />
+      <button onClick={props.funcion}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           x="0px"
