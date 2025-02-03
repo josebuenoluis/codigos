@@ -93,7 +93,7 @@ function RegistroComponent() {
             <InputTextComponent type={"text"} id={"usuario"} className={"text-component"} placeholder={"Nombre de usuario..."} />
             <InputTextComponent type={"password"} id={"contraseña"} className={"text-component"} placeholder={"Contraseña."} />
             <InputTextComponent type={"password"} id={"repetir-contraseña"} className={"text-component"} placeholder={"Repetir contraseña."} />
-            <CheckBoxComponent id={"id-check"} name={"terminos"} label={"Terminos y condiciones."} />
+            <CheckBoxComponent id={"id-check"} name={"terminos"} label={"Términos y condiciones."} />
             <BotonRegistroComponent id={"confirmar"} value={"Confirmar"} className={"boton-component"} />
             <BotonComponent id={"btn-inicio-registro"} value={"Iniciar sesion"} className={"boton-component"} funcion={iniciarSesion}/>
           </div>
