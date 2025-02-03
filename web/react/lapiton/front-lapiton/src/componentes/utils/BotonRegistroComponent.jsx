@@ -60,20 +60,25 @@ function BotonComponent(props) {
     let avatar = document.querySelector("#img-avatar").src;
     let contraseñaRepetida = document.querySelector("#repetir-contraseña").value;
     let mensajeError = validarCampos(usuario,contraseña,contraseñaRepetida)
+    let terminos = document.querySelector("#id-check");
     if(mensajeError == ""){
-      const usuarioResponse = obtenerUsuario(usuario).then(datos => {
-        console.log("Usuario consultado: ",datos);
-        if(Object.keys(datos).length==0){
-          crearUsuario({"nombre":usuario,"contraseña":contraseña,"avatar":avatar});
-          let tiempoActual = new Date().getTime()
-          setLocalStorage({"nombre":usuario,"avatar":avatar,"tiempo":tiempoActual})
-          console.log("INsertar");
-          navigate("/");
-        }else{
-          console.log("El nombre de usuario ya existe.")
-          ventanaEmergente("El nombre de usuario ya existe.","src/assets/user-icon-red.svg")
-        }
-      });
+      if(terminos.checked){
+        const usuarioResponse = obtenerUsuario(usuario).then(datos => {
+          console.log("Usuario consultado: ",datos);
+          if(Object.keys(datos).length==0){
+            crearUsuario({"nombre":usuario,"contraseña":contraseña,"avatar":avatar});
+            let tiempoActual = new Date().getTime()
+            setLocalStorage({"nombre":usuario,"avatar":avatar,"tiempo":tiempoActual})
+            console.log("INsertar");
+            navigate("/");
+          }else{
+            console.log("El nombre de usuario ya existe.")
+            ventanaEmergente("El nombre de usuario ya existe.","src/assets/user-icon-red.svg")
+          }
+        });
+      }else{
+        ventanaEmergente("Debe aceptar los terminos y condiciones.","src/assets/user-icon-red.svg")
+      }
     }else{
       ventanaEmergente(mensajeError,"src/assets/user-icon-red.svg")
     }
