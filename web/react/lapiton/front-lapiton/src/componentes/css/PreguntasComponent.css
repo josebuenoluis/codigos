@@ -1,0 +1,13 @@
+.article-titulo-preguntas{
+    grid-column-start: 1;
+    grid-column-end: -1;
+    text-align: center;
+    font-size: 2rem;
+    font-family: "Cherry Bomb One", system-ui;
+    font-weight: 400;
+}
+.article-titulo-preguntas hr{
+    width: 80%;
+    height: 4px;
+    background-color: black;
+}

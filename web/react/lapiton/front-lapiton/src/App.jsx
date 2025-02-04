@@ -11,7 +11,7 @@ import LoginComponent from './componentes/rutas/LoginComponent'
 import StateComponent from './context/StateComponent'
 import VentanaAgregarComponent from './componentes/rutas/VentanaAgregarComponent'
 import NovedadComponent from './componentes/rutas/NovedadComponent'
-
+import PreguntasComponent from './componentes/rutas/PreguntasComponent'
 
 
 function App() {
@@ -38,7 +38,7 @@ function App() {
           <Route path="login" element={<LoginComponent />} />
           <Route path="agregar" element={<VentanaAgregarComponent />} />
           <Route path="novedades/novedad" element={<NovedadComponent />} />
-          
+          <Route path='preguntas' element={<PreguntasComponent />} />
         </Routes>
       </div>
     </StateComponent>
