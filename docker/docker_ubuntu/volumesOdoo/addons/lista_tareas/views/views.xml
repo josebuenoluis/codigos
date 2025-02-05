@@ -16,7 +16,7 @@
     </record>
     
     
-    <record model="ir.ui.view" id="lista_tareas.form">
+    <!-- <record model="ir.ui.view" id="lista_tareas.form">
       <form>
         <sheet string="lista_tareas.lista_tareas">
           <group>
@@ -34,7 +34,7 @@
           </group>
         </sheet>
       </form>
-    </record>
+    </record> -->
 
     <!-- actions opening views on models-->
     <!-- Acciones al abrir las vistas en los modelos
@@ -44,6 +44,7 @@
       <field name="res_model">lista_tareas.lista_tareas</field>
       <field name="view_mode">tree,form</field>
     </record>
+
     <!-- Top menu item-->
     <menuitem name="Listado de tareas" id="lista_tareas.menu_root" />
     <!-- menu categories-->

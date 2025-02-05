@@ -2,31 +2,117 @@
   <data>
     <!-- explicit list view definition -->
 
-    <record model="ir.ui.view" id="fcties.list">
-      <field name="name">FCTIES list</field>
+    <!-- Vista List de alumnos -->
+    <record model="ir.ui.view" id="fcties_alumnos_list">
+      <field name="name">fcties.alumnos.list</field>
       <field name="model">alumnos.alumno</field>
       <field name="arch" type="xml">
         <tree>
           <field name="nombre"/>
           <field name="apellidos"/>
           <field name="fecha_nacimiento"/>
+          <field name="curso_academico"/>
+          <field name="correo_electronico"/>
+          <field name="telefono"/>
+          <field name="ciclo_formativo"/>
+          <field name="periodo_practica"/>
+          <field name="nota_media"/>
+          <field name="nota_media_texto"/>
+          <field name="empresa_id"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Vista Form de alumnos -->
+
+    <record model="ir.ui.view" id="fcties_alumnos_form">
+      <field name="name">fcties.alumnos.form</field>
+      <field name="model">alumnos.alumno</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet string="Formulario para alumnado">
+          <group>
+            <group>
+              <field name="nombre"/>
+              <field name="apellidos"/>
+              <field name="fecha_nacimiento"/>
+              <field name="curso_academico"/>
+              <field name="correo_electronico"/>
+              <field name="telefono"/>
+            </group>
+            <group>
+              <field name="ciclo_formativo"/>
+              <field name="periodo_practica"/>
+              <field name="nota_media"/>
+              <field name="nota_media_texto"/>
+              <field name="empresa_id"/>
+            </group>
+          </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- Vista List de empresas -->
+    <record model="ir.ui.view" id="fcties_empresa_list">
+      <field name="name">fcties.alumnos.list</field>
+      <field name="model">empresas.empresa</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="nombre"/>
+          <field name="persona_contacto"/>
+          <field name="telefono"/>
+          <field name="correo_electronico"/>
+          <field name="direccion"/>
+          <field name="alumno_ids"/>
         </tree>
       </field>
     </record>
 
 
-    <!-- actions opening views on models -->
+    <!-- Vista Form de Empresas -->
 
-    <record model="ir.actions.act_window" id="fcties.action_window">
-      <field name="name">FCTIES window</field>
+    <record model="ir.ui.view" id="fcties_empresa_form">
+      <field name="name">fcties.empresa.form</field>
+      <field name="model">empresas.empresa</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet string="Formulario para Empresas">
+          <group>
+            <group>
+              <field name="nombre"/>
+              <field name="persona_contacto"/>
+              <field name="telefono"/>
+              <field name="alumno_ids"/>
+            </group>
+            <group>
+              <field name="correo_electronico"/>
+              <field name="direccion"/>
+            </group>
+          </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+    <!-- Accion para modelo de alumnos -->
+    <record model="ir.actions.act_window" id="fcties.action_window_alumno">
+      <field name="name">Alumnos</field>
       <field name="res_model">alumnos.alumno</field>
       <field name="view_mode">tree,form</field>
     </record>
 
+    <!-- Accion para modelo de Empresas -->
+    <record model="ir.actions.act_window" id="fcties.action_window_empresa">
+      <field name="name">Empresas</field>
+      <field name="res_model">empresas.empresa</field>
+      <field name="view_mode">tree,form</field>
+    </record>
 
     <!-- server action to the one above -->
 
-    <record model="ir.actions.server" id="fcties.action_server">
+    <!-- <record model="ir.actions.server" id="fcties.action_server">
       <field name="name">FCTIES server</field>
       <field name="model_id" ref="alumnos.alumno"/>
       <field name="state">code</field>
@@ -37,24 +123,21 @@
           "res_model": alumnos.alumno,
         }
       </field>
-    </record>
+    </record> -->
 
 
     <!-- Top menu item -->
-<!--
+
     <menuitem name="FCTIES" id="fcties.menu_root"/>
--->
+
     <!-- menu categories -->
-<!--
-    <menuitem name="Menu 1" id="fcties.menu_1" parent="fcties.menu_root"/>
-    <menuitem name="Menu 2" id="fcties.menu_2" parent="fcties.menu_root"/>
--->
+
+    <menuitem name="Alumnos" id="fcties.menu_1" parent="fcties.menu_root" action="fcties.action_window_alumno"/>
+    <menuitem name="Empresas" id="fcties.menu_2" parent="fcties.menu_root" action="fcties.action_window_empresa"/>
+
     <!-- actions -->
-<!--
-    <menuitem name="List" id="fcties.menu_1_list" parent="fcties.menu_1"
-              action="fcties.action_window"/>
-    <menuitem name="Server to list" id="fcties" parent="fcties.menu_2"
-              action="fcties.action_server"/>
--->
+    <!-- <menuitem name="Server to list" id="fcties" parent="fcties.menu_2"
+              action="fcties.action_server"/> -->
+
   </data>
 </odoo>

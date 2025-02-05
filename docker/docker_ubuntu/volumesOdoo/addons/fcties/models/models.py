@@ -11,7 +11,7 @@ class Alumno(models.Model):
     apellidos = fields.Char(string="Apellido",required=True) # Apellidos (obligatorio).
     fecha_nacimiento = fields.Date(string="Fecha de nacimiento",required=True) #Fecha de nacimiento (obligatorio).
     curso_academico = fields.Date(string="Curso Académico",required=True) # Curso académico (formato 24/25).
-    correo_electrónico =  fields.Char(string="Correo electrónico")  #(opcional).
+    correo_electronico =  fields.Char(string="Correo electrónico")  #(opcional).
     telefono = fields.Integer(string="Teléfono")  #(opcional).
     ciclo_formativo = fields.Selection([
         ("DAM","Desarrollo de Aplicaciones Multiplataforma"),
