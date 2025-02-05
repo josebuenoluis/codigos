@@ -5,8 +5,26 @@ from django.http import JsonResponse,HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from .models import Task
+from .serializador import TaskSerializer
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import SessionAuthentication,BasicAuthentication
+from rest_framework.response import Response 
 import json
 # Create your views here.
+class TaskViewSet(viewsets.ModelViewSet):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+    authentication_classes = [SessionAuthentication,BasicAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self,request,format = None):
+        content = {
+            'user':str(request.user),
+            'auth':str(request.auth),
+        }
+        return Response(content)
+
 class TaskView(View):
 
     @method_decorator(csrf_exempt)
