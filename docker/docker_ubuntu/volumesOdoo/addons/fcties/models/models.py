@@ -6,7 +6,6 @@ from odoo import models, fields, api
 class Alumno(models.Model):
     _name = 'alumnos.alumno'
     _description = 'Modelo de alumno'
-
     nombre = fields.Char(string="Nombre",required=True)  # (Obligatorio)
     apellidos = fields.Char(string="Apellido",required=True) # Apellidos (obligatorio).
     fecha_nacimiento = fields.Date(string="Fecha de nacimiento",required=True) #Fecha de nacimiento (obligatorio).
@@ -45,6 +44,7 @@ class Alumno(models.Model):
 class Empresa(models.Model):
     _name = 'empresas.empresa'
     _description = 'Modelo de empresa'
+    _rec_name = "nombre"
     nombre = fields.Char(string="Nombre de empresa",required=True) # Nombre (obligatorio).
     persona_contacto = fields.Char(string="Persona de contacto",required=True) # Persona de contacto (obligatorio).
     telefono = fields.Integer(string="Teléfono",required=True) # Teléfono de contacto (obligatorio).

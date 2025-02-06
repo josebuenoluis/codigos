@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<record id="ir.module.category" model="cordinadores_fct">
+    <field name="name">Coordinadores</field>
+    <field name="description">Gestion de Coordinadores</field>
+    <field name="sequence">100</field>
+</record>    
+
+<!-- <record id="cordinadores_usuarios"  model="res.groups">
+    <field name="name">Usuarios para Coordinadores</field>
+    <field name="category_id" ref="alumnos.alumno" />
+    <field name="comment">Usuarios basicos para Coordinadores</field>
+    <field name="users" eval="[(4,ref('base.group_user'))]" />
+</record> -->
+
+
+
+</odoo>

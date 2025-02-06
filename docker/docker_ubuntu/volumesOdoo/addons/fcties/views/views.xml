@@ -22,7 +22,7 @@
         </tree>
       </field>
     </record>
-
+    
     <!-- Vista de tipo Search para el modelo de Alumnos -->
 
     <record id="alumnos_alumno_view_search" model="ir.ui.view">
@@ -73,7 +73,7 @@
     <record model="ir.ui.view" id="fcties_empresa_list">
       <field name="name">fcties.alumnos.list</field>
       <field name="model">empresas.empresa</field>
-      <field name="arch" type="xml">
+      <field name="arch" type="xml">  
         <tree>
           <field name="nombre"/>
           <field name="persona_contacto"/>
