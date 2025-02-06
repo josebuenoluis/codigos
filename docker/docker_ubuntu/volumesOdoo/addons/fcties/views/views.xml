@@ -1,7 +1,7 @@
 <odoo>
   <data>
     <!-- explicit list view definition -->
-
+  
     <!-- Vista List de alumnos -->
     <record model="ir.ui.view" id="fcties_alumnos_list">
       <field name="name">fcties.alumnos.list</field>
@@ -20,6 +20,22 @@
           <field name="nota_media_texto"/>
           <field name="empresa_id"/>
         </tree>
+      </field>
+    </record>
+
+    <!-- Vista de tipo Search para el modelo de Alumnos -->
+
+    <record id="alumnos_alumno_view_search" model="ir.ui.view">
+      <field name="name">alumnos.alumno.view.search</field>
+      <field name="model">alumnos.alumno</field>
+      <field name="arch" type="xml">
+        <search string="Busqueda de alumnos">
+          <field name="apellidos" />
+          <field name="empresa_id" />
+          <field name="ciclo_formativo" />
+          <field name="curso_academico" />
+          <filter name="filter_nota_media" string="Nota sobresaliente" domain="[('nota_media', '>', '8')]" />
+        </search>
       </field>
     </record>
 
@@ -110,22 +126,6 @@
       <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- server action to the one above -->
-
-    <!-- <record model="ir.actions.server" id="fcties.action_server">
-      <field name="name">FCTIES server</field>
-      <field name="model_id" ref="alumnos.alumno"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": alumnos.alumno,
-        }
-      </field>
-    </record> -->
-
-
     <!-- Top menu item -->
 
     <menuitem name="FCTIES" id="fcties.menu_root"/>
@@ -135,9 +135,6 @@
     <menuitem name="Alumnos" id="fcties.menu_1" parent="fcties.menu_root" action="fcties.action_window_alumno"/>
     <menuitem name="Empresas" id="fcties.menu_2" parent="fcties.menu_root" action="fcties.action_window_empresa"/>
 
-    <!-- actions -->
-    <!-- <menuitem name="Server to list" id="fcties" parent="fcties.menu_2"
-              action="fcties.action_server"/> -->
 
   </data>
 </odoo>

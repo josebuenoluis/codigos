@@ -30,14 +30,17 @@ class Alumno(models.Model):
     @api.depends("nota_media")
     def _compute_calcular_media(self):
         for record in self:
-            if record.nota_media >= 9:
-                record.nota_media_texto = "Sobresaliente"
-            elif record.nota_media >= 7:
-                record.nota_media_texto = "Notable"
-            elif record.nota_media >= 5:
-                record.nota_media_texto = "Aprobado"
+            if record.nota_media:
+                if record.nota_media >= 9:
+                    record.nota_media_texto = "Sobresaliente"
+                elif record.nota_media >= 7:
+                    record.nota_media_texto = "Notable"
+                elif record.nota_media >= 5:
+                    record.nota_media_texto = "Aprobado"
+                else:
+                    record.nota_media_texto = "Suspendido"
             else:
-                record.nota_media_texto = "Suspendido"
+                record.nota_media_texto = "No hay nota"
 
 class Empresa(models.Model):
     _name = 'empresas.empresa'
