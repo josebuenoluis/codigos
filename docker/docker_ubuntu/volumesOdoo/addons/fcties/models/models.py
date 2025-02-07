@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
-from datetime import datetime
+from odoo.exceptions import ValidationError
+
+# odoo.exceptions.ValidationError
 
 
 class Alumno(models.Model):
@@ -10,9 +12,9 @@ class Alumno(models.Model):
     nombre = fields.Char(string="Nombre",required=True)  # (Obligatorio)
     apellidos = fields.Char(string="Apellido",required=True) # Apellidos (obligatorio).
     fecha_nacimiento = fields.Date(string="Fecha de nacimiento",required=True) #Fecha de nacimiento (obligatorio).
-    curso_academico = fields.Date(string="Curso Académico",required=True) # Curso académico (formato 24/25).
+    curso_academico = fields.Char(string="Curso Académico",required=True) # Curso académico (formato 24/25).
     correo_electronico =  fields.Char(string="Correo electrónico")  #(opcional).
-    telefono = fields.Integer(string="Teléfono")  #(opcional).
+    telefono = fields.Char(string="Teléfono")  #(opcional).
     ciclo_formativo = fields.Selection([
         ("DAM","Desarrollo de Aplicaciones Multiplataforma"),
         ("DAW","Desarrollo de Aplicaciones Web"),
@@ -27,8 +29,29 @@ class Alumno(models.Model):
     empresa_id = fields.Many2one("empresas.empresa",string="Empresa de practicas")
 
 
-    def calcularFormato(self):
-        pass
+    @api.onchange("curso_academico")
+    def _validar_formato(self):
+        for record in self:
+            if record.curso_academico:
+                if not (len(record.curso_academico.split("/")) == 2 and record.curso_academico.split("/")[0].isdigit() and record.curso_academico.split("/")[1].isdigit()): 
+                    raise ValidationError("El formato debe ser asi 24/25")
+                
+
+    @api.onchange("correo_electronico")
+    def _validar_correo(self):
+        terminar_correos = [".com",".org",".net",".es",".edu",".gov",".mil"]
+        for record in self:
+            if record.correo_electronico:
+                if not "@" in record.correo_electronico:
+                    raise ValidationError("El correo electronico no es valido.")
+                    
+
+    @api.onchange("telefono")
+    def _validar_telefono(self):
+        for record in self:
+            if record.telefono:
+                if not len(record.telefono) == 9 and not record.telefono.isdigit():
+                    raise ValidationError("El telefono ingresado no es valido.")
 
     # Nota media en formato texto (campo calculado como se indica más adelante).
     @api.depends("nota_media")
