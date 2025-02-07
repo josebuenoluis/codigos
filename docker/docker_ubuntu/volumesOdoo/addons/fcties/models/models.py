@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
+from datetime import datetime
 
 
 class Alumno(models.Model):
@@ -24,6 +25,10 @@ class Alumno(models.Model):
     nota_media = fields.Float(string="Nota Media",required=True) # Nota media (obligatorio).
     nota_media_texto = fields.Text(string="Nota media en texto",compute="_compute_calcular_media",store=True)
     empresa_id = fields.Many2one("empresas.empresa",string="Empresa de practicas")
+
+
+    def calcularFormato(self):
+        pass
 
     # Nota media en formato texto (campo calculado como se indica más adelante).
     @api.depends("nota_media")

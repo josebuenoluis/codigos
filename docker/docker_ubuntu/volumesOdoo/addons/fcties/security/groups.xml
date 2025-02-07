@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-<record id="ir.module.category" model="cordinadores_fct">
-    <field name="name">Coordinadores</field>
-    <field name="description">Gestion de Coordinadores</field>
-    <field name="sequence">100</field>
-</record>    
+    <record id="category_coordinadores" model="ir.module.category">
+        <field name="name">Coordinadores</field>
+        <field name="description">Gestion de Coordinadores</field>
+    </record>
 
-<!-- <record id="cordinadores_usuarios"  model="res.groups">
-    <field name="name">Usuarios para Coordinadores</field>
-    <field name="category_id" ref="alumnos.alumno" />
-    <field name="comment">Usuarios basicos para Coordinadores</field>
-    <field name="users" eval="[(4,ref('base.group_user'))]" />
-</record> -->
+    <record id="category_profesores" model="ir.module.category">
+        <field name="name">Profesores</field>
+        <field name="description">Gestion de Profesores</field>
+    </record>
 
+    <record id="cordinadores_usuarios" model="res.groups">
+        <field name="name">Usuarios para Coordinadores</field>
+        <field name="category_id" ref="category_coordinadores" />
+        <field name="comment">Usuarios basicos para Coordinadores</field>
+    </record>
+
+    <record id="profesores_usuarios" model="res.groups">
+        <field name="name">Usuarios para Profesores</field>
+        <field name="category_id" ref="category_profesores" />
+        <field name="comment">Usuarios basicos para profesores</field>
+    </record>
 
 
 </odoo>
