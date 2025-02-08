@@ -33,24 +33,29 @@ class Alumno(models.Model):
     def _validar_formato(self):
         for record in self:
             if record.curso_academico:
-                if not (len(record.curso_academico.split("/")) == 2 and record.curso_academico.split("/")[0].isdigit() and record.curso_academico.split("/")[1].isdigit()): 
+                if not (len(record.curso_academico.split("/")) == 2 and record.curso_academico.split("/")[0].isdigit()\
+                         and record.curso_academico.split("/")[1].isdigit() and len(record.curso_academico.split("/")[0])==2\
+                            and len(record.curso_academico.split("/")[1])==2): 
                     raise ValidationError("El formato debe ser asi 24/25")
                 
 
     @api.onchange("correo_electronico")
     def _validar_correo(self):
-        terminar_correos = [".com",".org",".net",".es",".edu",".gov",".mil"]
         for record in self:
             if record.correo_electronico:
-                if not "@" in record.correo_electronico:
-                    raise ValidationError("El correo electronico no es valido.")
+                if not (len(record.correo_electronico.split("@")) == 2 and\
+                    len(record.correo_electronico.split("@")[1].split(".")) == 2 and\
+                    record.correo_electronico.split("@")[0] != "" and\
+                    record.correo_electronico.split("@")[1].split(".")[0] != "" and \
+                    record.correo_electronico.split("@")[1].split(".")[1].isalpha()):
+                    raise ValidationError("El correo electrónico no es válido.")
                     
 
     @api.onchange("telefono")
     def _validar_telefono(self):
         for record in self:
             if record.telefono:
-                if not len(record.telefono) == 9 and not record.telefono.isdigit():
+                if not (len(record.telefono) == 9 and record.telefono.isdigit()):  
                     raise ValidationError("El telefono ingresado no es valido.")
 
     # Nota media en formato texto (campo calculado como se indica más adelante).
@@ -75,7 +80,27 @@ class Empresa(models.Model):
     _rec_name = "nombre"
     nombre = fields.Char(string="Nombre de empresa",required=True) # Nombre (obligatorio).
     persona_contacto = fields.Char(string="Persona de contacto",required=True) # Persona de contacto (obligatorio).
-    telefono = fields.Integer(string="Teléfono",required=True) # Teléfono de contacto (obligatorio).
+    telefono = fields.Char(string="Teléfono",required=True) # Teléfono de contacto (obligatorio).
     correo_electronico = fields.Char(string="Correo electrónico",required=True) # Correo electrónico (obligatorio).
     direccion = fields.Char(string="Dirección",required=True)   # Dirección (obligatorio).
     alumno_ids = fields.One2many("alumnos.alumno","empresa_id",string="Alumnos en practica")
+
+
+    @api.onchange("correo_electronico")
+    def _validar_correo(self):
+        for record in self:
+            if record.correo_electronico:
+                if not (len(record.correo_electronico.split("@")) == 2 and\
+                    len(record.correo_electronico.split("@")[1].split(".")) == 2 and\
+                    record.correo_electronico.split("@")[0] != "" and\
+                    record.correo_electronico.split("@")[1].split(".")[0] != "" and \
+                    record.correo_electronico.split("@")[1].split(".")[1].isalpha()):
+                    raise ValidationError("El correo electrónico no es válido.")
+                    
+
+    @api.onchange("telefono")
+    def _validar_telefono(self):
+        for record in self:
+            if record.telefono:
+                if not (len(record.telefono) == 9 and record.telefono.isdigit()):  
+                    raise ValidationError("El telefono ingresado no es valido.")

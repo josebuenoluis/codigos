@@ -1,30 +1,144 @@
 <odoo>
     <data>
-<!--
-          <record id="object0" model="fcties.fcties">
-            <field name="name">Object 0</field>
-            <field name="value">0</field>
+
+        <record id="empresa1" model="empresas.empresa">
+          <field name="nombre">Binhex</field>
+          <field name="persona_contacto">Carlos León Rodríguez</field>
+          <field name="telefono">822179267</field>
+          <field name="correo_electronico">binhex@correo.com</field>
+          <field name="direccion">Calle Subida al Mayorazgo, 13, Piso 2, Oficina 15-2, Santa Cruz de Tenerife</field>
+          <field name="alumno_ids"></field>
+        </record>
+          
+        <record id="empresa2" model="empresas.empresa">
+          <field name="nombre">Atos Consulting Canarias</field>
+          <field name="persona_contacto">Miguel Martínez Rodríguez</field>
+          <field name="telefono">822119069</field>
+          <field name="correo_electronico">atos@correo.com</field>
+          <field name="direccion">Subida al Mayorazgo, 24B Planta 1 38110 Santa Cruz de Tenerife</field>
+          <field name="alumno_ids"></field>
+        </record>
+        
+        <record id="empresa3" model="empresas.empresa">
+          <field name="nombre">Eviden</field>
+          <field name="persona_contacto">Marcelo Fuentes Luis</field>
+          <field name="telefono">912148800</field>
+          <field name="correo_electronico">eviden@correo.com</field>
+          <field name="direccion">C. de San Lucas, 60, 38002 Santa Cruz de Tenerife</field>
+          <field name="alumno_ids"></field>
+        </record>
+
+          <record id="alumno1" model="alumnos.alumno">
+            <field name="nombre">José</field>
+            <field name="apellidos">Bueno Luis</field>
+            <field name="fecha_nacimiento">2002-04-25</field>
+            <field name="curso_academico">24/25</field>
+            <field name="correo_electronico">buenojosefrancisco@gmail.com</field>
+            <field name="telefono">644275671</field>
+            <field name="ciclo_formativo">DAM</field>
+            <field name="periodo_practica">abril</field>
+            <field name="nota_media">8.0</field>
+            <field name="nota_media_texto"/>
+            <field name="empresa_id" ref="empresa2" />
           </record>
 
-          <record id="object1" model="fcties.fcties">
-            <field name="name">Object 1</field>
-            <field name="value">10</field>
+          <record id="alumno2" model="alumnos.alumno">
+            <field name="nombre">Oliver</field>
+            <field name="apellidos">García González</field>
+            <field name="fecha_nacimiento">2002-04-25</field>
+            <field name="curso_academico">24/25</field>
+            <field name="correo_electronico">olivet@correo.com</field>
+            <field name="telefono">644698123</field>
+            <field name="ciclo_formativo">DAM</field>
+            <field name="periodo_practica">abril</field>
+            <field name="nota_media">8.0</field>
+            <field name="nota_media_texto"/>
+            <field name="empresa_id" ref="empresa1" />
           </record>
 
-          <record id="object2" model="fcties.fcties">
-            <field name="name">Object 2</field>
-            <field name="value">20</field>
+          <record id="alumno3" model="alumnos.alumno">
+            <field name="nombre">Víctor</field>
+            <field name="apellidos">González González</field>
+            <field name="fecha_nacimiento">1955-04-25</field>
+            <field name="curso_academico">24/25</field>
+            <field name="correo_electronico">victor@correo.com</field>
+            <field name="telefono">656352456</field>
+            <field name="ciclo_formativo">DAM</field>
+            <field name="periodo_practica">abril</field>
+            <field name="nota_media">10.0</field>
+            <field name="nota_media_texto"/>
+            <field name="empresa_id" ref="empresa2" />
           </record>
 
-          <record id="object3" model="fcties.fcties">
-            <field name="name">Object 3</field>
-            <field name="value">30</field>
+          <record id="alumno4" model="alumnos.alumno">
+            <field name="nombre">Alexander</field>
+            <field name="apellidos">Fuentes Rodríguez</field>
+            <field name="fecha_nacimiento">2000-03-12</field>
+            <field name="curso_academico">24/25</field>
+            <field name="correo_electronico">alexander@correo.com</field>
+            <field name="telefono">622546987</field>
+            <field name="ciclo_formativo">DAM</field>
+            <field name="periodo_practica">abril</field>
+            <field name="nota_media">8.0</field>
+            <field name="nota_media_texto"/>
+            <field name="empresa_id" ref="empresa3" />
           </record>
 
-          <record id="object4" model="fcties.fcties">
-            <field name="name">Object 4</field>
-            <field name="value">40</field>
+          <record id="alumno5" model="alumnos.alumno">
+            <field name="nombre">Alejandro</field>
+            <field name="apellidos">Hernández León</field>
+            <field name="fecha_nacimiento">2001-07-08</field>
+            <field name="curso_academico">24/25</field>
+            <field name="correo_electronico">alejandro@correo.com</field>
+            <field name="telefono">622464759</field>
+            <field name="ciclo_formativo">DAM</field>
+            <field name="periodo_practica">abril</field>
+            <field name="nota_media">10.0</field>
+            <field name="nota_media_texto"/>
+            <field name="empresa_id" ref="empresa2" />
           </record>
--->
+
+          <record id="alumno6" model="alumnos.alumno">
+            <field name="nombre">Samuel</field>
+            <field name="apellidos">De León González</field>
+            <field name="fecha_nacimiento">2002-06-08</field>
+            <field name="curso_academico">24/25</field>
+            <field name="correo_electronico">samuel@correo.com</field>
+            <field name="telefono">622568945</field>
+            <field name="ciclo_formativo">DAM</field>
+            <field name="periodo_practica">abril</field>
+            <field name="nota_media">8.0</field>
+            <field name="nota_media_texto"/>
+            <field name="empresa_id" ref="empresa1" />
+          </record>
+
+          <record id="alumno7" model="alumnos.alumno">
+            <field name="nombre">Unai</field>
+            <field name="apellidos">Uzquiza Leal</field>
+            <field name="fecha_nacimiento">2002-07-07</field>
+            <field name="curso_academico">24/25</field>
+            <field name="correo_electronico">unai@correo.com</field>
+            <field name="telefono">622223311</field>
+            <field name="ciclo_formativo">DAM</field>
+            <field name="periodo_practica">abril</field>
+            <field name="nota_media">8.0</field>
+            <field name="nota_media_texto"/>
+            <field name="empresa_id" ref="empresa1" />
+          </record>
+          
+          <record id="alumno8" model="alumnos.alumno">
+            <field name="nombre">Fermín</field>
+            <field name="apellidos">Ramon González-Navia</field>
+            <field name="fecha_nacimiento">2002-09-09</field>
+            <field name="curso_academico">24/25</field>
+            <field name="correo_electronico">fermin@correo.com</field>
+            <field name="telefono">626987555</field>
+            <field name="ciclo_formativo">DAM</field>
+            <field name="periodo_practica">abril</field>
+            <field name="nota_media">10.0</field>
+            <field name="nota_media_texto"/>
+            <field name="empresa_id" ref="empresa3" />
+          </record>
+          
     </data>
 </odoo>
