@@ -2,20 +2,23 @@
 {
     'name': "FCTIES",
 
-    'summary': "Short (1 phrase/line) summary of the module's purpose",
+    'summary': "Gestión del alumnado en prácticas de FCT y empresas colaboradoras.",
 
     'description': """
-Long description of module's purpose
+Este módulo permite gestionar la información del
+alumnado de Formación en Centros de Trabajo (FCT), 
+incluyendo sus datos personales, la empresa 
+donde realizan sus prácticas y el período de formación. 
     """,
 
-    'author': "My Company",
+    'author': "Jose Francisco Bueno Luis",
     'website': "https://www.yourcompany.com",
 
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/15.0/odoo/addons/base/data/ir_module_category_data.xml
     # for the full list
-    'category': 'Productivity',
-    'version': '0.1',
+    'category': 'Education',
+    'version': '1.0.0',
 
     # any module necessary for this one to work correctly
     'depends': ['base'],

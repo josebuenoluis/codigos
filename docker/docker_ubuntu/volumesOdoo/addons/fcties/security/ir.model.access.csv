@@ -1,7 +1,7 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_coordinador_alumnos_alumno,access_alumnos_alumno,model_alumnos_alumno,cordinadores_usuarios,1,1,1,1
-access_coordinador_empresas_empresa,access_empresas_empresa,model_empresas_empresa,cordinadores_usuarios,1,1,1,1
-access_profesor_alumnos_alumno,access_alumnos_alumno,model_alumnos_alumno,profesores_usuarios,1,1,1,0
-access_profesor_empresas_empresa,access_empresas_empresa,model_empresas_empresa,profesores_usuarios,1,0,0,0
+access_coordinador_alumnos_alumno,access_alumnos_alumno,model_fcties_alumno,cordinadores_usuarios,1,1,1,1
+access_coordinador_empresas_empresa,access_empresas_empresa,model_fcties_empresa,cordinadores_usuarios,1,1,1,1
+access_profesor_alumnos_alumno,access_alumnos_alumno,model_fcties_alumno,profesores_usuarios,1,1,1,0
+access_profesor_empresas_empresa,access_empresas_empresa,model_fcties_empresa,profesores_usuarios,1,0,0,0
 
 

@@ -5,7 +5,7 @@
     <!-- Vista List de alumnos -->
     <record model="ir.ui.view" id="fcties_alumnos_list">
       <field name="name">fcties.alumnos.list</field>
-      <field name="model">alumnos.alumno</field>
+      <field name="model">fcties.alumno</field>
       <field name="arch" type="xml">
         <tree>
           <field name="nombre"/>
@@ -25,9 +25,9 @@
     
     <!-- Vista de tipo Search para el modelo de Alumnos -->
 
-    <record id="alumnos_alumno_view_search" model="ir.ui.view">
-      <field name="name">alumnos.alumno.view.search</field>
-      <field name="model">alumnos.alumno</field>
+    <record id="fcties_alumno_view_search" model="ir.ui.view">
+      <field name="name">fcties.alumno.view.search</field>
+      <field name="model">fcties.alumno</field>
       <field name="arch" type="xml">
         <search string="Busqueda de alumnos">
           <field name="apellidos" />
@@ -43,7 +43,7 @@
 
     <record model="ir.ui.view" id="fcties_alumnos_form">
       <field name="name">fcties.alumnos.form</field>
-      <field name="model">alumnos.alumno</field>
+      <field name="model">fcties.alumno</field>
       <field name="arch" type="xml">
         <form>
           <sheet string="Formulario para alumnado">
@@ -71,8 +71,8 @@
 
     <!-- Vista List de empresas -->
     <record model="ir.ui.view" id="fcties_empresa_list">
-      <field name="name">fcties.alumnos.list</field>
-      <field name="model">empresas.empresa</field>
+      <field name="name">fcties.empresa.list</field>
+      <field name="model">fcties.empresa</field>
       <field name="arch" type="xml">  
         <tree>
           <field name="nombre"/>
@@ -90,7 +90,7 @@
 
     <record model="ir.ui.view" id="fcties_empresa_form">
       <field name="name">fcties.empresa.form</field>
-      <field name="model">empresas.empresa</field>
+      <field name="model">fcties.empresa</field>
       <field name="arch" type="xml">
         <form>
           <sheet string="Formulario para Empresas">
@@ -112,17 +112,18 @@
     </record>
 
     <!-- actions opening views on models -->
+    
     <!-- Accion para modelo de alumnos -->
     <record model="ir.actions.act_window" id="fcties.action_window_alumno">
       <field name="name">Alumnos</field>
-      <field name="res_model">alumnos.alumno</field>
+      <field name="res_model">fcties.alumno</field>
       <field name="view_mode">tree,form</field>
     </record>
 
     <!-- Accion para modelo de Empresas -->
     <record model="ir.actions.act_window" id="fcties.action_window_empresa">
       <field name="name">Empresas</field>
-      <field name="res_model">empresas.empresa</field>
+      <field name="res_model">fcties.empresa</field>
       <field name="view_mode">tree,form</field>
     </record>
 

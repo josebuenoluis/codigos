@@ -1,7 +1,7 @@
 <odoo>
     <data>
 
-        <record id="empresa1" model="empresas.empresa">
+        <record id="empresa1" model="fcties.empresa">
           <field name="nombre">Binhex</field>
           <field name="persona_contacto">Carlos León Rodríguez</field>
           <field name="telefono">822179267</field>
@@ -10,7 +10,7 @@
           <field name="alumno_ids"></field>
         </record>
           
-        <record id="empresa2" model="empresas.empresa">
+        <record id="empresa2" model="fcties.empresa">
           <field name="nombre">Atos Consulting Canarias</field>
           <field name="persona_contacto">Miguel Martínez Rodríguez</field>
           <field name="telefono">822119069</field>
@@ -19,7 +19,7 @@
           <field name="alumno_ids"></field>
         </record>
         
-        <record id="empresa3" model="empresas.empresa">
+        <record id="empresa3" model="fcties.empresa">
           <field name="nombre">Eviden</field>
           <field name="persona_contacto">Marcelo Fuentes Luis</field>
           <field name="telefono">912148800</field>
@@ -28,7 +28,7 @@
           <field name="alumno_ids"></field>
         </record>
 
-          <record id="alumno1" model="alumnos.alumno">
+          <record id="alumno1" model="fcties.alumno">
             <field name="nombre">José</field>
             <field name="apellidos">Bueno Luis</field>
             <field name="fecha_nacimiento">2002-04-25</field>
@@ -42,7 +42,7 @@
             <field name="empresa_id" ref="empresa2" />
           </record>
 
-          <record id="alumno2" model="alumnos.alumno">
+          <record id="alumno2" model="fcties.alumno">
             <field name="nombre">Oliver</field>
             <field name="apellidos">García González</field>
             <field name="fecha_nacimiento">2002-04-25</field>
@@ -56,7 +56,7 @@
             <field name="empresa_id" ref="empresa1" />
           </record>
 
-          <record id="alumno3" model="alumnos.alumno">
+          <record id="alumno3" model="fcties.alumno">
             <field name="nombre">Víctor</field>
             <field name="apellidos">González González</field>
             <field name="fecha_nacimiento">1955-04-25</field>
@@ -70,7 +70,7 @@
             <field name="empresa_id" ref="empresa2" />
           </record>
 
-          <record id="alumno4" model="alumnos.alumno">
+          <record id="alumno4" model="fcties.alumno">
             <field name="nombre">Alexander</field>
             <field name="apellidos">Fuentes Rodríguez</field>
             <field name="fecha_nacimiento">2000-03-12</field>
@@ -84,7 +84,7 @@
             <field name="empresa_id" ref="empresa3" />
           </record>
 
-          <record id="alumno5" model="alumnos.alumno">
+          <record id="alumno5" model="fcties.alumno">
             <field name="nombre">Alejandro</field>
             <field name="apellidos">Hernández León</field>
             <field name="fecha_nacimiento">2001-07-08</field>
@@ -98,7 +98,7 @@
             <field name="empresa_id" ref="empresa2" />
           </record>
 
-          <record id="alumno6" model="alumnos.alumno">
+          <record id="alumno6" model="fcties.alumno">
             <field name="nombre">Samuel</field>
             <field name="apellidos">De León González</field>
             <field name="fecha_nacimiento">2002-06-08</field>
@@ -112,7 +112,7 @@
             <field name="empresa_id" ref="empresa1" />
           </record>
 
-          <record id="alumno7" model="alumnos.alumno">
+          <record id="alumno7" model="fcties.alumno">
             <field name="nombre">Unai</field>
             <field name="apellidos">Uzquiza Leal</field>
             <field name="fecha_nacimiento">2002-07-07</field>
@@ -126,7 +126,7 @@
             <field name="empresa_id" ref="empresa1" />
           </record>
           
-          <record id="alumno8" model="alumnos.alumno">
+          <record id="alumno8" model="fcties.alumno">
             <field name="nombre">Fermín</field>
             <field name="apellidos">Ramon González-Navia</field>
             <field name="fecha_nacimiento">2002-09-09</field>
@@ -139,6 +139,6 @@
             <field name="nota_media_texto"/>
             <field name="empresa_id" ref="empresa3" />
           </record>
-          
+
     </data>
 </odoo>
