@@ -153,7 +153,9 @@ def listarAvatars():
     resultado = []
     for id_super in range(1,13):
         response = request_api.urlopen(f"https://superheroapi.com/api/7693742abd0d2968a66bc4d38f33db24/{id_super}")
-        avatar = json.loads(response.read().decode("utf-8"))
+        data = response.read()
+        data = data.decode("utf-8")
+        avatar = json.loads(data.split("\n")[-1])
         imagen = avatar["image"]["url"]
         resultado.append({"id_avatar":id_super,"imagen":imagen})
     return resultado
