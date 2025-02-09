@@ -32,3 +32,8 @@ class Novedades(BaseModel):
     descripcion = TextField()
     imagen = TextField()
     fecha_novedad = DateField(default=datetime.now().date())
+
+class Preguntas(BaseModel):
+    pregunta = TextField()
+    respuesta = TextField()
+    fecha_pregunta = DateField(default=datetime.now().date())

@@ -8,6 +8,7 @@ function FooterComponent() {
       <nav>
         <Link to="#" className='nav-item'>Lo mas jugado</Link>
         <Link to="#" className='nav-item'>Lo mas nuevo</Link>
+        <Link to="/preguntas" className='nav-item'>Preguntas frecuentes</Link>
       </nav>
       <div className="iconos-social">
         <a href='#'><img width="50" height="50" src="https://img.icons8.com/ios-filled/50/meta.png" alt="meta"/></a>

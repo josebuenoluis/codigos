@@ -24,6 +24,7 @@ function HeaderComponent() {
 
   function desplegableCategorias(e){
     let lista = document.getElementById("desplegable-categorias");  
+    let seccion = document.querySelector("section");
     let elemento = "";
     if(!menuDesplegado){
       for(var categoria in categorias){
@@ -33,14 +34,17 @@ function HeaderComponent() {
         lista.appendChild(elemento);
       }
     } 
+    seccion.style.contain = "none";
     SetmenuDesplegado(true); 
   }
 
   function cerrarMenu(e){
     let lista = document.getElementById("desplegable-categorias");
+    let seccion = document.querySelector("section");
     for(var i = 0;i < lista.childElementCount+2;i++){
       lista.removeChild(lista.childNodes.item(0));
     SetmenuDesplegado(false);
+    seccion.style.contain = "content";
     }
   }
 

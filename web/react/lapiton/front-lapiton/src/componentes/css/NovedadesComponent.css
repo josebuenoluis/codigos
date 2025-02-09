@@ -9,6 +9,7 @@ section{
     background-color: rgba(248, 245, 193, .6);
     background-attachment: fixed;
     background-blend-mode: overlay;
+    contain: content;
 }
 .article-agregar-eliminar{
     grid-column-start: 1;

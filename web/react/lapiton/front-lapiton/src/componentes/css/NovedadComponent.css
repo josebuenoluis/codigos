@@ -8,6 +8,7 @@ section{
     /* background-color: rgba(248, 245, 193);  */
     background-color: rgba(248, 245, 193, .6);
     background-attachment: fixed;
+    contain: content;
     background-blend-mode: overlay;
 }
 

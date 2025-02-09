@@ -33,6 +33,7 @@ footer nav{
     margin-left: 5rem;
     display: flex;
 }
+
 footer nav a{
     font-family: "Cherry Bomb One", system-ui;
     font-weight: 400;

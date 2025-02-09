@@ -230,6 +230,18 @@ def eliminarNovedad():
             data["realizada"] = False
     return data
 
+@app.route("/preguntas")
+def obtenerPreguntas():
+    preguntas = Preguntas.select()
+    data = []
+    for pregunta in preguntas:
+        diccionario = {}
+        diccionario["pregunta"] = pregunta.pregunta
+        diccionario["respuesta"] = pregunta.respuesta
+        diccionario["fecha_pregunta"] = pregunta.fecha_pregunta
+        data.append(diccionario)
+    return data
+
 if __name__ == '__main__':
 
     login = ""
@@ -238,6 +250,6 @@ if __name__ == '__main__':
 
     db.connect()
 
-    db.create_tables([Usuarios,Juegos,Ranking,Novedades])
+    db.create_tables([Usuarios,Juegos,Ranking,Novedades,Preguntas])
 
     app.run(host='0.0.0.0',port=5000)
