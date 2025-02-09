@@ -9,7 +9,7 @@
           <field name="direccion">Calle Subida al Mayorazgo, 13, Piso 2, Oficina 15-2, Santa Cruz de Tenerife</field>
           <field name="alumno_ids"></field>
         </record>
-          
+        
         <record id="empresa2" model="fcties.empresa">
           <field name="nombre">Atos Consulting Canarias</field>
           <field name="persona_contacto">Miguel Martínez Rodríguez</field>

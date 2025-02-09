@@ -7,6 +7,8 @@ import DesplegableComponent from '../utils/DesplegableComponent';
 import "../css/RankingComponent.css"
 function RankingComponent() {
 
+  // Funcion para obtener el ranking de jugadores,
+  // segun los filtros ingresados por el usuario
   async function obtenerRankingFiltros(){
     try{
       const peticion = {
@@ -36,6 +38,7 @@ function RankingComponent() {
     }
   }
 
+  // Funcion para limpiar la tabla de ranking
   function limpiarTabla(){
     let tablaJugadores = document.querySelector("#tabla-jugadores")
     let filas = tablaJugadores.querySelectorAll(".jugador-ranking");
@@ -44,13 +47,13 @@ function RankingComponent() {
       });
   }
 
+  // Funcion para mostrar los puntajes obtenidos segun los filtros
+  // ingresados
   function mostrarFiltrosCategoria(){
-    debugger
       limpiarTabla( )
       obtenerRankingFiltros().then(datos =>{
       let tablaJugadores = document.querySelector("#tabla-jugadores")
       let contador = 0
-      console.log(datos)
       for(var jugador in datos.jugadores){
         contador += 1
         let jugadorAgregar = datos.jugadores.at(jugador)
@@ -76,7 +79,7 @@ function RankingComponent() {
     })
   }
 
-  // Para hacer una peticion sobre que devolvera las categorias de juegos y puntos y informacion de los usuarios
+  // Para hacer una peticion y obtener el ranking de usuarios sin filtros
   async function obtenerRanking(){
     try{
       const peticion = {
@@ -95,6 +98,7 @@ function RankingComponent() {
     }
   }
 
+  // Obtenemos el ranking cada vez que carga la pagina
   const ranking = obtenerRanking().then(datos =>{
     let desplegable = document.querySelector("#categoria-seleccionada")
     let tablaJugadores = document.querySelector("#tabla-jugadores")

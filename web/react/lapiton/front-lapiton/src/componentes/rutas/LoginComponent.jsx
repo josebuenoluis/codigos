@@ -11,6 +11,9 @@ import VentanaAgregarComponent from "./VentanaAgregarComponent";
 function LoginComponent() {
   const navigate = useNavigate()
   const {user,setUser,loginUsuario,setLocalStorage} = useContext(userContext)
+
+  // Funcion asincrona para obtener los datos de un usuario por su usuario 
+  // y contraseña
   async function obtenerUsuario(nombreUsuario, contraseña) {
     try {
       const peticion = {
@@ -31,16 +34,19 @@ function LoginComponent() {
       return null;
     }
   }
+  // Para navegar a la ventana de registro de usuario
     function registro() {
       navigate("/registro");
     }
 
+    // Funcion para cerrar la ventana emergente
     function cerrarVentana(e){
       let seccion = document.querySelector("#seccion-principal")
       let ventana = document.querySelector(".container-ventana")
       seccion.removeChild(ventana)
     }
 
+    // Funcion para abrir ventana emergente con una imagen y un mensaje
     function ventanaEmergente(mensaje,imagen){
       let ventana = document.createElement("div");
       ventana.className = "container-ventana";
@@ -63,25 +69,27 @@ function LoginComponent() {
       contenedorMensaje.appendChild(imagenVentana);
       contenedorMensaje.appendChild(parrafo);
       ventana.appendChild(contenedorMensaje);
-      let panel = document.querySelector(".panel-inicio-sesion")
       let seccion = document.querySelector("#seccion-principal")
       seccion.appendChild(ventana)
     }
 
+    // Funcion que hara una peticion a la API para validar el 
+    // usuario ingresado y iniciar sesion
     function iniciarSesion() {
       let usuario = document.querySelector("#usuario").value;
       let contraseña = document.querySelector("#contraseña").value;
       const usuarioResponse = obtenerUsuario(usuario, contraseña).then(
         datos => {
-          debugger
           if (datos.valido) {
-            console.log("Usuario encontrado");
+            // Obtenemos el tiempo actual para establecer un tiempo
+            // de conexion al usuarios
             let tiempoActual = new Date().getTime()
-            debugger
             setLocalStorage({"nombre":datos.nombre,"avatar":datos.avatar,"tiempo":tiempoActual,"clave":contraseña})
+            // Al iniciar sesion redirecciona al usuario a la ventana de inicio
             navigate("/");
           } else {
             console.log("Usuario o contraseña son incorrectos");
+            // Abrimos la ventana emergente sino son correcto el usuario contraseña
             ventanaEmergente("Usuario o contraseña son incorrectos","src/assets/user-icon-red.svg");
           }
         }

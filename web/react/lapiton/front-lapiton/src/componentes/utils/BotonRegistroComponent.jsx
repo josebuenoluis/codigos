@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 function BotonComponent(props) {
   const {user,setUser,loginUsuario,setLocalStorage} = useContext(userContext)
   const navigate = useNavigate()
+
+  // Funcion para obtener un usuario por su nombre
   async function obtenerUsuario(nombreUsuario){
     try {
       const peticion = {
@@ -42,6 +44,8 @@ function BotonComponent(props) {
     }
   }
 
+  // Funcion para validar los campos ingresados por el usuario,
+  // si todo correcto devuelve un texto vacio
   function validarCampos(usuario,contraseña,contraseñaRepetida){
     let mensaje = "";
     if(usuario.length < 4){
@@ -64,12 +68,12 @@ function BotonComponent(props) {
     if(mensajeError == ""){
       if(terminos.checked){
         const usuarioResponse = obtenerUsuario(usuario).then(datos => {
-          console.log("Usuario consultado: ",datos);
           if(Object.keys(datos).length==0){
             crearUsuario({"nombre":usuario,"contraseña":contraseña,"avatar":avatar});
             let tiempoActual = new Date().getTime()
+            // Guardamos el usuario en el localStorage y tambien lo guardamos
+            // en el contexto
             setLocalStorage({"nombre":usuario,"avatar":avatar,"tiempo":tiempoActual})
-            console.log("INsertar");
             navigate("/");
           }else{
             console.log("El nombre de usuario ya existe.")

@@ -1,4 +1,4 @@
-from flask import Flask,request,session
+from flask import Flask,request
 from urllib import request as request_api
 from models import *
 from flask_cors import CORS
@@ -10,7 +10,6 @@ from peewee import fn
 
 app = Flask(__name__)
 CORS(app)
-app.secret_key = "prueba1234"
 
 @app.route("/",methods=["GET"])
 def index():    
@@ -122,12 +121,8 @@ def validarUsuario():
     try:
         usuario = Usuarios.select().where(Usuarios.nombre==usuario).get()
         if(validarPassword(contraseña,usuario.sal,usuario.contraseña)):
-            print(f"NOmbre prueba sesion: {session}")
-            session["nombre"] = usuario.nombre
-            session["avatar"] = usuario.avatar
             resultado["valido"] = True
             resultado["avatar"] = usuario.avatar
-            print(f"Sesion en Inicio de sesion: {session}")
         else:
             print("Contraseña incorrecta")
             resultado["valido"] = False
@@ -166,10 +161,6 @@ def crearUsuario():
     try:
         contraseña,sal = generarHash(data["contraseña"])
         usuario = Usuarios.create(nombre=data["nombre"],contraseña=contraseña,sal=sal,avatar=data["avatar"])
-        session.permanent = True
-        session["nombre"] = usuario.nombre
-        session["avatar"] = usuario.avatar
-        print(f"Sesion iniciada en crear usuario: {session}")
     except Exception as error:
         print("Error: ",error) 
     return data
@@ -243,8 +234,6 @@ def obtenerPreguntas():
     return data
 
 if __name__ == '__main__':
-
-    login = ""
 
     db = conexion.conexion()
 

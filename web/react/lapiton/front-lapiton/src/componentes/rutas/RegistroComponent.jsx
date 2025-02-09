@@ -18,6 +18,7 @@ function RegistroComponent() {
     navigate("/login");
   }
   
+  // Funcion para obtener los avatares disponibles mediante la API
   async function consultarAvatares(){
     try {
       const peticion = {
@@ -35,19 +36,21 @@ function RegistroComponent() {
     }
   }
 
+  // Funcion para cambiar de avatar cada vez que el usuario
+  // selecciona un avatar
   function elegirAvatar(e){
     let icono = document.querySelector("#img-avatar");
-    debugger
     let iconoSeleccionado = e.target
-    console.log("Cambiando avatar ","Fondo: ",iconoSeleccionado.src);
-    debugger
     if(icono.src!=iconoSeleccionado.src){
       icono.src = iconoSeleccionado.src;
     }else{
+      // Si el usuario selecciona el mismo avatar se seleccionara
+      // el avatar por defecto
       icono.src = UserIcon
     }
   }
 
+  // Funcion para mostrar los avatares disponibles obtenidos mediante la API
   function mostrarAvatars(){
     const resultado = consultarAvatares().then(datos =>{
       let lista = document.querySelector("#lista-avatares");
@@ -66,6 +69,7 @@ function RegistroComponent() {
       }
     });
   }
+  // Cada vez que se carga la pagina mostraremos todos los avatars
   mostrarAvatars()
   return (
     <div>

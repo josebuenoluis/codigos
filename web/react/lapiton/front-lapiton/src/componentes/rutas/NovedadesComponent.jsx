@@ -2,8 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import HeaderComponent from "../header/HeaderComponent";
 import FooterComponent from "../footer/FooterComponent";
-import DesplegableComponent from "../utils/DesplegableComponent";
-import BarraBusqueda from "../utils/BarraBusqueda";
 import BotonAgregar from "../utils/BotonAgregarComponent";
 import BotonEliminarComponent from "../utils/BotonEliminarComponent";
 import "../css/NovedadesComponent.css";
@@ -12,15 +10,17 @@ import { useContext, useState } from "react";
 import { userContext } from "../../context/userContext";
 
 function Novedades() {
+
   const navigate = useNavigate();
 
   const { novedad, SetNovedad, Vibrando, SetVibrando,user } =
-    useContext(userContext);
-    function cerrarVentana(e){
-      let seccion = document.querySelector(".seccion-principal")
-      let ventana = document.querySelector(".container-ventana")
-      seccion.removeChild(ventana)
-    }
+  useContext(userContext);
+  
+  function cerrarVentana(e){
+    let seccion = document.querySelector(".seccion-principal")
+    let ventana = document.querySelector(".container-ventana")
+    seccion.removeChild(ventana)
+  }
 
     function ventanaEmergente(mensaje,imagen){
       let ventana = document.createElement("div");
@@ -48,6 +48,9 @@ function Novedades() {
       let seccion = document.querySelector(".seccion-principal")
       seccion.appendChild(ventana)
     }
+
+  // Funcion para ir a ventana de agregar novedad,
+  // si el usuario es administrador
   function ventanaAgregar() {
     if(user.nombre=="admin"){
       navigate("/agregar");
@@ -56,12 +59,13 @@ function Novedades() {
     }
   }
 
+
+  // Funcion para eliminar una novedad y activar la vibracion de
+  // las novedades si es un usuario admin
   function ventanaEliminar() {
     if(user.nombre=="admin"){
       let divs = document.querySelectorAll(".novedad");
       let section = document.querySelector(".seccion-principal");
-      let vibracion = false;
-      debugger;
       if (Vibrando == false) {
         for (var div in divs) {
           let novedad = divs.item(div);
@@ -72,6 +76,7 @@ function Novedades() {
         }
         SetVibrando(true);
       } else {
+        // Eliminamos todas las novedades añadirlas nuevamente
         let articles = section.querySelectorAll(".article-contenido");
         articles.forEach((article) => {
           section.removeChild(article);
@@ -83,6 +88,8 @@ function Novedades() {
     }
   }
 
+  // Funcion para eliminar la novedad seleccionada
+  // por el usuario en modo vibracion
   function eliminarNovedad(e) {
     let section = document.querySelector(".seccion-principal");
     let articleNovedad = e.target.closest("article");
@@ -101,7 +108,8 @@ function Novedades() {
     })
   }
 
-
+  // Funcion hacer una peticion DELETE a la API y 
+  // eliminar una determinada novedad
   async function peticionEliminar(titulo) {
     try {
       const peticion = {
@@ -120,6 +128,7 @@ function Novedades() {
     }
   }
 
+  // Funcion para obtener todas las novedades mediante peticion a la API
   async function obtenerNovedades() {
     try {
       const peticion = {
@@ -138,15 +147,17 @@ function Novedades() {
     }
   }
 
+  // Funcion para obtener la novedad seleccionada por el usuario
+  // y añadirla al contexto, para luego mostrarla en la ventana de
+  // novedad
   function mostrarNovedad(e) {
     let titulo = e.currentTarget.querySelector("p").textContent;
-    debugger;
-    console.log(novedad);
     SetNovedad(titulo);
-    console.log(novedad);
     navigate("/novedades/novedad");
   }
 
+  // Funcion que se llamara cada vez que cargamos esta pagina,
+  // para obtener todas las novedades
   const juegos = obtenerNovedades().then((datos) => {
     let section = document.querySelector(".seccion-principal");
     if (Vibrando == false && section.childNodes.length <= 2) {

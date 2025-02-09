@@ -6,6 +6,7 @@ import "../css/PreguntasComponent.css"
 
 function PreguntasComponent() {
 
+    // Funcion para obtener las preguntas frecuentes
     async function obtenerPreguntas(){
         try{
           const peticion = {
@@ -24,6 +25,9 @@ function PreguntasComponent() {
         }
       }
 
+      // Cada vez que carga la pagina se obtienen todas las preguntas,
+      // luego iteramos en todas las preguntas para crear elementos
+      // HTML y mostrarlas
       const preguntas = obtenerPreguntas().then(datos =>{
         let seccion = document.querySelector(".seccion-principal")
         for(var pregunta in datos){
@@ -34,7 +38,7 @@ function PreguntasComponent() {
           articlePregunta.style.display = "flex";
           articlePregunta.style.flexDirection = "column";
           articlePregunta.className = "article-pregunta"
-          articlePregunta.onclick = mostrarPregunta
+          articlePregunta.onclick = mostrarRespuesta
           let contenedorPregunta = document.createElement("div")
           contenedorPregunta.className = "contenedor-pregunta"
           let contenedorBotonMostrar = document.createElement("div")
@@ -57,14 +61,15 @@ function PreguntasComponent() {
         }
       })
 
-      function mostrarPregunta(e){
+      // Funcion para mostrar la respuesta a la pregunta seleccionada
+      // por el usuario
+      function mostrarRespuesta(e){
         let articleSeleccionado = e.target.closest("article")
-        console.log(articleSeleccionado)
         let respuestaMostrar = articleSeleccionado.querySelector(".respuesta-texto")
         let iconoFlecha = articleSeleccionado.querySelector(".contenedor-pregunta .contenedor-icono-mostrar img")
-        console.log(respuestaMostrar)
         if(respuestaMostrar.style.display == "none"){
           respuestaMostrar.style.display = ""
+          // Si se muestra la respuesta, invertimos el icono de la flecha
           iconoFlecha.style.transform = "scaleY(-1)"
         } else{
           respuestaMostrar.style.display = "none"

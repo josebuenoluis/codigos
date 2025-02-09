@@ -8,10 +8,12 @@ import "../css/NovedadComponent.css"
 
 function NovedadComponent() {
     
+    // Usamos el contexto para obtener la novedad seleccionada por el usuario
     const {novedad,SetNovedad} = useContext(userContext)
-    debugger
-    console.log(novedad)
 
+
+    // Funcion asincrona para obtener una Novedad por su titulo
+    // mediante una peticion a la API
     async function obtenerNovedad(titulo) {
     try {
       const peticion = {
@@ -24,7 +26,6 @@ function NovedadComponent() {
 
       if (response.ok) {
         console.log("Exito");
-        debugger
         const datos = await response.json();
         return datos;
       }
@@ -34,6 +35,8 @@ function NovedadComponent() {
     }
   }
 
+  // Llamamos a la funcion para obtener la novedad y mostrarla en
+  // elementos HTML
   const juegos = obtenerNovedad(novedad).then((datos) => {
     let titulo = document.querySelector(".titulo-novedad");
     let imagen = document.querySelector("#imagen-novedad");

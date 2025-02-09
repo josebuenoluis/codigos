@@ -8,11 +8,11 @@ services:
         - db
         ports:
         - 8069:8069
-        # volumes:
-        # - C:\Users\Usuario\Documents\codigos\docker\docker_ubuntu\volumesOdoo\addons:/mnt/extra-addons
-        # - C:\Users\Usuario\Documents\codigos\docker\docker_ubuntu\volumesOdoo\filestore:/var/lib/odoo/filestore
-        # - C:\Users\Usuario\Documents\codigos\docker\docker_ubuntu\volumesOdoo\sessions:/var/lib/odoo/sessions
-        # - C:\Users\Usuario\Documents\codigos\docker\docker_ubuntu\volumesOdoo\config:/etc/odoo
+        volumes:
+        - C:\Users\Usuario\Documents\codigos\docker\docker_ubuntu\volumesOdoo\addons:/mnt/extra-addons
+        - C:\Users\Usuario\Documents\codigos\docker\docker_ubuntu\volumesOdoo\filestore:/var/lib/odoo/filestore
+        - C:\Users\Usuario\Documents\codigos\docker\docker_ubuntu\volumesOdoo\sessions:/var/lib/odoo/sessions
+        - C:\Users\Usuario\Documents\codigos\docker\docker_ubuntu\volumesOdoo\config:/etc/odoo
         environment:
         - HOST=db
         - USER=odoo
@@ -27,5 +27,5 @@ services:
         - POSTGRES_PASSWORD=odoo
         - POSTGRES_USER=odoo
         - POSTGRES_DB=postgres
-        # volumes:
-        # - C:\Users\Usuario\Documents\codigos\docker\docker_ubuntu\volumesOdoo\dataPG:/var/lib/postgresql/data
+        volumes:
+        - C:\Users\Usuario\Documents\codigos\docker\docker_ubuntu\volumesOdoo\dataPG:/var/lib/postgresql/data

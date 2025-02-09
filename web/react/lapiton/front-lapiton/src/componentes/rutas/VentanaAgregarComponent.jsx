@@ -13,24 +13,25 @@ function VentanaAgregarComponent() {
 
     const navigate = useNavigate()
 
+    // Funcion que se llamara cada vez que el usuario selecciona una imagen
+    // para una novedad
     function obtenerImagen(e){
         let img = document.querySelector("#img-novedad");
         let file = document.querySelector("#id-selector");
-        debugger
+        // Si selecciono alguna imagen la obtenemos y la mostraremos
         if(e.target.files[0]){
             const reader = new FileReader()
             reader.onload = function(e){
-                console.log(e.result)
                 img.src = e.target.result
             }
             let base = e.target.files[0]
-            console.log(base)
             reader.readAsDataURL(e.target.files[0])
         }else{
             img.src = imagenInsertar
         }
     }
 
+    // Funcion para obtener los datos de la novedad ingresados por el usuario
     function obtenerNovedad(){
         let titulo = document.querySelector("#titulo").value
         let img = document.querySelector("#img-novedad").src;
@@ -39,6 +40,7 @@ function VentanaAgregarComponent() {
         return novedad
     }
 
+    // Funcion para guardar la novedad en la base de datos mediante la API
     async function subirNovedad(){
         let novedad = obtenerNovedad()
         try {
