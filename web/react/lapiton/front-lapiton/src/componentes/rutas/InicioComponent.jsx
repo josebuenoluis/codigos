@@ -82,6 +82,7 @@ function Inicio() {
   function obtenerJuegosBusqueda(){
     let titulo = document.querySelector("#busqueda").value
     console.log(titulo)
+    debugger
     navigate(`/?titulo=${titulo}`)
     obtenerJuegosFiltros(titulo).then(datos => {
       // Luego de obtener los juegos, limpiamos toda la section

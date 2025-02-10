@@ -115,7 +115,7 @@ function Novedades() {
       const peticion = {
         method: "DELETE",
       };
-      const response = await fetch(`http://lapiton.zapto.org/novedades/eliminar?titulo=${titulo}&clave=${user.clave}`, peticion);
+      const response = await fetch(`http://lapiton.zapto.org:5000/novedades/eliminar?titulo=${titulo}&clave=${user.clave}`, peticion);
 
       if (response.ok) {
         console.log("Exito");
