@@ -1,0 +1,2 @@
+web/react/lapiton-video-guia.rar filter=lfs diff=lfs merge=lfs -text
+web/react/lapiton-video-guia/Video-guia-lapiton.mp4 filter=lfs diff=lfs merge=lfs -text
