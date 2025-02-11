@@ -1,0 +1,56 @@
+
+footer{
+    background-color: #b3ca83;
+    height: 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    border: 7px solid black;
+}
+
+.logo-footer{
+    display: flex;
+    align-items: end;
+    margin: 40px 40px 80px;
+}
+
+.logo-footer img{
+    width:20rem;
+    height: 10rem;
+}
+.logo-footer p{
+    font-family: "Sonsie One", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 2.5rem;
+    color: #5A8A3D;
+    
+}
+
+/*Estilos del navegador*/
+footer nav{
+    margin-bottom: 5.62rem;
+    margin-left: 5rem;
+    display: flex;
+}
+
+footer nav a{
+    font-family: "Cherry Bomb One", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.25rem;
+    text-decoration: none;
+    color: black;
+    margin-right: 0.94rem;
+    padding: 15px 20px;
+    
+}
+
+footer nav a:hover{
+    background-color: white;
+    opacity: .60;
+}
+
+footer .iconos-social img{
+    margin-right: 2rem;
+}

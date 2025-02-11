@@ -1,0 +1,57 @@
+.container-ventana{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: rgb(190, 186, 186,.7);
+}
+
+.container-mensaje{
+    width: 20rem;
+    height:15rem;
+    background-color: #ccc;
+    border-radius: 60px;
+    border: 4px solid black;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+}   
+
+#imagen-ventana{
+    width: 8rem;
+    border-radius: 60px;
+    min-height: 3rem;
+}
+
+#texto-ventana{
+    font-size: 1rem;
+    font-family: "Cherry Bomb One", system-ui;
+    font-weight: 400;
+    text-align: center;
+}
+
+/* MEDIA QUERIES */
+
+@media (max-width:750px){
+    header{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+    header nav ul{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    header nav ul li{
+        margin-bottom: 2rem;
+    }
+
+    footer{
+        flex-direction: column;
+    }
+
+}
