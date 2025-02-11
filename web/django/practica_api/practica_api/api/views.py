@@ -1,10 +1,16 @@
 from django.shortcuts import render
 from django.views import View
 from django.http import HttpResponse,JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
 from .models import Usuarios,Proyectos,Empleados
 import json
 # Create your views here.
 class UsuariosView(View):
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
 
     def get(self,request):
         usuarios = list(Usuarios.objects.values())
