@@ -1,9 +1,0 @@
-#id-btn-eliminar{
-    border: none;
-    background: none;
-}
-
-#id-btn-eliminar:hover{
-    opacity: .80;
-    cursor: pointer;
-}
