@@ -1,0 +1,486 @@
+[
+    {
+        "question": "¿Qué forma jurídica tiene responsabilidad ilimitada y no requiere capital mínimo?",
+        "options": [
+            "Empresario Individual",
+            "Sociedad Limitada",
+            "Sociedad Anónima",
+            "Cooperativa"
+        ],
+        "answer": 0,
+        "explanation": "El Empresario Individual tiene responsabilidad ilimitada y no requiere capital mínimo."
+    },
+    {
+        "question": "¿Qué forma jurídica protege la vivienda habitual del empresario hasta 300.000€?",
+        "options": [
+            "Empresario Individual",
+            "Emprendedor de Responsabilidad Limitada (ERL)",
+            "Sociedad Limitada",
+            "Comunidad de Bienes"
+        ],
+        "answer": 1,
+        "explanation": "El Emprendedor de Responsabilidad Limitada (ERL) protege la vivienda habitual del empresario hasta 300.000€."
+    },
+    {
+        "question": "¿Cuál es el capital mínimo requerido para una Sociedad Limitada (S.L.)?",
+        "options": [
+            "3.000€",
+            "60.000€",
+            "Ninguno",
+            "10.000€"
+        ],
+        "answer": 0,
+        "explanation": "El capital mínimo para una Sociedad Limitada (S.L.) es de 3.000€."
+    },
+    {
+        "question": "¿Qué forma jurídica es ideal para grandes proyectos y permite vender acciones?",
+        "options": [
+            "Sociedad Limitada",
+            "Sociedad Anónima",
+            "Cooperativa",
+            "Comunidad de Bienes"
+        ],
+        "answer": 1,
+        "explanation": "La Sociedad Anónima (S.A.) es ideal para grandes proyectos y permite vender acciones."
+    },
+    {
+        "question": "¿Qué forma jurídica tiene gestión democrática y requiere un mínimo de 3 socios?",
+        "options": [
+            "Sociedad Limitada",
+            "Cooperativa",
+            "Sociedad Anónima",
+            "Empresario Individual"
+        ],
+        "answer": 1,
+        "explanation": "La Cooperativa tiene gestión democrática y requiere un mínimo de 3 socios."
+    },
+    {
+        "question": "¿Qué impuesto pagan los empresarios individuales?",
+        "options": [
+            "Impuesto de Sociedades",
+            "IRPF",
+            "IGIC",
+            "IAE"
+        ],
+        "answer": 1,
+        "explanation": "Los empresarios individuales pagan el IRPF (Impuesto sobre la Renta de las Personas Físicas)."
+    },
+    {
+        "question": "¿Qué impuesto grava los beneficios de las sociedades?",
+        "options": [
+            "IRPF",
+            "Impuesto de Sociedades",
+            "IGIC",
+            "IAE"
+        ],
+        "answer": 1,
+        "explanation": "El Impuesto de Sociedades grava los beneficios de las sociedades."
+    },
+    {
+        "question": "¿Qué impuesto es similar al IVA pero solo se aplica en Canarias?",
+        "options": [
+            "IRPF",
+            "Impuesto de Sociedades",
+            "IGIC",
+            "IAE"
+        ],
+        "answer": 2,
+        "explanation": "El IGIC (Impuesto General Indirecto Canario) es similar al IVA pero solo se aplica en Canarias."
+    },
+    {
+        "question": "¿Qué impuesto municipal grava la propiedad de un local comercial?",
+        "options": [
+            "IAE",
+            "IBI",
+            "Impuesto sobre Vehículos",
+            "Plusvalía"
+        ],
+        "answer": 1,
+        "explanation": "El IBI (Impuesto sobre Bienes Inmuebles) grava la propiedad de un local comercial."
+    },
+    {
+        "question": "¿Qué impuesto se paga al vender una propiedad que ha subido de valor?",
+        "options": [
+            "IAE",
+            "IBI",
+            "Impuesto sobre Vehículos",
+            "Plusvalía"
+        ],
+        "answer": 3,
+        "explanation": "La Plusvalía se paga al vender una propiedad que ha subido de valor."
+    },
+    {
+        "question": "¿Qué trámite es necesario para obtener personalidad jurídica en una Sociedad Limitada?",
+        "options": [
+            "Alta en el IAE",
+            "Escritura Pública de Constitución",
+            "Licencia de Apertura",
+            "Comunicación de Apertura del Centro de Trabajo"
+        ],
+        "answer": 1,
+        "explanation": "La Escritura Pública de Constitución es necesaria para obtener personalidad jurídica en una Sociedad Limitada."
+    },
+    {
+        "question": "¿Qué trámite es obligatorio para iniciar la actividad en un local comercial?",
+        "options": [
+            "Alta en el IAE",
+            "Licencia de Apertura",
+            "Inscripción en el Registro Mercantil",
+            "Solicitud del CIF"
+        ],
+        "answer": 1,
+        "explanation": "La Licencia de Apertura es obligatoria para iniciar la actividad en un local comercial."
+    },
+    {
+        "question": "¿Qué trámite es necesario para proteger los datos personales de los clientes?",
+        "options": [
+            "Registro de Ficheros de Datos Personales",
+            "Alta en el IAE",
+            "Licencia de Obras",
+            "Comunicación de Apertura del Centro de Trabajo"
+        ],
+        "answer": 0,
+        "explanation": "El Registro de Ficheros de Datos Personales es necesario para proteger los datos personales de los clientes."
+    },
+    {
+        "question": "¿Qué trámite debe realizarse antes de iniciar obras en un local?",
+        "options": [
+            "Licencia de Obras",
+            "Licencia de Apertura",
+            "Alta en el IAE",
+            "Inscripción en el Registro Mercantil"
+        ],
+        "answer": 0,
+        "explanation": "La Licencia de Obras debe realizarse antes de iniciar obras en un local."
+    },
+    {
+        "question": "¿Qué trámite es necesario para dar de alta a los trabajadores en la Seguridad Social?",
+        "options": [
+            "Afiliación y Alta de Trabajadores",
+            "Alta en el IAE",
+            "Licencia de Apertura",
+            "Comunicación de Apertura del Centro de Trabajo"
+        ],
+        "answer": 0,
+        "explanation": "La Afiliación y Alta de Trabajadores es necesaria para dar de alta a los trabajadores en la Seguridad Social."
+    },
+    {
+        "question": "¿Qué trámite debe realizarse en los 30 días posteriores al inicio de la actividad?",
+        "options": [
+            "Comunicación de Apertura del Centro de Trabajo",
+            "Alta en el IAE",
+            "Licencia de Apertura",
+            "Inscripción en el Registro Mercantil"
+        ],
+        "answer": 0,
+        "explanation": "La Comunicación de Apertura del Centro de Trabajo debe realizarse en los 30 días posteriores al inicio de la actividad."
+    },
+    {
+        "question": "¿Qué trámite es necesario para obtener un CIF provisional?",
+        "options": [
+            "Solicitud del CIF",
+            "Escritura Pública de Constitución",
+            "Inscripción en el Registro Mercantil",
+            "Alta en el IAE"
+        ],
+        "answer": 0,
+        "explanation": "La Solicitud del CIF es necesaria para obtener un CIF provisional."
+    },
+    {
+        "question": "¿Qué trámite debe realizarse en el Registro Mercantil?",
+        "options": [
+            "Inscripción de la Sociedad",
+            "Alta en el IAE",
+            "Licencia de Apertura",
+            "Comunicación de Apertura del Centro de Trabajo"
+        ],
+        "answer": 0,
+        "explanation": "La Inscripción de la Sociedad debe realizarse en el Registro Mercantil."
+    },
+    {
+        "question": "¿Qué trámite es necesario para legalizar los libros contables?",
+        "options": [
+            "Diligencia y Legalización de Libros Obligatorios",
+            "Alta en el IAE",
+            "Licencia de Apertura",
+            "Comunicación de Apertura del Centro de Trabajo"
+        ],
+        "answer": 0,
+        "explanation": "La Diligencia y Legalización de Libros Obligatorios es necesaria para legalizar los libros contables."
+    },
+    {
+        "question": "¿Qué trámite es obligatorio para empresas que facturen menos de 1 millón de euros?",
+        "options": [
+            "Alta en el IAE",
+            "Licencia de Apertura",
+            "Inscripción en el Registro Mercantil",
+            "Comunicación de Apertura del Centro de Trabajo"
+        ],
+        "answer": 0,
+        "explanation": "El Alta en el IAE es obligatorio para empresas que facturen menos de 1 millón de euros, aunque estén exentas de pagarlo."
+    },
+    {
+        "question": "¿Qué forma jurídica es la más adecuada para un autónomo que quiere proteger su vivienda?",
+        "options": [
+            "Empresario Individual",
+            "Emprendedor de Responsabilidad Limitada (ERL)",
+            "Sociedad Limitada",
+            "Cooperativa"
+        ],
+        "answer": 1,
+        "explanation": "El Emprendedor de Responsabilidad Limitada (ERL) es la forma jurídica más adecuada para un autónomo que quiere proteger su vivienda."
+    },
+    {
+        "question": "¿Qué forma jurídica es la más adecuada para un grupo de personas que quieren trabajar juntas y compartir beneficios?",
+        "options": [
+            "Sociedad Limitada",
+            "Cooperativa",
+            "Sociedad Anónima",
+            "Comunidad de Bienes"
+        ],
+        "answer": 1,
+        "explanation": "La Cooperativa es la forma jurídica más adecuada para un grupo de personas que quieren trabajar juntas y compartir beneficios."
+    },
+    {
+        "question": "¿Qué forma jurídica es la más adecuada para una pequeña empresa con un capital inicial de 3.000€?",
+        "options": [
+            "Sociedad Limitada",
+            "Sociedad Anónima",
+            "Cooperativa",
+            "Empresario Individual"
+        ],
+        "answer": 0,
+        "explanation": "La Sociedad Limitada es la forma jurídica más adecuada para una pequeña empresa con un capital inicial de 3.000€."
+    },
+    {
+        "question": "¿Qué forma jurídica es la más adecuada para una empresa que quiere atraer inversores vendiendo acciones?",
+        "options": [
+            "Sociedad Limitada",
+            "Sociedad Anónima",
+            "Cooperativa",
+            "Comunidad de Bienes"
+        ],
+        "answer": 1,
+        "explanation": "La Sociedad Anónima es la forma jurídica más adecuada para una empresa que quiere atraer inversores vendiendo acciones."
+    },
+    {
+        "question": "¿Qué forma jurídica es la más adecuada para un autónomo que no quiere socios?",
+        "options": [
+            "Empresario Individual",
+            "Sociedad Limitada",
+            "Cooperativa",
+            "Comunidad de Bienes"
+        ],
+        "answer": 0,
+        "explanation": "El Empresario Individual es la forma jurídica más adecuada para un autónomo que no quiere socios."
+    },
+    {
+        "question": "¿Qué forma jurídica es la más adecuada para una empresa que quiere responsabilidad limitada pero no tiene mucho capital inicial?",
+        "options": [
+            "Sociedad Limitada",
+            "Sociedad Anónima",
+            "Cooperativa",
+            "Empresario Individual"
+        ],
+        "answer": 0,
+        "explanation": "La Sociedad Limitada es la forma jurídica más adecuada para una empresa que quiere responsabilidad limitada pero no tiene mucho capital inicial."
+    },
+    {
+        "question": "¿Qué forma jurídica es la más adecuada para una empresa que quiere gestionar democráticamente y tiene al menos 3 socios?",
+        "options": [
+            "Sociedad Limitada",
+            "Cooperativa",
+            "Sociedad Anónima",
+            "Comunidad de Bienes"
+        ],
+        "answer": 1,
+        "explanation": "La Cooperativa es la forma jurídica más adecuada para una empresa que quiere gestionar democráticamente y tiene al menos 3 socios."
+    },
+    {
+        "question": "¿Qué forma jurídica es la más adecuada para una empresa que quiere responsabilidad limitada y tiene un capital inicial de 60.000€?",
+        "options": [
+            "Sociedad Limitada",
+            "Sociedad Anónima",
+            "Cooperativa",
+            "Empresario Individual"
+        ],
+        "answer": 1,
+        "explanation": "La Sociedad Anónima es la forma jurídica más adecuada para una empresa que quiere responsabilidad limitada y tiene un capital inicial de 60.000€."
+    },
+    {
+        "question": "¿Qué forma jurídica es la más adecuada para una empresa que quiere responsabilidad limitada y no tiene un capital inicial?",
+        "options": [
+            "Sociedad Limitada",
+            "Sociedad Anónima",
+            "Cooperativa",
+            "Empresario Individual"
+        ],
+        "answer": 2,
+        "explanation": "La Cooperativa es la forma jurídica más adecuada para una empresa que quiere responsabilidad limitada y no tiene un capital inicial."
+    },
+    {
+        "question": "¿Qué forma jurídica es la más adecuada para una empresa que quiere responsabilidad limitada y tiene un capital inicial de 3.000€?",
+        "options": [
+            "Sociedad Limitada",
+            "Sociedad Anónima",
+            "Cooperativa",
+            "Empresario Individual"
+        ],
+        "answer": 0,
+        "explanation": "La Sociedad Limitada es la forma jurídica más adecuada para una empresa que quiere responsabilidad limitada y tiene un capital inicial de 3.000€."
+    },
+    {
+        "question": "¿Qué forma jurídica es la más adecuada para una empresa que quiere responsabilidad limitada y tiene un capital inicial de 60.000€?",
+        "options": [
+            "Sociedad Limitada",
+            "Sociedad Anónima",
+            "Cooperativa",
+            "Empresario Individual"
+        ],
+        "answer": 1,
+        "explanation": "La Sociedad Anónima es la forma jurídica más adecuada para una empresa que quiere responsabilidad limitada y tiene un capital inicial de 60.000€."
+    },
+    {
+        "question": "¿Qué forma jurídica es la más adecuada para una empresa que quiere responsabilidad limitada y no tiene un capital inicial?",
+        "options": [
+            "Sociedad Limitada",
+            "Sociedad Anónima",
+            "Cooperativa",
+            "Empresario Individual"
+        ],
+        "answer": 2,
+        "explanation": "La Cooperativa es la forma jurídica más adecuada para una empresa que quiere responsabilidad limitada y no tiene un capital inicial."
+    },
+    {
+        "question": "¿Qué forma jurídica es la más adecuada para una empresa que quiere responsabilidad limitada y tiene un capital inicial de 3.000€?",
+        "options": [
+            "Sociedad Limitada",
+            "Sociedad Anónima",
+            "Cooperativa",
+            "Empresario Individual"
+        ],
+        "answer": 0,
+        "explanation": "La Sociedad Limitada es la forma jurídica más adecuada para una empresa que quiere responsabilidad limitada y tiene un capital inicial de 3.000€."
+    },
+    {
+        "question": "¿Qué forma jurídica es la más adecuada para una empresa que quiere responsabilidad limitada y tiene un capital inicial de 60.000€?",
+        "options": [
+            "Sociedad Limitada",
+            "Sociedad Anónima",
+            "Cooperativa",
+            "Empresario Individual"
+        ],
+        "answer": 1,
+        "explanation": "La Sociedad Anónima es la forma jurídica más adecuada para una empresa que quiere responsabilidad limitada y tiene un capital inicial de 60.000€."
+    },
+    {
+        "question": "¿Qué forma jurídica es la más adecuada para una empresa que quiere responsabilidad limitada y no tiene un capital inicial?",
+        "options": [
+            "Sociedad Limitada",
+            "Sociedad Anónima",
+            "Cooperativa",
+            "Empresario Individual"
+        ],
+        "answer": 2,
+        "explanation": "La Cooperativa es la forma jurídica más adecuada para una empresa que quiere responsabilidad limitada y no tiene un capital inicial."
+    },
+    {
+        "question": "¿Qué forma jurídica es la más adecuada para una empresa que quiere responsabilidad limitada y tiene un capital inicial de 3.000€?",
+        "options": [
+            "Sociedad Limitada",
+            "Sociedad Anónima",
+            "Cooperativa",
+            "Empresario Individual"
+        ],
+        "answer": 0,
+        "explanation": "La Sociedad Limitada es la forma jurídica más adecuada para una empresa que quiere responsabilidad limitada y tiene un capital inicial de 3.000€."
+    },
+    {
+        "question": "¿Qué forma jurídica es la más adecuada para una empresa que quiere responsabilidad limitada y tiene un capital inicial de 60.000€?",
+        "options": [
+            "Sociedad Limitada",
+            "Sociedad Anónima",
+            "Cooperativa",
+            "Empresario Individual"
+        ],
+        "answer": 1,
+        "explanation": "La Sociedad Anónima es la forma jurídica más adecuada para una empresa que quiere responsabilidad limitada y tiene un capital inicial de 60.000€."
+    },
+    {
+        "question": "¿Qué forma jurídica es la más adecuada para una empresa que quiere responsabilidad limitada y no tiene un capital inicial?",
+        "options": [
+            "Sociedad Limitada",
+            "Sociedad Anónima",
+            "Cooperativa",
+            "Empresario Individual"
+        ],
+        "answer": 2,
+        "explanation": "La Cooperativa es la forma jurídica más adecuada para una empresa que quiere responsabilidad limitada y no tiene un capital inicial."
+    },
+    {
+        "question": "¿Qué forma jurídica es la más adecuada para una empresa que quiere responsabilidad limitada y tiene un capital inicial de 3.000€?",
+        "options": [
+            "Sociedad Limitada",
+            "Sociedad Anónima",
+            "Cooperativa",
+            "Empresario Individual"
+        ],
+        "answer": 0,
+        "explanation": "La Sociedad Limitada es la forma jurídica más adecuada para una empresa que quiere responsabilidad limitada y tiene un capital inicial de 3.000€."
+    },
+    {
+        "question": "¿Qué forma jurídica es la más adecuada para una empresa que quiere responsabilidad limitada y tiene un capital inicial de 60.000€?",
+        "options": [
+            "Sociedad Limitada",
+            "Sociedad Anónima",
+            "Cooperativa",
+            "Empresario Individual"
+        ],
+        "answer": 1,
+        "explanation": "La Sociedad Anónima es la forma jurídica más adecuada para una empresa que quiere responsabilidad limitada y tiene un capital inicial de 60.000€."
+    },
+    {
+        "question": "¿Qué forma jurídica es la más adecuada para una empresa que quiere responsabilidad limitada y no tiene un capital inicial?",
+        "options": [
+            "Sociedad Limitada",
+            "Sociedad Anónima",
+            "Cooperativa",
+            "Empresario Individual"
+        ],
+        "answer": 2,
+        "explanation": "La Cooperativa es la forma jurídica más adecuada para una empresa que quiere responsabilidad limitada y no tiene un capital inicial."
+    },
+    {
+        "question": "¿Qué forma jurídica es la más adecuada para una empresa que quiere responsabilidad limitada y tiene un capital inicial de 3.000€?",
+        "options": [
+            "Sociedad Limitada",
+            "Sociedad Anónima",
+            "Cooperativa",
+            "Empresario Individual"
+        ],
+        "answer": 0,
+        "explanation": "La Sociedad Limitada es la forma jurídica más adecuada para una empresa que quiere responsabilidad limitada y tiene un capital inicial de 3.000€."
+    },
+    {
+        "question": "¿Qué forma jurídica es la más adecuada para una empresa que quiere responsabilidad limitada y tiene un capital inicial de 60.000€?",
+        "options": [
+            "Sociedad Limitada",
+            "Sociedad Anónima",
+            "Cooperativa",
+            "Empresario Individual"
+        ],
+        "answer": 1,
+        "explanation": "La Sociedad Anónima es la forma jurídica más adecuada para una empresa que quiere responsabilidad limitada y tiene un capital inicial de 60.000€."
+    },
+    {
+        "question": "¿Qué forma jurídica es la más adecuada para una empresa que quiere responsabilidad limitada y no tiene un capital inicial?",
+        "options": [
+            "Sociedad Limitada",
+            "Sociedad Anónima",
+            "Cooperativa",
+            "Empresario Individual"
+        ],
+        "answer": 2,
+        "explanation": "La Cooperativa es la forma jurídica más adecuada para una empresa que quiere responsabilidad limitada y no tiene un capital inicial."
+    }
+]
