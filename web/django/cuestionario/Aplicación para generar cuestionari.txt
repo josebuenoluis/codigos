@@ -1,0 +1,16 @@
+Aplicación para generar cuestionarios con IA
+
+Modelos
+	- Usuarios(nombre,constraseña,correo)
+	- Ciclos(id_ciclo,nombre)
+	- Asignaturas(id_asignatura,nombre)
+	- Cuestionario(id_cuestionario,asignatura_fk,ciclo_fk,
+	fecha_creacion(auto))
+	- Preguntas(id_pregunta,id_cuestionario_fk)
+	- Respuestas(id_repuesta,
+
+
+Vistas
+
+Rutas
+	
