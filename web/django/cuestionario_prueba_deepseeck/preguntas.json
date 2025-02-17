@@ -1,0 +1,54 @@
+{
+    "preguntas": [
+      {
+        "pregunta": "¿Qué forma jurídica tiene responsabilidad ilimitada?",
+        "opciones": ["Sociedad Limitada", "Empresario Individual", "Sociedad Anónima"],
+        "respuesta_correcta": "Empresario Individual"
+      },
+      {
+        "pregunta": "¿Cuál es el capital mínimo para constituir una Sociedad Limitada?",
+        "opciones": ["3.000€", "60.000€", "No requiere capital mínimo"],
+        "respuesta_correcta": "3.000€"
+      },
+      {
+        "pregunta": "¿Qué impuesto grava los beneficios de una Sociedad Anónima?",
+        "opciones": ["IRPF", "IVA", "Impuesto sobre Sociedades"],
+        "respuesta_correcta": "Impuesto sobre Sociedades"
+      },
+      {
+        "pregunta": "¿Qué tipo de gravamen tiene el IGIC general en Canarias?",
+        "opciones": ["7%", "13.5%", "25%"],
+        "respuesta_correcta": "7%"
+      },
+      {
+        "pregunta": "¿Qué forma jurídica es ideal para grandes proyectos con muchos socios?",
+        "opciones": ["Empresario Individual", "Sociedad Anónima", "Comunidad de Bienes"],
+        "respuesta_correcta": "Sociedad Anónima"
+      },
+      {
+        "pregunta": "¿Qué impuesto grava el consumo de bienes y servicios en Canarias?",
+        "opciones": ["IVA", "IGIC", "IRPF"],
+        "respuesta_correcta": "IGIC"
+      },
+      {
+        "pregunta": "¿Qué forma jurídica tiene responsabilidad limitada y no requiere capital mínimo?",
+        "opciones": ["Sociedad Limitada de Formación Sucesiva", "Sociedad Anónima", "Empresario Individual"],
+        "respuesta_correcta": "Sociedad Limitada de Formación Sucesiva"
+      },
+      {
+        "pregunta": "¿Qué impuesto grava la renta de las personas físicas?",
+        "opciones": ["IRPF", "IS", "IVA"],
+        "respuesta_correcta": "IRPF"
+      },
+      {
+        "pregunta": "¿Qué forma jurídica es más adecuada para un negocio pequeño con un solo dueño?",
+        "opciones": ["Sociedad Anónima", "Empresario Individual", "Sociedad Limitada"],
+        "respuesta_correcta": "Empresario Individual"
+      },
+      {
+        "pregunta": "¿Qué tipo de responsabilidad tienen los socios de una Sociedad Limitada?",
+        "opciones": ["Ilimitada", "Limitada al capital aportado", "No tienen responsabilidad"],
+        "respuesta_correcta": "Limitada al capital aportado"
+      }
+    ]
+  }

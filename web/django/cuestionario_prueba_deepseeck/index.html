@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="test.png">
+    <title>Cuestionario del instalacion y configuración ERP</title>
+    <style>
+        /* Estilos Generales */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 50px auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            animation: fadeIn 1s ease-in-out;
+        }
+        h1 {
+            text-align: center;
+            color: #333333;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            animation: slideDown 1s ease-out;
+        }
+        .question {
+            margin-bottom: 25px;
+            padding: 20px;
+            border-left: 5px solid #28a745;
+            background: #f9f9f9;
+            border-radius: 5px;
+            animation: fadeInUp 0.5s ease-in-out;
+        }
+        .question h3 {
+            margin-bottom: 15px;
+            color: #555555;
+        }
+        .options label {
+            display: block;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+            padding: 10px;
+            border-radius: 5px;
+            background: #ffffff;
+        }
+        .options label:hover {
+            background: #e6ffe6;
+        }
+        .options input {
+            margin-right: 10px;
+        }
+        #submitBtn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.3s;
+            margin-top: 20px;
+        }
+        #submitBtn:hover {
+            background: #0056b3;
+            transform: scale(1.05);
+        }
+        #result {
+            display: none;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+        #result h2 {
+            color: #333333;
+            margin-bottom: 20px;
+        }
+        #result p {
+            font-size: 20px;
+            color: #555555;
+        }
+        #review {
+            margin-top: 30px;
+            text-align: left;
+        }
+        .review-question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 2px solid #dedede;
+            border-radius: 5px;
+            background: #f1f1f1;
+            transition: background 0.3s, border-color 0.3s;
+        }
+        .review-question.correct {
+            border-color: #28a745;
+            background: #e6ffe6;
+        }
+        .review-question.incorrect {
+            border-color: #dc3545;
+            background: #ffe6e6;
+        }
+        .review-question h4 {
+            margin-bottom: 10px;
+            color: #333333;
+        }
+        .review-question p {
+            margin: 5px 0;
+            color: #555555;
+        }
+        .explanation {
+            margin-top: 10px;
+            padding: 10px;
+            background: #fff3cd;
+            border-left: 5px solid #ffeeba;
+            border-radius: 3px;
+            color: #856404;
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Cuestionario de 15 preguntas aleatorias sobre UT6 y UT7 de EMR</h1>
+    <form id="quizForm">
+        <!-- Las preguntas se cargarán aquí dinámicamente -->
+    </form>
+    <button id="submitBtn">Enviar Respuestas</button>
+    <div id="result">
+        <h2>Resultado</h2>
+        <p id="score"></p>
+        <div id="review">
+        </div>
+        <button onclick="location.reload()" style="margin-top: 20px; padding: 10px 20px; background: #28a745; color: #fff; border: none; border-radius: 5px; cursor: pointer; transition: background 0.3s;">Reintentar</button>
+    </div>
+</div>
+
+<script>
+    const QUESTIONS_URL = 'questions4.json'; // Ruta al archivo JSON con las preguntas
+    let questions = [];
+    let selectedQuestions = [];
+    let userAnswers = [];
+
+    // Función para escapar caracteres HTML
+    function escapeHTML(str) {
+        return str.replace(/&/g, "&amp;")
+                  .replace(/</g, "&lt;")
+                  .replace(/>/g, "&gt;")
+                  .replace(/"/g, "&quot;")
+                  .replace(/'/g, "&#039;");
+    }
+
+    // Cargar las preguntas desde el JSON
+    fetch(QUESTIONS_URL)
+        .then(response => response.json())
+        .then(data => {
+            questions = data;
+            selectRandomQuestions();
+            displayQuestions();
+        })
+        .catch(error => console.error('Error al cargar las preguntas:', error));
+
+    // Seleccionar 15 preguntas aleatorias
+    function selectRandomQuestions() {
+        const shuffled = questions.sort(() => 0.5 - Math.random());
+        selectedQuestions = shuffled.slice(0, 60);
+    }
+
+    // Mostrar las preguntas en el formulario
+    function displayQuestions() {
+        const quizForm = document.getElementById('quizForm');
+        selectedQuestions.forEach((q, index) => {
+            const questionDiv = document.createElement('div');
+            questionDiv.classList.add('question');
+
+            // Crear el título de la pregunta
+            const questionTitle = document.createElement('h3');
+            questionTitle.textContent = `${index + 1}. ${q.question}`;
+            questionDiv.appendChild(questionTitle);
+
+            // Crear el contenedor de opciones
+            const optionsDiv = document.createElement('div');
+            optionsDiv.classList.add('options');
+
+            // Crear cada opción
+            q.options.forEach((option, i) => {
+                const label = document.createElement('label');
+
+                const input = document.createElement('input');
+                input.type = 'radio';
+                input.name = `question${index}`;
+                input.value = i;
+
+                label.appendChild(input);
+
+                // Escapar el texto de la opción para evitar interpretación HTML
+                const optionText = document.createElement('span');
+                optionText.innerHTML = escapeHTML(option);
+
+                label.appendChild(optionText);
+
+                optionsDiv.appendChild(label);
+            });
+
+            questionDiv.appendChild(optionsDiv);
+            quizForm.appendChild(questionDiv);
+        });
+    }
+
+    // Manejar el envío del formulario
+    document.getElementById('submitBtn').addEventListener('click', () => {
+        userAnswers = [];
+        let score = 0;
+        selectedQuestions.forEach((q, index) => {
+            const selected = document.querySelector(`input[name="question${index}"]:checked`);
+            const answer = selected ? parseInt(selected.value) : null;
+            userAnswers.push(answer);
+            if (answer === q.answer) {
+                score++;
+            }
+        });
+
+        // Mostrar el resultado
+        document.getElementById('quizForm').style.display = 'none';
+        document.getElementById('submitBtn').style.display = 'none';
+        document.getElementById('result').style.display = 'block';
+        document.getElementById('score').innerText = `Has acertado ${score} de ${selectedQuestions.length} preguntas.`;
+
+        // Mostrar la revisión detallada
+        const reviewDiv = document.getElementById('review');
+        selectedQuestions.forEach((q, index) => {
+            const userAnswer = userAnswers[index];
+            const isCorrect = userAnswer === q.answer;
+            const reviewQuestion = document.createElement('div');
+            reviewQuestion.classList.add('review-question');
+            reviewQuestion.classList.add(isCorrect ? 'correct' : 'incorrect');
+
+            // Crear el título de la pregunta
+            const reviewTitle = document.createElement('h4');
+            reviewTitle.textContent = `${index + 1}. ${q.question}`;
+            reviewQuestion.appendChild(reviewTitle);
+
+            // Crear la respuesta del usuario
+            const userResponse = document.createElement('p');
+            userResponse.innerHTML = `<strong>Tu respuesta:</strong> ${userAnswer !== null ? escapeHTML(q.options[userAnswer]) : 'No respondida'}`;
+            reviewQuestion.appendChild(userResponse);
+
+            // Crear la respuesta correcta
+            const correctResponse = document.createElement('p');
+            correctResponse.innerHTML = `<strong>Respuesta correcta:</strong> ${escapeHTML(q.options[q.answer])}`;
+            reviewQuestion.appendChild(correctResponse);
+
+            // Crear la explicación
+            const explanationDiv = document.createElement('div');
+            explanationDiv.classList.add('explanation');
+            explanationDiv.innerHTML = `<strong>Explicación:</strong> ${escapeHTML(q.explanation)}`;
+            reviewQuestion.appendChild(explanationDiv);
+
+            reviewDiv.appendChild(reviewQuestion);
+        });
+    });
+</script>
+
+</body>
+</html>
