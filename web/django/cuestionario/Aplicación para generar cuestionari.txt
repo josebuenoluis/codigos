@@ -7,7 +7,9 @@ Modelos
 	- Cuestionario(id_cuestionario,asignatura_fk,ciclo_fk,
 	fecha_creacion(auto))
 	- Preguntas(id_pregunta,id_cuestionario_fk)
-	- Respuestas(id_repuesta,
+	- Respuestas(id_repuesta,respuesta,id_pregunta_fk,correcta=Bool)
+	- Estadisticas(id,nombre_usuario,ciclo_fk,asignatura_fk,id_cuestionario_fk,aciertos:int,
+	falladas:str,porcentaje_acierto:float)
 
 
 Vistas
