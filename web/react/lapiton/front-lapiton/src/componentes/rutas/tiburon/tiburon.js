@@ -171,8 +171,6 @@ function ventanaRegresar() {
 // Funcion para guardar los datos del usuario en la base de datos
 function crearUsuario() {
   // Limpiamos el input de texto del nombre de usuario
-  console.log("DATOS GUARDADOS.");
-  debugger
   let user_puntos = JSON.parse(window.localStorage.getItem("puntaje"));
   let user = JSON.parse(window.localStorage.getItem("user"));
   user_puntos.nombre = user.nombre;
@@ -231,6 +229,8 @@ function ventanaEmergente(mensaje,imagen){
   ventana.style.position = "absolute";
   let contenedorMensaje = document.createElement("div");
   contenedorMensaje.className = "container-mensaje";
+  contenedorMensaje.style.position = "absolute";
+  contenedorMensaje.style.top = "25rem";
   let imagenVentana = document.createElement("img");
   imagenVentana.id = "imagen-ventana";
   imagenVentana.src = imagen;

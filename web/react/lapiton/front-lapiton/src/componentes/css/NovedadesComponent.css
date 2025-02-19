@@ -36,6 +36,7 @@ section{
 .novedad{
     width: 20rem;
     min-height: 20rem;
+    height: 20rem;
     background-color: white;
     text-align: center;
     display: flex;

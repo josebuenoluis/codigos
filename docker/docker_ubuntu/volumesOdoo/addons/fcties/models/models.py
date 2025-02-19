@@ -26,6 +26,7 @@ class Alumno(models.Model):
     nota_media = fields.Float(string="Nota Media",required=True)
     nota_media_texto = fields.Text(string="Nota media en texto",compute="_compute_calcular_media",store=True)
     empresa_id = fields.Many2one("fcties.empresa",string="Empresa de practicas")
+    tutor_id = fields.Many2one("fcties.tutor",string="Tutor de practicas")
 
 
     @api.onchange("curso_academico")
@@ -37,6 +38,7 @@ class Alumno(models.Model):
                             and len(record.curso_academico.split("/")[1])==2): 
                     raise ValidationError("El formato debe ser 24/25")
                 
+    
 
     @api.onchange("correo_electronico")
     def _validar_correo(self):
@@ -72,6 +74,8 @@ class Alumno(models.Model):
             else:
                 record.nota_media_texto = "No hay nota"
 
+
+
 class Empresa(models.Model):
     _name = 'fcties.empresa'
     _description = 'Modelo de empresa'
@@ -102,3 +106,11 @@ class Empresa(models.Model):
             if record.telefono:
                 if not (len(record.telefono) == 9 and record.telefono.isdigit()):  
                     raise ValidationError("El teléfono ingresado no es válido.")
+
+class Tutor(models.Model):
+    _name = 'fcties.tutor'
+    _description = 'Modelo de tutor'
+    _rec_name = "nombre"
+    nombre = fields.Char(string="Nombre de tutor",required=True)
+    alumno_asociado = fields.One2many("fcties.alumno","tutor_id",string="Alumnos asociados")
+

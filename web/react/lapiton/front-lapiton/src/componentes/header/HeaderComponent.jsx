@@ -103,7 +103,7 @@ function HeaderComponent() {
           let articuloJuego = document.createElement("article")
           articuloJuego.className = "article-juegos"
           let enlace = document.createElement("a")
-          enlace.href = "/juego"
+          enlace.href = `/juego?titulo=${objeto.nombre}`
           let contenedor = document.createElement("div");
           contenedor.className = "juego";
           let imagen = document.createElement("img");
