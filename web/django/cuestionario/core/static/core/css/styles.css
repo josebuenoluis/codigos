@@ -1,0 +1,23 @@
+body{
+    background-color: white;
+}
+
+footer.container-fluid{
+    background-color: black;
+}
+
+footer.container-fluid a{
+    text-decoration: none;
+    color: white;
+}
+
+footer.container-fluid h3.lead{
+    color: white;
+}
+
+main.container > .row:first-child > .col:nth-child(2) p{
+    font-family: "Poppins", serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 1.5rem;
+}

@@ -28,6 +28,7 @@ class Respuestas(models.Model):
 
 class Estadisticas(models.Model):
     nombre_usuario_fk = models.ForeignKey(Usuarios,on_delete=models.CASCADE)
+    id_cuestionario_fk = models.ForeignKey(Cuestionarios,on_delete=models.PROTECT,null=True)
     id_ciclo_fk = models.ForeignKey(Ciclos,on_delete=models.CASCADE)
     acertadas = models.IntegerField(null=False)
     falladas = models.IntegerField(null=False)
