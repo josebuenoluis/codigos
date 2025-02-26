@@ -10,6 +10,9 @@
     <!-- bootstrap -->
     <link rel="stylesheet" href="{% static 'core/bootstrap/css/bootstrap.min.css' %}">
 
+    <!-- Icono -->
+    <link rel="icon" href="{% static 'core/img/test.png' %}">
+
     <!-- Fuentes -->
     <link href="{% static 'core/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,10 +45,10 @@
                         <a href="{% url 'home' %}" class="nav-link">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{% url 'galeria' %}" class="nav-link">Cuestionarios</a>
+                        <a href="{% url 'cuestionarios' %}" class="nav-link">Cuestionarios</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Estadisticas</a>
+                        <a href="#" class="nav-link">Estadísticas</a>
                     </li>
                 </ul>
             </div>
@@ -58,8 +61,8 @@
         <div class="row border-top py-5 justify-content-between">
             <div class="col-auto">
                 <h3 class="lead">cuestionarios.com</h3>
-                <a href="{% url 'galeria' %}" class="btn btn-link">Cuestionarios</a>
-                <a href="#" class="btn btn-link">Estadisticas</a>
+                <a href="{% url 'cuestionarios' %}" class="btn btn-link">Cuestionarios</a>
+                <a href="#" class="btn btn-link">Estadísticas</a>
             </div>
             <div class="col-auto">
                 <a href="#" class="btn btn-link">LOGO</a>
