@@ -1,0 +1,41 @@
+{% extends 'core/base.html' %}
+
+{% load static %} 
+{% block title%} Contestar {% endblock %} 
+{% block content %}
+
+<div class="row">
+    <div class="row py-3">
+      <div class="col-12">
+        <div class="border-bottom">
+          <h1 class="text-center">{{cuestionario.nombre_cuestionario}}</h1>
+        </div>
+      </div>
+    </div>
+    <form action="/cuestionarios/contestar/{{cuestionario.id}}" method="post">
+        {% csrf_token %}
+        {% for pregunta in preguntas %}
+            <div class="row d-flex justify-content-center">
+                <div class="col-10 rounded border border-dark" style="background: #f2f2f2; margin:10px 0; padding: 40px;">
+                    <h2>-{{pregunta.pregunta}}</h2>
+                    {% for respuesta in pregunta.respuestas %}
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="{{pregunta}}" value="{{respuesta.correcta}}" id="{{respuesta.id}}">
+                            <label class="form-check-label fs-5" for="{{respuesta.id}}">
+                                {{respuesta}}
+                            </label>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+        <div class="row my-4">
+            <div class="col d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary btn-lg mx-2">Enviar</button>
+                <a href="/cuestionarios/" class="btn btn-danger btn-lg mx-2">Cancelar</a>
+            </div>
+        </div>
+        
+    </form>
+</div>
+{% endblock %} 
