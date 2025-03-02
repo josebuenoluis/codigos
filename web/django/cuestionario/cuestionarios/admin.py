@@ -3,4 +3,4 @@ from .models import *
 
 # Register your models here.
 admin.site.register([Usuarios,Ciclos,Asignaturas,Preguntas,
-                     Respuestas,Estadisticas])
+                     Respuestas,Estadisticas,Cuestionarios])

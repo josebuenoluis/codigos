@@ -14,7 +14,7 @@
       </div>
     </div>
   </div>
-  <form action="#" method="post" enctype="multipart/form-data">
+  <form action="/cuestionarios/crear" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="row justify-content-center">
       <div class="col-10 col-lg-6">
@@ -53,6 +53,19 @@
           placeholder="Nombre del tema..."
           id="temaCuestionario"
         />
+      </div>
+    </div>
+    <div class="row my-4 justify-content-center">
+      <div class="col-10 col-lg-6 d-flex flex-column align-items-center">
+        <p>Descripción del cuestionario</p>
+        <textarea
+        class="form-control"
+        placeholder="Descripción..."
+        style="height: 80px"
+        id="cuestionarioDescripcion"
+        name="descripcion"
+        ></textarea>
+        <label for="cuestionarioDescripcion"></label>
       </div>
     </div>
     <div class="row my-4 justify-content-around flex-wrap">
@@ -127,15 +140,15 @@
     </div>
     <div class="row my-4 justify-content-center">
       <div class="col-12 col-sm-6 d-flex justify-content-center flex-wrap">
-        <button type="submit" class="btn btn-primary my-2 mx-2">
+        <button type="submit" name="enlace" value="guardar_contestar" class="btn btn-primary my-2 mx-2">
           Guardar y contestar
         </button>
-        <button type="submit" class="btn btn-info my-2 mx-2">Guardar</button>
-        <button type="reset" class="btn btn-warning my-2 mx-2">
+        <button type="submit" name="enlace" value="guardar" class="btn btn-info my-2 mx-2">Guardar</button>
+        <button type="reset" name="enlace" value="reiniciar" class="btn btn-warning my-2 mx-2">
           Reiniciar
         </button>
-        <button type="reset" class="btn btn-danger my-2 mx-2">Cancelar</button>
-        <button type="submit" class="btn btn-success my-2 mx-2">
+        <button type="reset" name="enlace" value="cancelar" class="btn btn-danger my-2 mx-2">Cancelar</button>
+        <button type="submit" name="enlace" value="exportar_pdf" class="btn btn-success my-2 mx-2">
           Exportart a PDF
         </button>
       </div>
