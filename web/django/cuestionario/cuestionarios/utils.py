@@ -6,8 +6,8 @@ from openai import OpenAI
 import os
 
 # Inicializar el cliente de OpenAI
-API_KEY = os.getenv('%OPENAI_API_KEY%')
-client = OpenAI(api_key=API_KEY)  # Reemplaza con tu clave API
+API_KEY = os.getenv('OPENAI_API_KEY')  # Corregido para usar la variable de entorno correctamente
+client = OpenAI(api_key=API_KEY)
 
 def extraer_texto_pdf_directo(archivo_pdf):
     """Extrae texto directamente de un objeto UploadedFile"""
@@ -23,13 +23,6 @@ def extraer_texto_pdf_directo(archivo_pdf):
 def dividir_texto_en_secciones(texto, num_secciones=10):
     """
     Divide el texto en secciones aproximadamente iguales.
-
-    Args:
-        texto (str): Texto completo extraído del PDF.
-        num_secciones (int): Número de secciones a crear.
-
-    Returns:
-        list: Lista de secciones de texto.
     """
     # Dividir el texto en oraciones usando expresiones regulares
     oraciones = re.split(r'(?<=[.!?])\s+(?=[A-Z])|(?<=[.!?])$', texto)
@@ -51,14 +44,6 @@ def dividir_texto_en_secciones(texto, num_secciones=10):
 def optimizar_texto(texto, max_tokens=800):
     """
     Optimiza el texto para reducir tokens manteniendo la información más relevante.
-    Versión modificada que no depende de NLTK sent_tokenize.
-
-    Args:
-        texto (str): Texto completo extraído del PDF.
-        max_tokens (int): Número máximo aproximado de tokens a mantener.
-
-    Returns:
-        str: Texto optimizado.
     """
     # Dividir el texto en oraciones usando expresiones regulares
     oraciones = re.split(r'(?<=[.!?])\s+(?=[A-Z])|(?<=[.!?])$', texto)
@@ -118,109 +103,69 @@ def optimizar_texto(texto, max_tokens=800):
 def contar_tokens_aproximados(texto):
     """
     Estima el número de tokens en un texto.
-
-    Args:
-        texto (str): Texto a analizar.
-
-    Returns:
-        int: Número estimado de tokens.
     """
     # Aproximación: 1 token ≈ 4 caracteres en inglés o 1.3 tokens por palabra
     palabras = len(texto.split())
     return int(palabras * 1.3)
 
-def extraer_tema_principal(texto, max_palabras=5):
+def limpiar_pregunta(texto_pregunta):
     """
-    Extrae el tema principal del texto para usar en la corrección de preguntas ambiguas.
-    
-    Args:
-        texto (str): Texto de la sección.
-        max_palabras (int): Número máximo de palabras para el tema.
-        
-    Returns:
-        str: Tema principal extraído.
+    Limpia el texto de la pregunta eliminando frases como "según el texto" y haciendo
+    que suene más natural.
     """
-    # Simplificación: usar las primeras palabras del texto como tema
-    palabras = texto.split()
-    if len(palabras) <= max_palabras:
-        return texto
-    
-    # Tomar las primeras palabras significativas
-    palabras_significativas = []
-    for palabra in palabras:
-        if len(palabra) > 3 and palabra.lower() not in ['este', 'esta', 'estos', 'estas', 'esos', 'esas', 'aquel', 'aquella']:
-            palabras_significativas.append(palabra)
-            if len(palabras_significativas) >= max_palabras:
-                break
-    
-    return " ".join(palabras_significativas) if palabras_significativas else "el tema del documento"
+    # Patrones a eliminar
+    patrones = [
+        r'\s+según\s+el\s+texto\s*[.?]?',
+        r'\s+de\s+acuerdo\s+al\s+texto\s*[.?]?',
+        r'\s+en\s+el\s+texto\s*[.?]?',
+        r'\s+mencionado\s+en\s+el\s+texto\s*[.?]?',
+        r'\s+como\s+se\s+menciona\s+en\s+el\s+texto\s*[.?]?',
+        r'\s+que\s+aparece\s+en\s+el\s+texto\s*[.?]?'
+    ]
 
-def corregir_pregunta_ambigua(pregunta, texto):
-    """
-    Intenta corregir una pregunta ambigua reemplazando referencias genéricas con el tema específico.
-    
-    Args:
-        pregunta (dict): Pregunta en formato JSON.
-        texto (str): Texto de contexto.
-        
-    Returns:
-        dict: Pregunta corregida o None si no se pudo corregir.
-    """
-    try:
-        # Extraer el tema principal del contexto
-        tema = extraer_tema_principal(texto)
-        
-        # Reemplazar referencias ambiguas con el tema específico
-        texto_pregunta = pregunta["pregunta"]
-        referencias_ambiguas = {
-            "este tipo": f"el tipo de {tema}",
-            "esta ayuda": f"la ayuda sobre {tema}",
-            "este texto": f"el texto sobre {tema}",
-            "este documento": f"el documento sobre {tema}",
-            "esta sección": f"la sección sobre {tema}"
-        }
-        
-        for ref, reemplazo in referencias_ambiguas.items():
-            if ref in texto_pregunta.lower():
-                texto_pregunta = re.sub(re.escape(ref), reemplazo, texto_pregunta, flags=re.IGNORECASE)
-        
-        # Actualizar la pregunta corregida
-        pregunta_corregida = pregunta.copy()
-        pregunta_corregida["pregunta"] = texto_pregunta
-        return pregunta_corregida
-    except:
-        return None
+    # Aplicar los patrones
+    texto_limpio = texto_pregunta
+    for patron in patrones:
+        texto_limpio = re.sub(patron, '?', texto_limpio, flags=re.IGNORECASE)
+
+    # Asegurarse de que la pregunta termine con signo de interrogación
+    if not texto_limpio.endswith('?'):
+        texto_limpio = texto_limpio.rstrip('.') + '?'
+
+    return texto_limpio
 
 def generar_cuestionario_json_por_seccion(texto, num_preguntas=8, max_tokens_salida=800):
     """
     Genera un cuestionario en formato JSON basado en una sección de texto usando GPT-3.5-Turbo.
-    Versión mejorada para generar preguntas más contextualizadas y específicas.
-
-    Args:
-        texto (str): Texto optimizado de la sección.
-        num_preguntas (int): Número de preguntas a generar.
-        max_tokens_salida (int): Número máximo de tokens para la respuesta.
-
-    Returns:
-        list: Lista de preguntas en formato JSON.
+    Versión mejorada para generar preguntas más naturales y directas para cualquier tipo de PDF.
     """
     try:
-        # Crear el prompt para la API con instrucciones más específicas
+        # Crear el prompt para la API con instrucciones más específicas y genéricas
         prompt = f"""
-        Genera un cuestionario educativo con {num_preguntas} preguntas basadas en el siguiente texto.
+        Analiza el siguiente texto extraído de un PDF y genera un cuestionario educativo con {num_preguntas} preguntas.
 
         INSTRUCCIONES IMPORTANTES:
-        1. Cada pregunta debe ser clara, específica y autocontenida (no debe hacer referencia a "este texto", "esta ayuda", etc. sin contexto).
-        2. Evita preguntas ambiguas o que requieran información no presente en el texto.
-        3. Las preguntas deben ser relevantes para el contenido del texto y evaluar la comprensión del mismo.
+        1. Identifica los conceptos clave, definiciones, hechos importantes y relaciones en el texto.
+        2. Formula preguntas directas y claras que evalúen la comprensión de estos conceptos.
+        3. Cada pregunta debe ser autocontenida y no hacer referencia al "texto" o "documento".
         4. Cada pregunta debe tener 4 opciones de respuesta con una sola respuesta correcta.
-        5. Las opciones incorrectas deben ser plausibles pero claramente incorrectas según el texto.
+        5. Las opciones deben ser breves y claras, etiquetadas como a), b), c), d).
+        6. Ignora elementos no informativos como encabezados, pies de página, números de página, etc.
+        7. Si el texto contiene temas técnicos, asegúrate de que las preguntas sean precisas y utilicen la terminología correcta.
+
+        Ejemplo del formato de pregunta deseado:
+        "¿Qué tipo de prueba evalúa el funcionamiento de un módulo específico de una aplicación?"
+        a) Pruebas de integración.
+        b) Pruebas de regresión.
+        c) Pruebas unitarias.
+        d) Pruebas funcionales.
+        Respuesta correcta: c
 
         Devuelve el resultado en formato JSON con la siguiente estructura:
         [
             {{
-                "pregunta": "Texto de la pregunta completa y específica",
-                "opciones": ["Opción A", "Opción B", "Opción C", "Opción D"],
+                "pregunta": "¿Pregunta directa?",
+                "opciones": ["a) Opción A.", "b) Opción B.", "c) Opción C.", "d) Opción D."],
                 "respuesta_correcta": 0  // Índice (0-3) de la opción correcta en el array
             }},
             // Más preguntas...
@@ -231,11 +176,11 @@ def generar_cuestionario_json_por_seccion(texto, num_preguntas=8, max_tokens_sal
         Texto: {texto}
         """
 
-        # Realizar la consulta a la API usando la nueva sintaxis
+        # Realizar la consulta a la API
         response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
-                {"role": "system", "content": "Eres un experto en educación especializado en crear cuestionarios de alta calidad. Tus preguntas deben ser claras, específicas, contextualizadas y evaluar correctamente la comprensión del material."},
+                {"role": "system", "content": "Eres un experto en educación que crea cuestionarios de alta calidad sobre cualquier tema. Tus preguntas son claras, precisas y evalúan la comprensión de conceptos clave sin hacer referencia al texto fuente."},
                 {"role": "user", "content": prompt}
             ],
             max_tokens=max_tokens_salida,
@@ -253,28 +198,15 @@ def generar_cuestionario_json_por_seccion(texto, num_preguntas=8, max_tokens_sal
         # Convertir el texto JSON a una lista de Python
         cuestionario_json = json.loads(cuestionario_json_texto)
 
-        # Verificar y mejorar la calidad de las preguntas
-        cuestionario_mejorado = []
-        preguntas_omitidas = 0
-        
+        # Limpiar y mejorar las preguntas para hacerlas más naturales
         for pregunta in cuestionario_json:
-            # Verificar si la pregunta contiene referencias ambiguas
-            texto_pregunta = pregunta["pregunta"]
-            referencias_ambiguas = ["este tipo", "esta ayuda", "este texto", "este documento", "esta sección"]
+            # Limpiar la pregunta de frases como "según el texto"
+            pregunta["pregunta"] = limpiar_pregunta(pregunta["pregunta"])
 
-            contiene_ambiguedad = any(ref in texto_pregunta.lower() for ref in referencias_ambiguas)
-
-            if not contiene_ambiguedad:
-                cuestionario_mejorado.append(pregunta)
-            else:
-                # Intentar corregir la pregunta ambigua
-                pregunta_corregida = corregir_pregunta_ambigua(pregunta, texto)
-                if pregunta_corregida:
-                    cuestionario_mejorado.append(pregunta_corregida)
-                    print(f"Pregunta corregida: {pregunta_corregida['pregunta']}")
-                else:
-                    preguntas_omitidas += 1
-                    print(f"Omitiendo pregunta ambigua: {texto_pregunta}")
+            # Hacer las opciones más naturales (eliminar patrones formales)
+            for i, opcion in enumerate(pregunta["opciones"]):
+                # Eliminar frases como "según el texto" de las opciones también
+                pregunta["opciones"][i] = re.sub(r'\s+según\s+el\s+texto\s*[.?]?', '', opcion, flags=re.IGNORECASE)
 
         # Calcular tokens utilizados
         tokens_entrada = contar_tokens_aproximados(prompt)
@@ -283,9 +215,9 @@ def generar_cuestionario_json_por_seccion(texto, num_preguntas=8, max_tokens_sal
         print(f"Tokens de entrada: ~{tokens_entrada}")
         print(f"Tokens de salida: ~{tokens_salida}")
         print(f"Costo estimado: ${(tokens_entrada/1000*0.0015) + (tokens_salida/1000*0.002):.6f}")
-        print(f"Preguntas generadas: {len(cuestionario_mejorado)} (se omitieron {preguntas_omitidas} preguntas ambiguas)")
+        print(f"Preguntas generadas: {len(cuestionario_json)}")
 
-        return cuestionario_mejorado
+        return cuestionario_json
 
     except Exception as e:
         print(f"Error al generar el cuestionario JSON: {str(e)}")
@@ -296,42 +228,25 @@ def generar_cuestionario_json_por_seccion(texto, num_preguntas=8, max_tokens_sal
 def guardar_cuestionario_json(cuestionario_json, nombre_archivo):
     """
     Guarda el cuestionario generado en un archivo JSON.
-
-    Args:
-        cuestionario_json (list): Lista de preguntas en formato JSON.
-        nombre_archivo (str): Nombre del archivo de salida.
     """
     try:
         with open(nombre_archivo, 'w', encoding='utf-8') as archivo:
-            json.dump(cuestionario_json, archivo, ensure_ascii=False, indent=2)
+            json.dump({"cuestionario": cuestionario_json}, archivo, ensure_ascii=False, indent=2)
         print(f"Cuestionario JSON guardado en {nombre_archivo}")
     except Exception as e:
         print(f"Error al guardar el cuestionario JSON: {str(e)}")
 
-def procesar_pdf_y_generar_cuestionario_json(texto_completo, total_preguntas=60, max_tokens_entrada=800, max_tokens_salida=800):
+def procesar_pdf_y_generar_cuestionario_json(texto_completo, total_preguntas=10, max_tokens_entrada=800, max_tokens_salida=800):
     """
     Procesa un PDF grande y genera un cuestionario en formato JSON con muchas preguntas,
     dividiendo el proceso en secciones para optimizar costos.
-    Versión mejorada para asegurar que se generen todas las preguntas solicitadas.
-
-    Args:
-        ruta_pdf (str): Ruta al archivo PDF.
-        total_preguntas (int): Número total de preguntas a generar.
-        max_tokens_entrada (int): Número máximo de tokens para el texto de entrada por sección.
-        max_tokens_salida (int): Número máximo de tokens para la respuesta por sección.
-
-    Returns:
-        list: Lista completa de preguntas en formato JSON.
+    Versión mejorada para generar preguntas más naturales y directas.
     """
-    # Extraer texto del PDF
-    # print(f"Extrayendo texto de {ruta_pdf}...")
-    # texto_completo = extraer_texto_pdf(ruta_pdf)
-
     if not texto_completo:
         return []
 
     # Calcular el número de secciones necesarias
-    preguntas_por_seccion = 8  # Aumentado de 6 a 8 preguntas por sección
+    preguntas_por_seccion = 10  # Ajustado para generar todas las preguntas en una sección si son 10 o menos
     num_secciones = (total_preguntas + preguntas_por_seccion - 1) // preguntas_por_seccion
 
     # Dividir el texto en secciones
@@ -368,14 +283,14 @@ def procesar_pdf_y_generar_cuestionario_json(texto_completo, total_preguntas=60,
         if len(preguntas_seccion) < preguntas_a_generar:
             preguntas_faltantes = preguntas_a_generar - len(preguntas_seccion)
             print(f"Se generaron solo {len(preguntas_seccion)} de {preguntas_a_generar} preguntas. Generando {preguntas_faltantes} preguntas adicionales...")
-            
+
             # Intentar con un prompt ligeramente diferente o más tokens
             preguntas_adicionales = generar_cuestionario_json_por_seccion(
                 texto_optimizado,
                 num_preguntas=preguntas_faltantes,
                 max_tokens_salida=max_tokens_salida + 200  # Aumentar tokens para el reintento
             )
-            
+
             preguntas_seccion.extend(preguntas_adicionales)
             print(f"Total de preguntas generadas para esta sección después del reintento: {len(preguntas_seccion)}")
 
@@ -411,22 +326,77 @@ def procesar_pdf_y_generar_cuestionario_json(texto_completo, total_preguntas=60,
 
     print(f"\nCosto total del cuestionario: ${costo_total:.6f}")
     print(f"Costo promedio por pregunta: ${costo_total/preguntas_generadas:.6f}")
-    
 
     return todas_las_preguntas
 
+# Función para generar un cuestionario a partir de un texto
+def generar_cuestionario(texto_pdf, num_preguntas=10):
+    """
+    Genera un cuestionario a partir del texto de un PDF.
+
+    Args:
+        texto_pdf (str): Texto extraído del PDF.
+        num_preguntas (int): Número de preguntas a generar.
+
+    Returns:
+        dict: Cuestionario en formato JSON.
+    """
+    # Generar las preguntas
+    preguntas = procesar_pdf_y_generar_cuestionario_json(
+        texto_pdf,
+        total_preguntas=num_preguntas,
+        max_tokens_entrada=800,
+        max_tokens_salida=800
+    )
+
+    # Formatear el resultado como un diccionario con la clave "cuestionario"
+    return {"cuestionario": preguntas}
+
+# Función para extraer texto de un archivo PDF
+def extraer_texto_pdf(ruta_pdf):
+    """
+    Extrae texto de un archivo PDF.
+
+    Args:
+        ruta_pdf (str): Ruta al archivo PDF.
+
+    Returns:
+        str: Texto extraído del PDF.
+    """
+    texto_completo = ""
+    try:
+        with open(ruta_pdf, 'rb') as archivo:
+            lector_pdf = PyPDF2.PdfReader(archivo)
+            for pagina in lector_pdf.pages:
+                texto_completo += pagina.extract_text()
+    except Exception as e:
+        print(f"Error al leer el PDF: {str(e)}")
+    return texto_completo
+
 # Ejemplo de uso
-# if __name__ == "__main__":
-#     # Ruta al archivo PDF
-#     ruta_pdf = "UT6-Teoría.pdf"  # Reemplaza con la ruta a tu PDF
+def generar_cuestionario_desde_pdf(ruta_pdf, num_preguntas=10, nombre_archivo_salida="cuestionario.json"):
+    """
+    Genera un cuestionario a partir de un archivo PDF y lo guarda en un archivo JSON.
 
-#     # Procesar el PDF y generar el cuestionario en formato JSON
-#     cuestionario_json = procesar_pdf_y_generar_cuestionario_json(
-#         ruta_pdf,
-#         total_preguntas=60,  # Número total de preguntas a generar
-#         max_tokens_entrada=800,  # Límite de tokens para el texto de entrada por sección
-#         max_tokens_salida=800  # Límite de tokens para la respuesta por sección (aumentado)
-#     )
+    Args:
+        ruta_pdf (str): Ruta al archivo PDF.
+        num_preguntas (int): Número de preguntas a generar.
+        nombre_archivo_salida (str): Nombre del archivo JSON de salida.
+    """
+    # Extraer texto del PDF
+    print(f"Extrayendo texto de {ruta_pdf}...")
+    texto_pdf = extraer_texto_pdf(ruta_pdf)
 
-#     print("\nCuestionario en formato JSON generado y guardado con éxito!")
-#     print(f"Total de preguntas generadas: {len(cuestionario_json)}")
+    if not texto_pdf:
+        print("No se pudo extraer texto del PDF.")
+        return
+
+    # Generar cuestionario
+    print(f"Generando cuestionario con {num_preguntas} preguntas...")
+    cuestionario = generar_cuestionario(texto_pdf, num_preguntas)
+
+    # Guardar cuestionario en archivo JSON
+    guardar_cuestionario_json(cuestionario["cuestionario"], nombre_archivo_salida)
+
+    print(f"\nCuestionario generado y guardado en {nombre_archivo_salida}")
+    print(f"Total de preguntas generadas: {len(cuestionario['cuestionario'])}")
