@@ -1,0 +1,152 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}Cuestionarios{% endblock %}
+
+{% block content %}
+
+<main class="container">
+    <div class="row py-3">
+        <div class="col-12 col-lg-4 my-3">
+            <form action="" class="d-flex">
+                <input 
+                type="text"
+                class="form-control me-2"
+                aria-label="Buscar"
+                placeholder="Buscar"
+                >
+                <button class="btn btn-primary" type="submit">Buscar</button>
+            </form>
+        </div>
+        <div class="col-4 col-lg-1 my-3">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Ciclos
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">1ºDAM</a></li>
+                    <li><a class="dropdown-item" href="#">2ºDAM</a></li>
+                    <li><a class="dropdown-item" href="#">1ºASIR</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-4 col-lg-1 col-sm-4 my-3">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Asignaturas
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">BAE</a></li>
+                    <li><a class="dropdown-item" href="#">PRO</a></li>
+                    <li><a class="dropdown-item" href="#">LND</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col d-flex justify-content-end my-3">
+            <a href="{% url 'crear_cuestionario' %}">
+                <button type="button" class="btn btn-success">Crear cuestonario</button>
+            </a>
+        </div>
+    </div>
+    <div class="row py-3">
+        <div class="col">
+            <div class="border-bottom">
+                <h1 class="text-center">Cuestionarios</h1>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6 col-lg-3 mb-4">
+            <div class="card">
+                <img class="card-img-top" src="{% static 'core/img/cuestionarios-icono.jpg' %}" alt="Poker">
+                <div class="card-body">
+                    <h3 class="card-title">Nombre de cuestionario</h3>
+                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    <a href="#" class="btn btn-sm btn-primary">Contestar</a>
+                    <a href="#" class="btn btn-sm btn-secondary">Detalles</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3 mb-4">
+            <div class="card">
+                <img class="card-img-top" src="{% static 'core/img/cuestionarios-icono.jpg' %}" alt="Poker">
+                <div class="card-body">
+                    <h3 class="card-title">Nombre de cuestionario</h3>
+                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    <a href="#" class="btn btn-sm btn-primary">Contestar</a>
+                    <a href="#" class="btn btn-sm btn-secondary">Detalles</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3 mb-4">
+            <div class="card">
+                <img class="card-img-top" src="{% static 'core/img/cuestionarios-icono.jpg' %}" alt="Poker">
+                <div class="card-body">
+                    <h3 class="card-title">Nombre de cuestionario</h3>
+                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    <a href="#" class="btn btn-sm btn-primary">Contestar</a>
+                    <a href="#" class="btn btn-sm btn-secondary">Detalles</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3 mb-4">
+            <div class="card">
+                <img class="card-img-top" src="{% static 'core/img/cuestionarios-icono.jpg' %}" alt="Poker">
+                <div class="card-body">
+                    <h3 class="card-title">Nombre de cuestionario</h3>
+                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    <a href="#" class="btn btn-sm btn-primary">Contestar</a>
+                    <a href="#" class="btn btn-sm btn-secondary">Detalles</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3 mb-4">
+            <div class="card">
+                <img class="card-img-top" src="{% static 'core/img/cuestionarios-icono.jpg' %}" alt="Poker">
+                <div class="card-body">
+                    <h3 class="card-title">Nombre de cuestionario</h3>
+                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    <a href="#" class="btn btn-sm btn-primary">Contestar</a>
+                    <a href="#" class="btn btn-sm btn-secondary">Detalles</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3 mb-4">
+            <div class="card">
+                <img class="card-img-top" src="{% static 'core/img/cuestionarios-icono.jpg' %}" alt="Poker">
+                <div class="card-body">
+                    <h3 class="card-title">Nombre de cuestionario</h3>
+                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    <a href="#" class="btn btn-sm btn-primary">Contestar</a>
+                    <a href="#" class="btn btn-sm btn-secondary">Detalles</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3 mb-4">
+            <div class="card">
+                <img class="card-img-top" src="{% static 'core/img/cuestionarios-icono.jpg' %}" alt="Poker">
+                <div class="card-body">
+                    <h3 class="card-title">Nombre de cuestionario</h3>
+                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    <a href="#" class="btn btn-sm btn-primary">Contestar</a>
+                    <a href="#" class="btn btn-sm btn-secondary">Detalles</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3 mb-4">
+            <div class="card">
+                <img class="card-img-top" src="{% static 'core/img/cuestionarios-icono.jpg' %}" alt="Poker">
+                <div class="card-body">
+                    <h3 class="card-title">Nombre de cuestionario</h3>
+                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    <a href="#" class="btn btn-sm btn-primary">Contestar</a>
+                    <a href="#" class  ="btn btn-sm btn-secondary">Detalles</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

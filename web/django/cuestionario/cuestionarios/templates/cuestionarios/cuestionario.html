@@ -1,0 +1,146 @@
+{% extends 'core/base.html' %}
+
+{% load static %} 
+{% block title%} Crear-Cuestionario{% endblock %} 
+{% block content %}
+
+<main class="container">
+  <div class="row">
+    <div class="row py-3">
+      <div class="col-12">
+        <div class="border-bottom">
+          <h1 class="text-center">Crear cuestionario</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <form action="#" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row justify-content-center">
+      <div class="col-10 col-lg-6">
+        <div class="mb-3">
+          <label for="formFile" class="form-label"></label>
+          <input
+            class="form-control"
+            type="file"
+            name="archivo"
+            id="formFile"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-8 col-lg-6 d-flex flex-column align-items-center mb-3">
+        <p>Nombre del cuestionario</p>
+        <input
+          type="text"
+          class="form-control me-2"
+          name="nombre"
+          aria-label="Buscar"
+          placeholder="Buscar"
+          id="nombreCuestionario"
+        />
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-8 col-lg-6 d-flex flex-column align-items-center">
+        <p>Tema de la asignatura</p>
+        <input
+          type="text"
+          class="form-control me-2"
+          name="tema"
+          aria-label="Nombre del tema..."
+          placeholder="Nombre del tema..."
+          id="temaCuestionario"
+        />
+      </div>
+    </div>
+    <div class="row my-4 justify-content-around flex-wrap">
+      <div class="col-6 col-lg-4 d-flex flex-column align-items-center">
+        <div class="input-group">
+          <label class="input-group-text" for="ciclo">Ciclo</label>
+          <select name="ciclo" class="form-select" id="ciclo">
+            <option selected>Elegir...</option>
+            <option value="DAM">DAM</option>
+            <option value="DAW">DAW</option>
+            <option value="ASIR">ASIR</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-6 col-lg-4 d-flex flex-column align-items-center">
+        <div class="input-group">
+          <label class="input-group-text" for="asignatura">Asignatura</label>
+          <select name="asignatura" class="form-select" id="asignatura">
+            <option selected>Elegir...</option>
+            <option value="BAE">BAE</option>
+            <option value="PRO">PRO</option>
+            <option value="LND">LND</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row my-4 justify-content-around flex-wrap">
+      <div class="col-4 col-lg-2 d-flex flex-column align-items-center">
+        <p class="my-auto mb-2">NºPreguntas</p>
+        <input
+        type="number"
+        name="preguntas"
+        min="0"
+        value="0"
+        class="form-control text-center"
+        id="numeroPreguntas"
+        />
+      </div>
+      <div class="col-4 col-lg-2 d-flex flex-column align-items-center">
+        <p class="my-auto mb-2">NºRespuestas</p>
+        <input
+        type="number"
+        name="respuestas"
+        min="0"
+        value="0"
+        class="form-control text-center"
+        id="numeroRespuestas"
+        />
+      </div>
+      <div class="col-4 col-lg-2 d-flex flex-column align-items-center">
+        <p class="my-auto mb-2">NºCorrectas</p>
+        <input
+        type="number"
+        name="correctas"
+            min="0"
+            value="0"
+            class="form-control text-center"
+            id="numeroCorrectas"
+            />
+          </div>
+    <div class="row my-4 justify-content-center">
+      <div class="col-10 col-lg-8 d-flex flex-column align-items-center">
+        <p>Cuestionario generado</p>
+        <textarea
+          class="form-control"
+          placeholder="Cuestionario..."
+          style="height: 100px"
+          id="cuestionarioGenerado"
+        ></textarea>
+        <label for="cuestionarioGenerado"></label>
+      </div>
+    </div>
+    <div class="row my-4 justify-content-center">
+      <div class="col-12 col-sm-6 d-flex justify-content-center flex-wrap">
+        <button type="submit" class="btn btn-primary my-2 mx-2">
+          Guardar y contestar
+        </button>
+        <button type="submit" class="btn btn-info my-2 mx-2">Guardar</button>
+        <button type="reset" class="btn btn-warning my-2 mx-2">
+          Reiniciar
+        </button>
+        <button type="reset" class="btn btn-danger my-2 mx-2">Cancelar</button>
+        <button type="submit" class="btn btn-success my-2 mx-2">
+          Exportart a PDF
+        </button>
+      </div>
+    </div>
+  </form>
+</main>
+
+{% endblock %}
