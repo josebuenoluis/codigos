@@ -17,12 +17,12 @@
         {% for pregunta in preguntas %}
             <div class="row d-flex justify-content-center">
                 <div class="col-10 rounded border border-dark" style="background: #f2f2f2; margin:10px 0; padding: 40px;">
-                    <h2>-{{pregunta.pregunta}}</h2>
+                    <h2>-{{pregunta.pregunta.pregunta}}</h2>
                     {% for respuesta in pregunta.respuestas %}
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="{{pregunta}}" value="{{respuesta.correcta}}" id="{{respuesta.id}}">
+                            <input class="form-check-input" type="radio" name="{{pregunta.pregunta.id}}" value="{{respuesta.id}}" id="{{respuesta.id}}" required>
                             <label class="form-check-label fs-5" for="{{respuesta.id}}">
-                                {{respuesta}}
+                                {{respuesta.respuesta}}
                             </label>
                         </div>
                     {% endfor %}

@@ -34,12 +34,14 @@ class CrearCuestionarioView(View):
         ciclo = request.POST["ciclo"]
         asginatura = request.POST["asignatura"]
         preguntas = request.POST["preguntas"]
+        respuestas = request.POST["respuestas"]
         correctas = request.POST["correctas"]
         descripcion = request.POST["descripcion"]
         enlace = request.POST["enlace"]
         #Obtenemos el texto del PDF y generamos el cuestionario
         texto_pdf = extraer_texto_pdf_directo(archivo)
-        cuestionario_generado = procesar_pdf_y_generar_cuestionario_json(texto_pdf,total_preguntas=10)
+        cuestionario_generado = procesar_pdf_y_generar_cuestionario_json(texto_pdf,total_preguntas=int(preguntas),
+                                n_respuestas=int(respuestas),n_correctas=int(correctas))
         if enlace == "guardar_contestar":
             #Guardamo el cuestionario en y mandamos al usuario a contestarlo
             cuestionario = Cuestionarios(
@@ -82,15 +84,27 @@ class ContestarCuestionarioView(View):
         respuestas = Respuestas.objects.filter(id_pregunta_fk__in=preguntas)
         preguntas_respuestas = [
             {
-                "pregunta": pregunta.pregunta,
-                "respuestas": [respuesta.respuesta for respuesta in respuestas if respuesta.id_pregunta_fk == pregunta]
+                "pregunta": pregunta,
+                "respuestas": [respuesta for respuesta in respuestas if respuesta.id_pregunta_fk == pregunta]
             }
             for pregunta in preguntas
         ]
         return render(request, "cuestionarios/contestar.html", {"cuestionario": cuestionario, "preguntas": preguntas_respuestas,})
-        
+
     def post(self,request,cuestionario_id):
 
-        print(request.POST)
-
+        preguntas = Preguntas.objects.filter(id_cuestionario_fk=cuestionario_id)
+        respuestas_usuario_correctas_falladas = []
+        for id_pregunta in request.POST:
+            if id_pregunta.isdigit():
+                respuesta_correcta = Respuestas.objects.get(id_pregunta_fk=id_pregunta,correcta=True)
+                respuesta_usuario = request.POST[id_pregunta]
+                if int(respuesta_usuario) == respuesta_correcta.id:
+                    print(f"Usuario acerto en la pregunta {id_pregunta} y en la respuesta {respuesta_correcta}")
+                else:
+                    print(f"Usuario fallo en la pregunta {id_pregunta} y en la respuesta {respuesta_usuario}")
+                print(f"Respuesta correcta es: {respuesta_correcta.respuesta} y el usuario respondio {respuesta_usuario}")
+                respuestas_usuario_correctas_falladas.append({id_pregunta:{"correcta":respuesta_correcta.id,"usuario":respuesta_usuario}})
+        
+        
         return redirect("cuestionarios")
