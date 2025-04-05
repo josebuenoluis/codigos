@@ -1,4 +1,9 @@
 
+using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
+using ApiWebProject.DbContexto;
+
+
 namespace ApiWebProject
 {
     public class Program
@@ -14,6 +19,10 @@ namespace ApiWebProject
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddDbContext<AppDBContext>(options =>
+            options.UseMySql(builder.Configuration.GetConnectionString("MySql"),
+            new MySqlServerVersion(new Version(8, 0, 21))));
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -26,7 +35,6 @@ namespace ApiWebProject
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 

@@ -95,16 +95,39 @@ class ContestarCuestionarioView(View):
 
         preguntas = Preguntas.objects.filter(id_cuestionario_fk=cuestionario_id)
         respuestas_usuario_correctas_falladas = []
+        respuestas = Respuestas.objects.filter(id_pregunta_fk__in=preguntas)
+        preguntas_respuestas = [
+            {
+                "pregunta": pregunta,
+                "respuestas": [respuesta for respuesta in respuestas if respuesta.id_pregunta_fk == pregunta]
+            }
+            for pregunta in preguntas
+        ]
         for id_pregunta in request.POST:
             if id_pregunta.isdigit():
                 respuesta_correcta = Respuestas.objects.get(id_pregunta_fk=id_pregunta,correcta=True)
                 respuesta_usuario = request.POST[id_pregunta]
+                respuesta_usuario_objeto = Respuestas.objects.get(id=respuesta_usuario,id_pregunta_fk=id_pregunta)
+                cuestionario = Cuestionarios.objects.get(id=cuestionario_id)
+                acierto = False
                 if int(respuesta_usuario) == respuesta_correcta.id:
-                    print(f"Usuario acerto en la pregunta {id_pregunta} y en la respuesta {respuesta_correcta}")
+                    print(f"Usuario acerto en la pregunta {id_pregunta} y en la respuesta {respuesta_correcta.respuesta}")
+                    acierto = True
                 else:
                     print(f"Usuario fallo en la pregunta {id_pregunta} y en la respuesta {respuesta_usuario}")
+                    acierto = False
+                
+                for pregunta in preguntas_respuestas:
+                    if int(id_pregunta) == pregunta["pregunta"].id:
+                        pregunta["acierto"] = acierto
+                        pregunta["respuesta_correcta"] = respuesta_correcta
+                        pregunta["respuesta_usuario"] = respuesta_usuario_objeto
+                        print("respuesta usuario: ",respuesta_usuario_objeto.id)
+                        
                 print(f"Respuesta correcta es: {respuesta_correcta.respuesta} y el usuario respondio {respuesta_usuario}")
+                
                 respuestas_usuario_correctas_falladas.append({id_pregunta:{"correcta":respuesta_correcta.id,"usuario":respuesta_usuario}})
         
-        
-        return redirect("cuestionarios")
+        print(preguntas_respuestas)
+        return render(request,"cuestionarios/contestado.html",{"respuesta_usuario":respuestas_usuario_correctas_falladas,
+                                                             "preguntas":preguntas_respuestas,"cuestionario":cuestionario})

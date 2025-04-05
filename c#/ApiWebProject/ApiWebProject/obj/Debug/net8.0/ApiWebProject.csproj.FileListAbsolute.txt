@@ -35,3 +35,8 @@ C:\Users\jose_\Documents\codigos\c#\ApiWebProject\ApiWebProject\obj\Debug\net8.0
 C:\Users\jose_\Documents\codigos\c#\ApiWebProject\ApiWebProject\obj\Debug\net8.0\ApiWebProject.pdb
 C:\Users\jose_\Documents\codigos\c#\ApiWebProject\ApiWebProject\obj\Debug\net8.0\ApiWebProject.genruntimeconfig.cache
 C:\Users\jose_\Documents\codigos\c#\ApiWebProject\ApiWebProject\obj\Debug\net8.0\ref\ApiWebProject.dll
+C:\Users\jose_\Documents\codigos\c#\ApiWebProject\ApiWebProject\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\jose_\Documents\codigos\c#\ApiWebProject\ApiWebProject\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\jose_\Documents\codigos\c#\ApiWebProject\ApiWebProject\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\jose_\Documents\codigos\c#\ApiWebProject\ApiWebProject\bin\Debug\net8.0\MySqlConnector.dll
+C:\Users\jose_\Documents\codigos\c#\ApiWebProject\ApiWebProject\bin\Debug\net8.0\Pomelo.EntityFrameworkCore.MySql.dll

@@ -3,16 +3,44 @@
   "WorkspaceRootPath": "C:\\Users\\jose_\\Documents\\codigos\\c#\\ApiWebProject\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C10CAC43-3E2C-4BFD-85BA-263828BE28AA}|ApiWebProject\\ApiWebProject.csproj|c:\\users\\jose_\\documents\\codigos\\c#\\apiwebproject\\apiwebproject\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C10CAC43-3E2C-4BFD-85BA-263828BE28AA}|ApiWebProject\\ApiWebProject.csproj|solutionrelative:apiwebproject\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C10CAC43-3E2C-4BFD-85BA-263828BE28AA}|ApiWebProject\\ApiWebProject.csproj|c:\\users\\jose_\\documents\\codigos\\c#\\apiwebproject\\apiwebproject\\controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C10CAC43-3E2C-4BFD-85BA-263828BE28AA}|ApiWebProject\\ApiWebProject.csproj|solutionrelative:apiwebproject\\controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C10CAC43-3E2C-4BFD-85BA-263828BE28AA}|ApiWebProject\\ApiWebProject.csproj|c:\\users\\jose_\\documents\\codigos\\c#\\apiwebproject\\apiwebproject\\models\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C10CAC43-3E2C-4BFD-85BA-263828BE28AA}|ApiWebProject\\ApiWebProject.csproj|solutionrelative:apiwebproject\\models\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C10CAC43-3E2C-4BFD-85BA-263828BE28AA}|ApiWebProject\\ApiWebProject.csproj|c:\\users\\jose_\\documents\\codigos\\c#\\apiwebproject\\apiwebproject\\dbcontexto\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C10CAC43-3E2C-4BFD-85BA-263828BE28AA}|ApiWebProject\\ApiWebProject.csproj|solutionrelative:apiwebproject\\dbcontexto\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C10CAC43-3E2C-4BFD-85BA-263828BE28AA}|ApiWebProject\\ApiWebProject.csproj|c:\\users\\jose_\\documents\\codigos\\c#\\apiwebproject\\apiwebproject\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{C10CAC43-3E2C-4BFD-85BA-263828BE28AA}|ApiWebProject\\ApiWebProject.csproj|solutionrelative:apiwebproject\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C10CAC43-3E2C-4BFD-85BA-263828BE28AA}|ApiWebProject\\ApiWebProject.csproj|c:\\users\\jose_\\documents\\codigos\\c#\\apiwebproject\\apiwebproject\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C10CAC43-3E2C-4BFD-85BA-263828BE28AA}|ApiWebProject\\ApiWebProject.csproj|solutionrelative:apiwebproject\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{C10CAC43-3E2C-4BFD-85BA-263828BE28AA}|ApiWebProject\\ApiWebProject.csproj|c:\\users\\jose_\\documents\\codigos\\c#\\apiwebproject\\apiwebproject\\apiwebproject.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{C10CAC43-3E2C-4BFD-85BA-263828BE28AA}|ApiWebProject\\ApiWebProject.csproj|solutionrelative:apiwebproject\\apiwebproject.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C10CAC43-3E2C-4BFD-85BA-263828BE28AA}|ApiWebProject\\ApiWebProject.csproj|c:\\users\\jose_\\documents\\codigos\\c#\\apiwebproject\\apiwebproject\\apiwebproject.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{C10CAC43-3E2C-4BFD-85BA-263828BE28AA}|ApiWebProject\\ApiWebProject.csproj|solutionrelative:apiwebproject\\apiwebproject.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C10CAC43-3E2C-4BFD-85BA-263828BE28AA}|ApiWebProject\\ApiWebProject.csproj|c:\\users\\jose_\\documents\\codigos\\c#\\apiwebproject\\apiwebproject\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C10CAC43-3E2C-4BFD-85BA-263828BE28AA}|ApiWebProject\\ApiWebProject.csproj|solutionrelative:apiwebproject\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C10CAC43-3E2C-4BFD-85BA-263828BE28AA}|ApiWebProject\\ApiWebProject.csproj|c:\\users\\jose_\\documents\\codigos\\c#\\apiwebproject\\apiwebproject\\weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C10CAC43-3E2C-4BFD-85BA-263828BE28AA}|ApiWebProject\\ApiWebProject.csproj|solutionrelative:apiwebproject\\weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C10CAC43-3E2C-4BFD-85BA-263828BE28AA}|ApiWebProject\\ApiWebProject.csproj|c:\\users\\jose_\\documents\\codigos\\c#\\apiwebproject\\apiwebproject\\apiwebproject.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{C10CAC43-3E2C-4BFD-85BA-263828BE28AA}|ApiWebProject\\ApiWebProject.csproj|solutionrelative:apiwebproject\\apiwebproject.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,45 +50,135 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AppDBContext.cs",
+              "DocumentMoniker": "C:\\Users\\jose_\\Documents\\codigos\\c#\\ApiWebProject\\ApiWebProject\\DbContexto\\AppDBContext.cs",
+              "RelativeDocumentMoniker": "ApiWebProject\\DbContexto\\AppDBContext.cs",
+              "ToolTip": "C:\\Users\\jose_\\Documents\\codigos\\c#\\ApiWebProject\\ApiWebProject\\DbContexto\\AppDBContext.cs",
+              "RelativeToolTip": "ApiWebProject\\DbContexto\\AppDBContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T21:30:47.082Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\jose_\\Documents\\codigos\\c#\\ApiWebProject\\ApiWebProject\\appsettings.json",
+              "RelativeDocumentMoniker": "ApiWebProject\\appsettings.json",
+              "ToolTip": "C:\\Users\\jose_\\Documents\\codigos\\c#\\ApiWebProject\\ApiWebProject\\appsettings.json",
+              "RelativeToolTip": "ApiWebProject\\appsettings.json",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAAAAkAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-03-06T08:27:52.981Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\jose_\\Documents\\codigos\\c#\\ApiWebProject\\ApiWebProject\\Program.cs",
+              "RelativeDocumentMoniker": "ApiWebProject\\Program.cs",
+              "ToolTip": "C:\\Users\\jose_\\Documents\\codigos\\c#\\ApiWebProject\\ApiWebProject\\Program.cs",
+              "RelativeToolTip": "ApiWebProject\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-05T21:53:23.857Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "ClienteController.cs",
+              "DocumentMoniker": "C:\\Users\\jose_\\Documents\\codigos\\c#\\ApiWebProject\\ApiWebProject\\Controllers\\ClienteController.cs",
+              "RelativeDocumentMoniker": "ApiWebProject\\Controllers\\ClienteController.cs",
+              "ToolTip": "C:\\Users\\jose_\\Documents\\codigos\\c#\\ApiWebProject\\ApiWebProject\\Controllers\\ClienteController.cs",
+              "RelativeToolTip": "ApiWebProject\\Controllers\\ClienteController.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAQwCMAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T19:54:57.273Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Cliente.cs",
+              "DocumentMoniker": "C:\\Users\\jose_\\Documents\\codigos\\c#\\ApiWebProject\\ApiWebProject\\Models\\Cliente.cs",
+              "RelativeDocumentMoniker": "ApiWebProject\\Models\\Cliente.cs",
+              "ToolTip": "C:\\Users\\jose_\\Documents\\codigos\\c#\\ApiWebProject\\ApiWebProject\\Models\\Cliente.cs",
+              "RelativeToolTip": "ApiWebProject\\Models\\Cliente.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T19:53:52.36Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ApiWebProject.csproj",
+              "DocumentMoniker": "C:\\Users\\jose_\\Documents\\codigos\\c#\\ApiWebProject\\ApiWebProject\\ApiWebProject.csproj",
+              "RelativeDocumentMoniker": "ApiWebProject\\ApiWebProject.csproj",
+              "ToolTip": "C:\\Users\\jose_\\Documents\\codigos\\c#\\ApiWebProject\\ApiWebProject\\ApiWebProject.csproj",
+              "RelativeToolTip": "ApiWebProject\\ApiWebProject.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-03-06T08:27:57.297Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ApiWebProject.http",
+              "DocumentMoniker": "C:\\Users\\jose_\\Documents\\codigos\\c#\\ApiWebProject\\ApiWebProject\\ApiWebProject.http",
+              "RelativeDocumentMoniker": "ApiWebProject\\ApiWebProject.http",
+              "ToolTip": "C:\\Users\\jose_\\Documents\\codigos\\c#\\ApiWebProject\\ApiWebProject\\ApiWebProject.http",
+              "RelativeToolTip": "ApiWebProject\\ApiWebProject.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2025-03-06T08:32:17.181Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "WeatherForecastController.cs",
               "DocumentMoniker": "C:\\Users\\jose_\\Documents\\codigos\\c#\\ApiWebProject\\ApiWebProject\\Controllers\\WeatherForecastController.cs",
               "RelativeDocumentMoniker": "ApiWebProject\\Controllers\\WeatherForecastController.cs",
               "ToolTip": "C:\\Users\\jose_\\Documents\\codigos\\c#\\ApiWebProject\\ApiWebProject\\Controllers\\WeatherForecastController.cs",
               "RelativeToolTip": "ApiWebProject\\Controllers\\WeatherForecastController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-05T21:54:25.637Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 8,
               "Title": "WeatherForecast.cs",
               "DocumentMoniker": "C:\\Users\\jose_\\Documents\\codigos\\c#\\ApiWebProject\\ApiWebProject\\WeatherForecast.cs",
               "RelativeDocumentMoniker": "ApiWebProject\\WeatherForecast.cs",
               "ToolTip": "C:\\Users\\jose_\\Documents\\codigos\\c#\\ApiWebProject\\ApiWebProject\\WeatherForecast.cs",
               "RelativeToolTip": "ApiWebProject\\WeatherForecast.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAABFAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-05T21:53:33.278Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\jose_\\Documents\\codigos\\c#\\ApiWebProject\\ApiWebProject\\Program.cs",
-              "RelativeDocumentMoniker": "ApiWebProject\\Program.cs",
-              "ToolTip": "C:\\Users\\jose_\\Documents\\codigos\\c#\\ApiWebProject\\ApiWebProject\\Program.cs",
-              "RelativeToolTip": "ApiWebProject\\Program.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-05T21:53:23.857Z",
+              "DocumentIndex": 9,
+              "Title": "ApiWebProject",
+              "DocumentMoniker": "C:\\Users\\jose_\\Documents\\codigos\\c#\\ApiWebProject\\ApiWebProject\\ApiWebProject.csproj",
+              "RelativeDocumentMoniker": "ApiWebProject\\ApiWebProject.csproj",
+              "ToolTip": "C:\\Users\\jose_\\Documents\\codigos\\c#\\ApiWebProject\\ApiWebProject\\ApiWebProject.csproj",
+              "RelativeToolTip": "ApiWebProject\\ApiWebProject.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-03-06T19:41:30.025Z",
               "EditorCaption": ""
             }
           ]
