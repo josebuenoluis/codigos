@@ -1,0 +1,52 @@
+footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-top: 3px solid white;
+    margin-top: 1rem;
+    width: 95%;
+    margin: auto;
+}
+footer h3{
+    font-family: "Montserrat";
+    font-style: normal;
+    color: white;
+}
+nav{
+    width: 40%;
+}
+nav ul{
+    display: flex;
+    justify-content:space-around;
+    list-style: none;
+    padding: 0;
+}
+nav ul li a{
+    font-family: "Lato", sans-serif;
+    font-style: normal;
+    font-size: 18px;
+    color: white;
+    text-decoration: none;
+}
+nav ul li a:hover{
+    text-decoration: underline 2px;
+}
+
+.social-media{
+    display: flex;
+    justify-content: space-around;
+    width: 30%;
+    list-style: none;
+    margin-top: 1rem;
+}
+.social-media li a:hover{
+    opacity:60%;
+}
+footer p{
+    font-family: "Lato", sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: white;
+    margin-top: 1rem;
+}
