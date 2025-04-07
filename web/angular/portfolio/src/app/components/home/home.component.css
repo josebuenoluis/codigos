@@ -1,16 +1,25 @@
 .banner{
-    height: 30rem;
+    min-height: 30rem;
     background-color: #02061F;
     border-bottom: 2px solid white;
     border-top: 1px solid white;
     margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
 }
 
 .banner .title-info{
     font-family: "Lato";
     font-style: normal;
     font-size: 34px;
+    margin-bottom: 0;
     color: white;
+}
+
+.banner .title-info,.text-info{
+    margin-left: 2rem;
 }
 
 .banner .text-info{
@@ -22,7 +31,7 @@
 }
 
 .banner .text-info:nth-of-type(2){
-    margin:0;
+    margin-bottom:0;
 }
 
 .banner .text-info:nth-of-type(3){
@@ -39,10 +48,154 @@
     font-family: "Lato";
     font-style: bold;
     font-size: 24px;
+    margin-left: 2rem;
+    margin-bottom: 3rem;
 }
 
 #contact-button:hover{
     background-color: rgb(103, 125, 183,0.70);
     color: rgb(255, 255, 255,0.70);
     cursor: pointer;
+}
+
+.info{
+    display: flex;
+    font-family: "Lato";
+    justify-content: center;
+    align-items: center;
+    font-style: normal;
+    color: white;
+}
+
+
+.info .banner-info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+}
+
+.banner-info > img{
+    width: 30%;
+    height: 234px;
+    background-color: gray;
+}
+
+.container-text{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin-left: 1rem;
+}
+
+.container-text .text-skills{
+    width: 100%;
+}
+.container-text .text-skills .icons-language{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 1rem;
+}
+.container-text .text-skills .icons-language > img{
+    width: 50px;
+    height: 50px;
+    margin-right: 1.5rem;
+    background-color: gray;
+    display: flex;
+}
+
+.section-attributes{
+    font-family: "Lato";
+    font-style: normal;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    margin-top: 3rem;
+}
+.content-attributes > h2{
+    text-align: center;
+}
+.content-attributes{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    width: 70%;
+}
+.content-attributes .childs-attributtes{
+    display: flex;
+}
+.content-attributes .childs-attributtes .child-attribute{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-right: 1rem;
+}
+
+.info-boxes{
+    color: white;
+    font-family: "Lato";
+    font-style: normal;
+    margin-bottom: 5rem;
+}
+
+.info-boxes .content-boxes{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 2rem;
+}
+
+.info-boxes .content-boxes .info-box{
+    width:50%;
+    height: 273px;
+    background-color: #454B66;
+    border-radius:60px;
+    border: 3px solid rgb(255, 255, 255,.60);
+    box-shadow: 10px 10px 10px 5px rgb(103, 125, 183,.40);
+    margin-top: 5rem;
+}
+.info-boxes .content-boxes .info-box > h3{
+    text-align: center;
+    text-decoration: underline 2px;
+}
+
+.info-boxes .content-boxes .info-box > p{
+    text-align: center;
+    width: 80%;
+    margin: auto;
+}
+@media screen and (max-width: 768px) {
+    .banner-info{
+        flex-direction: column;
+    }
+    .banner-info > img{
+        width: 60%;
+    }
+    .container-text{
+        width: 60%;
+    }
+
+    .container-text .text-skills .icons-language > img{
+        margin-bottom: 1rem;
+        justify-content: center;
+    }
+    .content-attributes{
+        width: 100%;
+    }
+    .content-attributes .childs-attributtes{
+        flex-direction: column;
+        margin-top: 1.5rem;
+    }
+    .content-attributes .childs-attributtes .child-attribute p{
+        width: 50%;
+    }
 }

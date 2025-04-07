@@ -33,6 +33,12 @@ nav ul li a:hover{
     text-decoration: underline 2px;
 }
 
+.info-boxes{
+    color: white;
+    font-family: "Lato";
+    font-style: normal;
+}
+
 @media screen and (max-width: 768px) {
     header{
         flex-direction: column;
@@ -48,9 +54,8 @@ nav ul li a:hover{
         margin-right: 0;
     }
     nav ul{
-        flex-direction: column;
         align-items: center;
-        justify-content: center;
+        justify-content: space-around;
         margin-left: 0;
     }
     nav ul li a{
