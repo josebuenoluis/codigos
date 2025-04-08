@@ -79,12 +79,33 @@
             <h3>Desarrollador de ERP</h3>
             <p>Lorem ipsum dolor sit amet. Est cupiditate galisum qui perspiciatis dolores sed consectetur incidunt.</p>
         </div>
-        <div class="info-box">
+        <div class="info-box-form">
             <h3>¿Qué quieres desarrollar?</h3>
-            <form action="#" method="post">
-                <select name="" id=""></select>
-                <select name="" id=""></select>
-                <select name="" id=""></select>
+            <form action="#" method="post" id="contact-form">
+                <div class="select-option">
+                  <select name="type" id="type-select">
+                    <option value="" selected>Seleccione tipo de aplicación...</option>
+                  </select>
+                  <div class="icon-select">
+                    <img src="../../../assets/caret-down.svg" alt="icon-arrow">
+                  </div>
+                </div>
+                <div class="select-option">
+                  <select name="direct" id="direct-select">
+                    <option value="" selected>¿Para quien esta dirigido?</option>
+                  </select>
+                  <div class="icon-select">
+                    <img src="../../../assets/caret-down.svg" alt="icon-arrow">
+                  </div>
+                </div>
+                <div class="select-option">
+                  <select name="objective" id="objective-select">
+                    <option value="" selected>¿Cual es tu objetivo?</option>
+                  </select>
+                  <div class="icon-select">
+                    <img src="../../../assets/caret-down.svg" alt="icon-arrow">
+                  </div>
+                </div>
                 <input type="submit" value="¡Contratame!">
             </form>
         </div>

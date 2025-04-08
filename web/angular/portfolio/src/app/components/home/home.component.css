@@ -46,7 +46,7 @@
     border-radius: 10px;
     color: white;
     font-family: "Lato";
-    font-style: bold;
+    font-weight: bold;
     font-size: 24px;
     margin-left: 2rem;
     margin-bottom: 3rem;
@@ -154,13 +154,13 @@
     margin-top: 2rem;
 }
 
-.info-boxes .content-boxes .info-box{
-    width:50%;
+.info-boxes .content-boxes .info-box:not(:last-child) {
+    width: 50%;
     height: 273px;
     background-color: #454B66;
-    border-radius:60px;
-    border: 3px solid rgb(255, 255, 255,.60);
-    box-shadow: 10px 10px 10px 5px rgb(103, 125, 183,.40);
+    border-radius: 60px;
+    border: 3px solid rgb(255, 255, 255, .60);
+    box-shadow: 10px 10px 10px 5px rgb(103, 125, 183, .40);
     margin-top: 5rem;
 }
 .info-boxes .content-boxes .info-box > h3{
@@ -173,6 +173,99 @@
     width: 80%;
     margin: auto;
 }
+
+.info-box-form {
+    width: 50%;
+    background-color: #454B66;
+    border-radius: 60px;
+    border: 3px solid rgb(255, 255, 255, .60);
+    box-shadow: 10px 10px 10px 5px rgb(103, 125, 183, .40);
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#contact-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+#contact-form .select-option{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+
+#contact-form .select-option select{
+    width: 60%;
+    height: 3rem;
+    background-color:#fff;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    color: black;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+    border-top:1px solid black;
+    border-right:none;
+    font-weight: bold;
+    font-size: 20px;
+    appearance: none;
+}
+#contact-form .select-option select option{
+    width: 20px;
+}
+
+#contact-form .select-option select:hover{
+    background-color: rgb(103, 125, 183,0.70);
+    color: rgb(255, 255, 255,0.70);
+    cursor: pointer;
+}
+
+#contact-form .select-option select:focus{
+    outline: none;
+    border: 2px solid rgb(103, 125, 183,0.70);
+    box-shadow: 0 0 5px rgb(103, 125, 183,0.70);
+}
+#contact-form .select-option .icon-select{
+    background-color: #ccc;
+    height: 2.85rem;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+}
+#contact-form .select-option .icon-select img{
+    height: 50%;
+}
+#contact-form input{
+    width: 10rem;
+    height: 3rem;
+    border-radius: 20px;
+    border:1px solid black;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+}
+#contact-form input:hover{
+    background-color: rgb(103, 125, 183,0.70);
+    color: rgb(255, 255, 255,0.70);
+    cursor: pointer;
+}
+
 @media screen and (max-width: 768px) {
     .banner-info{
         flex-direction: column;
@@ -197,5 +290,15 @@
     }
     .content-attributes .childs-attributtes .child-attribute p{
         width: 50%;
+    }
+
+    .info-box-form{
+        width: 80%;
+    }
+    .info-boxes .content-boxes .info-box:not(:last-child){
+        width: 80%;
+    }
+    .banner .text-info{
+        width: 80%;
     }
 }
