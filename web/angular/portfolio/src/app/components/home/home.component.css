@@ -266,7 +266,7 @@
     cursor: pointer;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1000px) {
     .banner-info{
         flex-direction: column;
     }
