@@ -29,15 +29,16 @@ nav ul li a{
     color: white;
     text-decoration: none;
 }
+
+nav ul li a:active {
+    color: blue;
+    transform: scale(0.95);
+}
+
 nav ul li a:hover{
     text-decoration: underline 2px;
 }
 
-.info-boxes{
-    color: white;
-    font-family: "Lato";
-    font-style: normal;
-}
 
 @media screen and (max-width: 768px) {
     header{

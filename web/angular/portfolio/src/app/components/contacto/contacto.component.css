@@ -1,0 +1,274 @@
+.section-attributes{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 8rem;
+    margin-top: 8rem;
+}
+
+.section-attributes article{
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.section-attributes article .img-attribute{
+    width: 40%;
+    min-height: 6rem;
+    background-color: #ccc;
+    margin-bottom: 1rem;
+}
+
+.section-attributes article .img-attribute img{
+    width: 100%;
+    height: 100%;
+}
+
+.section-attributes article p{
+    font-family: "Lato";
+    font-size: 16px;
+    font-weight: 600;
+    width: 100%;
+    color: white;
+    text-align:start; 
+    margin: 0;
+}
+
+.section-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5rem;
+}
+
+.section-form .contact-form{
+    background-color: #6275A8;
+    width: 90%;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 10px 10px 10px rgba(103, 125, 183, 0.6);
+    border: 3px solid rgba(255, 255, 255, 0.6);
+}
+
+.section-form .contact-form .child-form{
+    width: 50%;
+    margin-top: 3rem;
+    margin-bottom: 5rem;
+}
+
+.section-form .contact-form .child-form:nth-child(1){
+    margin-left: 3rem;
+}
+
+.section-form .contact-form .child-form .child-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Lato";
+    color: white;
+    width: 100%;
+}
+.section-form .contact-form .child-form .child-content hr{
+    width: 90%;
+    border: 1px solid white;
+}
+.section-form .contact-form .child-form .child-content h2{
+    text-align: start;
+    width: 80%;
+    margin-bottom: 0;
+}
+
+.section-form .contact-form .child-form .child-content .text-content{
+    width: 80%;
+}
+
+.section-form .contact-form .child-form .child-image{
+    width: 80%;
+    background-color: #ccc;
+    min-height: 15rem;
+    margin-top: 2rem;
+}
+
+.section-form .contact-form .child-form .child-image img{
+    width: 100%;
+    height: 100%;
+}
+
+
+.section-form .contact-form .child-form .child-content form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 5rem;
+    width: 100%;
+    gap: 1rem;
+}
+
+.section-form .contact-form .child-form .child-content form input[type="text"], 
+.section-form .contact-form .child-form .child-content form select {
+    width: 70%;
+    height: 50px;
+    background-color: #435397;
+    padding-left: 0.8rem;
+    color: white;
+    font-family: "Lato";
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    box-sizing: border-box; /* Ensures consistent sizing */
+}
+
+.section-form .contact-form .child-form .child-content form input[type="text"]:focus, 
+.section-form .contact-form .child-form .child-content form textarea:focus,
+.section-form .contact-form .child-form .child-content form select:focus {
+    outline: none;
+    border: 2px solid #3C62C4;
+    background-color: #3C62C4;
+    color: white;
+}
+
+.section-form .contact-form .child-form .child-content form input[type="text"]:hover, 
+.section-form .contact-form .child-form .child-content form textarea:hover,
+.section-form .contact-form .child-form .child-content form select:hover {
+    background-color: rgb(103, 125, 183,0.70);
+    cursor: pointer;
+}
+
+.section-form .contact-form .child-form .child-content form select option {
+    background-color: #435397;
+    color: white; 
+    font-family: "Lato";
+    font-size: 16px; 
+    font-weight: bold;
+    padding: 0.5rem; 
+    border-radius: 10px; 
+}
+
+.section-form .contact-form .child-form .child-content form select option{
+    opacity: 0.7;
+}
+.section-form .contact-form .child-form .child-content form select {
+    appearance: none; /* Removes default arrow */
+    -webkit-appearance: none; /* For Safari */
+    -moz-appearance: none; /* For Firefox */
+    background-image: url('../../../assets/caret-down.svg'); /* Replace with your icon */
+    background-repeat: no-repeat;
+    background-position: right 10px center; /* Adjust position */
+    background-size: 20px; /* Adjust size of the icon */
+    padding-right: 30px; /* Add space for the icon */
+}
+
+.section-form .contact-form .child-form .child-content form textarea{
+    width: 67.5%;
+    max-width: 67.5%;
+    min-width: 67.5%;
+    min-height: 150px;
+    max-height: 300px;
+    background-color: #435397;
+    color: white;
+    font-family: "Lato";
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    padding-left: 0.8rem;
+    padding-top: 0.5rem;
+}
+
+.section-form .contact-form .child-form .child-content form input[type=submit]{
+    width: 7rem;
+    height: 3.5rem;
+    background-color: #3C62C4;
+    border: 3px solid rgb(255, 255, 255,.60);
+    border-radius: 15px;
+    font-size: 18px;
+    color: white;
+    font-family: "Lato";
+}
+
+.section-form .contact-form .child-form .child-content form input[type=submit]:hover{
+    cursor:pointer;
+    background-color: blue;
+    border: 3px solid rgb(255, 255, 255,.80);
+}
+
+.section-form .contact-form .child-form .child-content form input[type="text"]::placeholder,textarea::placeholder {
+    color: #ffffff;
+    opacity: 0.7;
+}
+
+@media screen and (max-width: 768px) {
+
+    .section-attributes article {
+        width: 30%;
+    }
+    .section-form .contact-form .child-form .child-image {
+        width: 100%;
+    }
+    .section-attributes article .img-attribute {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 610px) {
+
+    .section-attributes {
+        flex-direction: column;
+        align-items: center;
+        gap: 3rem;
+    }
+
+    .section-form .contact-form {
+        flex-direction: column;
+        justify-content: center;
+        align-items: end;
+    }
+
+    .section-form .contact-form .child-form .child-content form input[type=text], 
+    .section-form .contact-form .child-form .child-content form select{
+        width: 80%;
+    }
+
+    .section-attributes article .img-attribute {
+        width: 80%;
+        min-height: 10rem;
+    }
+    .section-attributes article p {
+        text-align: center;
+    }
+    .section-attributes article {
+        width: 60%;
+    }
+
+    .section-form .contact-form {
+        flex-direction: column;
+    }
+
+    .section-form .contact-form .child-form {
+        width: 100%;
+    }
+
+    .section-form .contact-form .child-form:nth-child(1) {
+        align-items: center;
+    }
+    .section-form .contact-form .child-form .child-content form {
+        margin-left: 0;
+        align-items: center;
+    }
+    .section-form .contact-form .child-form .child-image {
+        width: 85%;
+    }
+    
+}
+
+@media screen and (max-width: 400px) {
+
+    .section-attributes article {
+        width: 80%;
+    } 
+}

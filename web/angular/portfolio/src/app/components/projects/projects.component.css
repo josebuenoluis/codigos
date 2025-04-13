@@ -1,0 +1,140 @@
+.projects-section{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.tittle,.text-presentation,.stroke{
+    font-family: "Lato";
+    color: white;
+}
+
+.tittle{
+    font-weight: bold;
+    text-align: center;
+    font-size: 24px;
+    
+}
+
+.stroke{
+    width: 60%;
+    margin: auto;
+    font-size: 24px;
+}
+
+.stroke hr{
+    border:2px solid white;
+}
+
+.text-presentation{
+    font-size: 20px;
+    font-style: normal;
+    text-align: center;
+    width: 60%;
+    margin: auto;
+    font-weight: bold;
+}
+
+.projects-section .project-box{
+    width: 25%;
+    height: 100%;
+    background-color: #6275A8;
+    border:3px solid rgb(255, 255, 255,.60);
+    border-radius: 20px;
+    margin: 50px;
+    font-family: "Lato";
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.projects-section .project-box:hover{
+    box-shadow: 10px 10px 10px rgb(103, 125, 183, .60);
+    transform: translateY(-10px);
+    transition: transform 0.15s ease-in-out;
+}
+
+
+
+.projects-section .project-box .text-info{
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+}
+.projects-section .project-box .text-info h3{
+    margin: 0 12px;
+}
+
+.projects-section .project-box .text-info p{
+    margin-top: 6px;
+    margin-left: 12px;
+    width: 80%;
+}
+
+.projects-section .project-box a{
+    text-decoration: none;
+    background-color: #3C62C4;
+    border: 2px solid rgb(255, 255, 255,.60);
+    color: white;
+    width: 50%;
+    font-size: 18px;
+    padding: 5px;
+    border-radius: 10px;
+    margin: 1rem auto;
+    text-align: center;
+}
+
+.projects-section .project-box a:hover{
+    background-color: #0d4ae4;
+    border: 2px solid rgb(255, 255, 255,.80);
+    cursor: pointer;
+}
+
+.projects-section .project-box .img-project{
+    height: 40%;
+    background-color: white;
+    object-fit: cover;
+    border-radius: 17px 17px 0px 0px;
+
+}
+
+.projects-section .project-box .img-project img{
+    width: 100%;
+    height: 12rem;
+    margin: 0;
+    padding: 0;
+    border-radius: 20px 20px 0px 0px;
+    object-fit: contain;
+}
+
+.projects-section .project-box .tecnologies-box{
+    display: flex;
+    margin-left: 12px;
+}
+.projects-section .project-box .tecnologies-box .tecnologie-content{
+    margin-right: 0.5rem;
+    background-color: #4E649E;
+    border-radius: 20px;
+    padding: 5px;
+}
+.projects-section .project-box .tecnologies-box .tecnologie-content p{
+    font-size: 12px;
+    padding: 0;
+    margin: 0;
+}
+
+@media screen and (max-width: 1200px) {
+    .projects-section .project-box{
+        width: 35%;
+    }
+
+    .text-presentation,.stroke{
+        width: 85%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .projects-section .project-box{
+        width: 80%;
+    }
+}
