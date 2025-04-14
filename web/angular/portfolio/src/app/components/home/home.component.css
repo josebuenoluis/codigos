@@ -174,7 +174,7 @@
 .info-boxes .content-boxes .info-box{
     width: 50%;
     height: 273px;
-    background-color: #454B66;
+    background-color: #6275A8;
     border-radius: 60px;
     border: 3px solid rgb(255, 255, 255, .60);
     box-shadow: 10px 10px 10px 5px rgb(103, 125, 183, .40);
@@ -209,7 +209,7 @@
 
 .info-box-form{
     width: 50%;
-    background-color: #454B66;
+    background-color:  #6275A8;
     border-radius: 60px;
     border: 3px solid rgb(255, 255, 255, .60);
     box-shadow: 10px 10px 10px 5px rgb(103, 125, 183, .40);
