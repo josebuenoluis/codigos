@@ -110,16 +110,15 @@
 }
 .container-text .text-skills .icons-language{
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
     align-items: center;
     margin-top: 1rem;
+    gap: 1rem;
 }
 .container-text .text-skills .icons-language > img{
     width: 50px;
     height: 50px;
     margin-right: 1.5rem;
-    background-color: gray;
     display: flex;
 }
 
@@ -142,7 +141,7 @@
     justify-content: center;
     align-content: center;
     flex-direction: column;
-    width: 70%;
+    width: 80%;
 }
 .content-attributes .childs-attributtes{
     display: flex;
@@ -153,7 +152,15 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    margin-right: 1rem;
+    margin-right: 1.5rem;
+}
+.content-attributes .childs-attributtes .child-attribute > h4{
+    margin:0;
+    font-size: 20px;
+}
+
+.content-attributes .childs-attributtes .child-attribute > p{
+    font-size: 18px;
 }
 
 .info-boxes{
@@ -181,30 +188,31 @@
     margin-top: 5rem;
     position:relative;
     right: 100%;
+    padding-bottom: 2rem;
 }
 
-/* .info-boxes .content-boxes .info-box:not(:last-child) .animate-box{
-
+.info-boxes .content-boxes .info-box .info-content{
+    display: flex;
+    align-items: center;
 }
-
-@keyframes move-right-to-left {
-    0% {
-        transform: translateX(-1000px);
-    }
-    100% {
-        transform: translateX(0);
-    }
-}  */
 
 .info-boxes .content-boxes .info-box > h3{
     text-align: center;
-    text-decoration: underline 2px;
+    font-size: 28px;
+    font-weight: bold;
 }
 
-.info-boxes .content-boxes .info-box > p{
-    text-align: center;
-    width: 80%;
+.info-boxes .content-boxes .info-box .info-content > p{
+    text-align: start;
+    width: 50%;
     margin: auto;
+    font-size: 18px;
+    font-weight:400;
+}
+
+.info-boxes .content-boxes .info-box .info-content > img{
+    width: 40%;
+    height: 10rem;
 }
 
 .info-box-form{
@@ -323,7 +331,7 @@
         margin-top: 1.5rem;
     }
     .content-attributes .childs-attributtes .child-attribute p {
-        width: 50%;
+        width: 80%;
     }
 
     .info-box-form {
