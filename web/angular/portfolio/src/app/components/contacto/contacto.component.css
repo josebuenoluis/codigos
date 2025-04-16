@@ -6,28 +6,38 @@
 }
 
 .section-attributes article{
-    width: 25%;
+    width: 35%;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.section-attributes article .img-attribute{
+.section-attributes article .text-attribute{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    margin-left: 1rem;
     width: 40%;
-    min-height: 6rem;
-    background-color: #ccc;
-    margin-bottom: 1rem;
 }
 
-.section-attributes article .img-attribute img{
-    width: 100%;
-    height: 100%;
+.section-attributes article .text-attribute h2{
+    color: #ccc;
+    font-weight: bold;
+    margin: 0;
+}
+
+.section-attributes article img{
+    background-color: white;
+    border-radius: 20px;
+    padding: 0.5rem;
+    width: 50px;
+    height: 50px;
 }
 
 .section-attributes article p{
     font-family: "Lato";
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
     width: 100%;
     color: white;
@@ -84,6 +94,7 @@
 
 .section-form .contact-form .child-form .child-content .text-content{
     width: 80%;
+    font-size: 18px;
 }
 
 .section-form .contact-form .child-form .child-image{
@@ -204,18 +215,21 @@
 
 @media screen and (max-width: 768px) {
 
+    .section-attributes {
+        flex-direction: column;
+        align-items: center;
+        gap: 3rem;
+    }
+
     .section-attributes article {
-        width: 30%;
+        width: 60%;
     }
     .section-form .contact-form .child-form .child-image {
         width: 100%;
     }
-    .section-attributes article .img-attribute {
-        width: 50%;
-    }
 }
 
-@media screen and (max-width: 610px) {
+@media screen and (max-width: 620px) {
 
     .section-attributes {
         flex-direction: column;
@@ -234,12 +248,8 @@
         width: 80%;
     }
 
-    .section-attributes article .img-attribute {
-        width: 80%;
-        min-height: 10rem;
-    }
     .section-attributes article p {
-        text-align: center;
+        text-align: start;
     }
     .section-attributes article {
         width: 60%;
@@ -266,9 +276,17 @@
     
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 450px) {
 
     .section-attributes article {
-        width: 80%;
+        width: 100%;
     } 
+
+    .section-attributes{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 8rem;
+        margin-top: 8rem;
+    }
+    
 }

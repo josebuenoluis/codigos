@@ -353,5 +353,9 @@
     #contact-form select{
         width: 80%;
     }
+
+    .content-attributes .childs-attributtes .child-attribute {
+        margin-bottom: 3rem;
+    }
     
 }
