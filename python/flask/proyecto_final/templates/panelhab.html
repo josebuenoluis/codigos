@@ -1,0 +1,31 @@
+<html>
+	<head>
+		<title>lampara 2</title>
+		<meta charset="utf-8">
+		<meta http-equiv="refresh" content="2">
+	<!-- <script type="text/javascript" src="https://www3.gobiernodecanarias.org/educacion/cau_ce/estadisticasweb/scripts/piwik-eforma.js"></script><link rel="stylesheet" type="text/css" href="https://www3.gobiernodecanarias.org/educacion/cau_ce/estadisticasweb/scripts/cookies/cookies.css"/><script  type="text/javascript" src="https://www3.gobiernodecanarias.org/educacion/cau_ce/estadisticasweb/scripts/cookies/cookies.js"></script><script type="text/javascript" src="https://www3.gobiernodecanarias.org/educacion/cau_ce/estadisticasweb/scripts/cookies/cookies-html.js"></script></head> -->
+	<body style="text-align:center;">
+		<button id="conmutador" onclick="llamada()">Llamada</button>
+		<br>
+		<br>
+		<button id="presencia" onclick="presencia()">Presencia</button>
+		<br>
+		<br>
+		{% if lampara==0 %}
+			<img id="lampara" src="static/pic_bulboff.gif">
+		{% else %}
+			<img id="lampara" src="static/pic_bulbon.gif">
+		{% endif %}
+	</body>
+</html>
+<script type="text/javascript">
+	//let estado=0;
+	function llamada(){
+		fetch('https://paciente-enfermero.angelmelchor.pro/llamada/104/b') 
+			.then(response => response.json()) // Convierte la respuesta en JSON
+		}
+	function presencia(){
+		fetch('https://paciente-enfermero.angelmelchor.pro/presencia/104/b') 
+			.then(response => response.json()) // Convierte la respuesta en JSON
+	}
+</script>
