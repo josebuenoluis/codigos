@@ -14,10 +14,11 @@ class Asignaturas(models.Model):
     id_ciclo_fk = models.ForeignKey(Ciclos,on_delete=models.PROTECT)
 
 class Cuestionarios(models.Model):
-    nombre_cuestionario = models.CharField(max_length=200,null=True)
+    nombre_cuestionario = models.CharField(max_length=200,null=True,unique=True)
     descripcion_cuestionario = models.TextField(null=True)
     tema_asignatura_cuestionario = models.TextField(null=True)
     id_ciclo_fk = models.ForeignKey(Ciclos,on_delete=models.CASCADE)
+    id_asignatura_fk = models.ForeignKey(Asignaturas,on_delete=models.CASCADE,null=True)
     nombre_usuario_fk = models.ForeignKey(Usuarios,on_delete=models.CASCADE,null=True)
     fecha_creacion = models.DateField(auto_now=True)
 

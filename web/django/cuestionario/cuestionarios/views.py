@@ -1,19 +1,79 @@
 from django.shortcuts import render,redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.views import View
-from django.http import JsonResponse
+from django.http import JsonResponse,HttpResponse
 from .models import *
 from .utils import *
+import math
 import json
 # Create your views here.
 
 class CuestionariosView(View):
 
 
-    def get(self,request):
-        cuestionarios = Cuestionarios.objects.all()
-        return render(request,"cuestionarios/cuestionarios.html",{"cuestionarios":cuestionarios})
-
+    def get(self,request,n_pagina=1):
+        busqueda = request.GET.get('busqueda', '')
+        ciclo = request.GET.get('ciclo','')
+        asignatura = request.GET.get('asignatura','')
+        filtros = request.GET.get('filtros','')
+        if busqueda != "":
+            n_pagina = 1
+        #El numero de pagina se utilizara para seleccionar los cuestionario atraves de 
+        #una especie de indicie, una pagina tiene 8 cuestionarios y si es la pagina 1
+        #se mostraran los primero 8 cuestionario y asi sucesivamente
+        indice = n_pagina * 8
+        desde = indice - 8
+        cuestionarios_mostrar = []
+        if filtros:
+            if ciclo != "" and asignatura == "" and busqueda == "":
+                cuestionarios = Cuestionarios.objects.select_related('id_ciclo_fk').select_related('id_asignatura_fk').filter(id_ciclo_fk=ciclo)
+                cuestionarios_mostrar = cuestionarios[desde:indice]
+            elif ciclo == "" and asignatura != "" and busqueda == "":
+                cuestionarios = Cuestionarios.objects.select_related('id_ciclo_fk').select_related('id_asignatura_fk').filter(id_asignatura_fk=asignatura)
+                cuestionarios_mostrar = cuestionarios[desde:indice]
+            elif ciclo != "" and asignatura != "" and busqueda == "":
+                cuestionarios = Cuestionarios.objects.select_related('id_ciclo_fk').select_related('id_asignatura_fk').filter(id_ciclo_fk=ciclo,id_asignatura_fk=asignatura)
+                cuestionarios_mostrar = cuestionarios[desde:indice]
+            elif ciclo != "" and asignatura != "" and busqueda != "":
+                cuestionarios = Cuestionarios.objects.select_related('id_ciclo_fk').select_related('id_asignatura_fk').filter(id_ciclo_fk=ciclo,id_asignatura_fk=asignatura,nombre_cuestionario__icontains=busqueda)
+                cuestionarios_mostrar = cuestionarios[desde:indice]
+            elif ciclo != "" and asignatura == "" and busqueda != "":
+                cuestionarios = Cuestionarios.objects.select_related('id_ciclo_fk').select_related('id_asignatura_fk').filter(id_ciclo_fk=ciclo,nombre_cuestionario__icontains=busqueda)
+                cuestionarios_mostrar = cuestionarios[desde:indice]
+            elif ciclo == "" and asignatura != "" and busqueda != "":
+                cuestionarios = Cuestionarios.objects.select_related('id_ciclo_fk').select_related('id_asignatura_fk').filter(nombre_cuestionario__icontains=busqueda,id_asignatura_fk=asignatura)
+                cuestionarios_mostrar = cuestionarios[desde:indice]
+            elif ciclo == "" and asignatura == "" and busqueda != "":
+                cuestionarios = Cuestionarios.objects.select_related('id_ciclo_fk').select_related('id_asignatura_fk').filter(nombre_cuestionario__icontains=busqueda)
+                cuestionarios_mostrar = cuestionarios[desde:indice]
+            elif ciclo == "" and asignatura == "" and busqueda == "":
+                cuestionarios_mostrar = Cuestionarios.objects.select_related('id_ciclo_fk').select_related('id_asignatura_fk').all()[desde:indice]
+            return render(request,"cuestionarios/cuestionarios-filtros.html",{"cuestionarios":cuestionarios_mostrar})
+        elif busqueda:
+            cuestionarios = Cuestionarios.objects.select_related('id_ciclo_fk').select_related('id_asignatura_fk').filter(nombre_cuestionario__icontains=busqueda)
+        else:
+            cuestionarios = Cuestionarios.objects.select_related('id_ciclo_fk').select_related('id_asignatura_fk').all()
+        cuestionarios_mostrar = cuestionarios[desde:indice]
+        n_cuestionarios = len(cuestionarios)
+        n_paginas = n_cuestionarios / 8
+        n_paginas = math.ceil(n_paginas)
+        numeracion = [{"indice":n,"ruta":f"/cuestionarios/{n}"} for n in range(1,n_paginas+1)]
+        #Si la pagina es divisible entre 5 es que hay que mostrar los siguientes numeros porque
+        # este en el inicio o final de los 5 indices
+        if n_pagina % 5 == 0 or n_pagina == 1:
+            inicio = (n_pagina - 1) // 5 * 5
+            fin = inicio + 5
+            numeracion = numeracion[inicio:fin]
+            siguiente = n_pagina + 1 if n_pagina < n_paginas else n_pagina
+            anterior = n_pagina - 1 if n_pagina > 1 else 1
+        else:
+            inicio = (n_pagina - 1) // 5 * 5
+            fin = inicio + 5
+            numeracion = numeracion[inicio:fin]
+            siguiente = n_pagina + 1 if n_pagina < n_paginas else n_pagina
+            anterior = n_pagina - 1 if n_pagina > 1 else 1
+        return render(request,"cuestionarios/cuestionarios.html",{"cuestionarios":cuestionarios_mostrar,"indices":numeracion,
+                    "siguiente":siguiente,"anterior":anterior})
 
 class CrearCuestionarioView(View):
 
@@ -25,54 +85,58 @@ class CrearCuestionarioView(View):
         return render(request,"cuestionarios/cuestionario.html",{"ciclos":ciclos,"asignaturas":asignaturas})
     
     def post(self,request):
-        #Obtenemos el archivo PDF enviado por el formulario
-        archivo = request.FILES["archivo"]
-        print(request.POST)
-        # Obtenemos los datos enviados por el formulario
-        nombre_cuestionario = request.POST["nombre"]
-        tema_asignatura = request.POST["tema"]
-        ciclo = request.POST["ciclo"]
-        asginatura = request.POST["asignatura"]
-        preguntas = request.POST["preguntas"]
-        respuestas = request.POST["respuestas"]
-        correctas = request.POST["correctas"]
-        descripcion = request.POST["descripcion"]
-        enlace = request.POST["enlace"]
-        #Obtenemos el texto del PDF y generamos el cuestionario
-        texto_pdf = extraer_texto_pdf_directo(archivo)
-        cuestionario_generado = procesar_pdf_y_generar_cuestionario_json(texto_pdf,total_preguntas=int(preguntas),
-                                n_respuestas=int(respuestas),n_correctas=int(correctas))
-        if enlace == "guardar_contestar":
-            #Guardamo el cuestionario en y mandamos al usuario a contestarlo
-            cuestionario = Cuestionarios(
-                nombre_cuestionario=nombre_cuestionario,
-                tema_asignatura_cuestionario=tema_asignatura,
-                id_ciclo_fk=Ciclos.objects.get(nombre=ciclo),
-                nombre_usuario_fk=Usuarios.objects.get(nombre="jose"),
-                descripcion_cuestionario=descripcion,
-            )
-            
-            cuestionario.save()
-            
-            preguntas = [Preguntas(pregunta=pregunta["pregunta"],id_cuestionario_fk=cuestionario) for pregunta in cuestionario_generado]
-            
-            for pregunta in preguntas:
-                pregunta.save()
+        try:
+            #Obtenemos el archivo PDF enviado por el formulario
+            archivo = request.FILES["archivo"]
+            # Obtenemos los datos enviados por el formulario
+            nombre_cuestionario = request.POST["nombre"]
+            tema_asignatura = request.POST["tema"]
+            ciclo = request.POST["ciclo"]
+            asginatura = request.POST["asignatura"]
+            preguntas = request.POST["preguntas"]
+            respuestas = request.POST["respuestas"]
+            # correctas = request.POST["correctas"] if request.POST["correctas"] != "" else "1"
+            descripcion = request.POST["descripcion"]
+            enlace = request.POST["enlace"]
+            #Obtenemos el texto del PDF y generamos el cuestionario
+            texto_pdf = extraer_texto_pdf_directo(archivo)
+            cuestionario_generado = procesar_pdf_y_generar_cuestionario_json(texto_pdf,total_preguntas=int(preguntas),
+                                    n_respuestas=int(respuestas))
+            if enlace == "guardar_contestar":
+                #Guardamo el cuestionario en y mandamos al usuario a contestarlo
+                cuestionario = Cuestionarios(
+                    nombre_cuestionario=nombre_cuestionario,
+                    tema_asignatura_cuestionario=tema_asignatura,
+                    id_ciclo_fk=Ciclos.objects.get(nombre=ciclo),
+                    id_asignatura_fk=Asignaturas.objects.get(nombre=asginatura),
+                    nombre_usuario_fk=Usuarios.objects.get(nombre="jose"),
+                    descripcion_cuestionario=descripcion
+                )
+                
+                cuestionario.save()
+                
+                preguntas = [Preguntas(pregunta=pregunta["pregunta"],id_cuestionario_fk=cuestionario) for pregunta in cuestionario_generado]
+                
+                for pregunta in preguntas:
+                    pregunta.save()
 
-            respuestas = []
-            for posicion_pregunta in range(len(cuestionario_generado)):
-                for respuesta in cuestionario_generado[posicion_pregunta]["opciones"]:
-                    respuestas.append(Respuestas(respuesta=respuesta,
-                    correcta=True if cuestionario_generado[posicion_pregunta]["opciones"][cuestionario_generado[posicion_pregunta]["respuesta_correcta"]] == respuesta else False,
-                    id_pregunta_fk=preguntas[posicion_pregunta]))
-            
-            for respuesta in respuestas:
-                respuesta.save()
+                respuestas = []
+                for posicion_pregunta in range(len(cuestionario_generado)):
+                    for respuesta in cuestionario_generado[posicion_pregunta]["opciones"]:
+                        respuestas.append(Respuestas(respuesta=respuesta,
+                        correcta=True if cuestionario_generado[posicion_pregunta]["opciones"][cuestionario_generado[posicion_pregunta]["respuesta_correcta"]] == respuesta else False,
+                        id_pregunta_fk=preguntas[posicion_pregunta]))
+                
+                for respuesta in respuestas:
+                    respuesta.save()
 
-            return redirect("contestar_cuestionario",cuestionario_id=cuestionario.id)
+                return redirect("contestar_cuestionario",cuestionario_id=cuestionario.id)
+            elif enlace == "generar":
+                
+                return HttpResponse(cuestionario_generado)
 
-
-        # return JsonResponse({"cuestionario":cuestionario_generado})
+        except Exception as error:
+            print("Error: ",error)
     
 
 class ContestarCuestionarioView(View):
