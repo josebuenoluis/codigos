@@ -180,7 +180,7 @@
 
 .info-boxes .content-boxes .info-box{
     width: 50%;
-    height: 273px;
+    min-height: 273px;
     background-color: #6275A8;
     border-radius: 60px;
     border: 3px solid rgb(255, 255, 255, .60);
@@ -357,5 +357,15 @@
     .content-attributes .childs-attributtes .child-attribute {
         margin-bottom: 3rem;
     }
-    
+
+    .info-boxes .content-boxes .info-box .info-content {
+        flex-direction: column;
+    }
+    .info-boxes .content-boxes .info-box .info-content > p {
+        width: 90%;
+    }
+
+    .info-boxes .content-boxes .info-box .info-content > img {
+        margin-top: 2rem;
+    }
 }
