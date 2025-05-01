@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block title %} Crear-Asistente {% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/crear-asistente.css') }}">
+{% endblock %}
+{% block content %}
+<main>
+    <div class="container">
+        <div class="card my-4">
+            <div class="card-body">
+                <div class="row d-flex justify-content-center mb-4">
+                    <div class="col-12 col-lg-8">
+                        <h2 class="text-center border-bottom">Crear Asistente</h2>
+                    </div>
+                </div>
+                <div class="row d-flex flex-wrap justify-content-around mb-4">
+                    <div class="col-12 col-lg-4 mb-2">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" id="nombre" name="nombre" class="form-control">
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <label for="planta" class="form-label">Planta</label>
+                        <select class="form-select" required id="planta" name="planta" aria-label="Planta">
+                            <option value="" disabled selected>Selecciona una planta</option>
+                            <option value="1">Planta 1</option>
+                            <option value="2">Planta 2</option>
+                            <option value="3">Planta 3</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row d-flex flex-wrap justify-content-around mb-4">
+                    <div class="col-12 col-lg-4 mb-2">
+                        <label for="nif" class="form-label">NIF</label>
+                        <input type="text" name="nif" id="nif" class="form-control">
+                     </div>
+                    <div class="col-12 col-lg-4">
+                        <label for="codigo" class="form-label">Codigo</label>
+                            <div class="input-group">
+                                <input type="text" 
+                                class="form-control" 
+                                id="codigo"
+                                name="codigo"
+                                placeholder="Ingrese codigo de 6 caracteres..."
+                                required>
+                                <button type="button" class="input-group-text"
+                                id="generar-codigo">Generar</button>
+                            </div>
+                     </div>
+                </div>
+                <div class="row d-flex justify-content-around mb-5">
+                    <div class="col-12 col-lg-4">
+                        <label for="telefono" class="form-label">Telefono</label>
+                        <input type="text" name="telefono" id="telefono" class="form-control">
+                     </div>
+                </div>
+                <div class="row d-flex justify-content-around">
+                    <div class="col-4 col-lg-12 flex-wrap d-flex justify-content-center">
+                        <input type="submit" value="Crear" class="btn btn-success m-4 px-4" id="crear-asistente">
+                        <input type="reset" value="Reiniciar" class="btn btn-danger m-4" id="reiniciar">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

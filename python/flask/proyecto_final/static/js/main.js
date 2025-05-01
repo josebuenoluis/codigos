@@ -1,8 +1,7 @@
 const sidebar = document.querySelector(".sidebar");
-const sidebarToggler = document.querySelector(".sidebar-toggler");
-const sidebarTogler2 = document.querySelector(".sidebar-toggler-header");
+const sidebarTogler = document.querySelector(".sidebar-toggler-header");
 let desplegado = false;
-sidebarTogler2.addEventListener("click",() => {
+sidebarTogler.addEventListener("click",() => {
     sidebar.classList.toggle("collapsed");
     if(desplegado == false){
         desplegado = true;
@@ -12,11 +11,13 @@ sidebarTogler2.addEventListener("click",() => {
     evaluarHeader();
 });
 
+window.addEventListener("resize", () => {
+    evaluarHeader();
+});
 
 function evaluarHeader(){
-    const header = document.querySelector("body > header");
+    const header = document.querySelector(".header-content > header");
     const userIcon = header.querySelector(".icon-user");
-    const sidebars = document.querySelector(".sidebar");
     if(window.innerWidth <= 326 && desplegado == true){
         userIcon.style.display = "none";
     }else{
@@ -24,6 +25,16 @@ function evaluarHeader(){
             userIcon.style.display = "inline";
         }, 200);
     }
-    console.log(header);
-    console.log(header.style.width);
+    actualizarContenido();
+}
+
+function actualizarContenido(){
+    const content = document.querySelector("body main");
+    if(desplegado == true){
+        content.style.left = "270px";
+        // sidebarTogler.style.left = "270px";
+    }else{
+        content.style.left = "86px";
+        // sidebarTogler.style.left = "86px";
+    }
 }
