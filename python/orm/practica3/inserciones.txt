@@ -1,0 +1,24 @@
+clientes
+89131381X;Empresa Alfa S.L.;912345678;contacto@alfasl.com;
+34623227Q;Beta Consultores;923456789;info@betaconsultores.com;
+68777904S;Gamma Innovaciones;934567890;soporte@gamma.com;
+80551547G;Delta Proyectos;945678901;ventas@deltaproyectos.com;
+11750649H;Epsilon Soluciones;956789012;info@epsilonsol.com;
+empleados
+99466717C;Juan Pérez;False;juan.perez@empresa.com;
+62663280X;María López;False;maria.lopez@empresa.com;
+03205083X;Carlos García;False;carlos.garcia@empresa.com;
+64070692Y;Lucía Martínez;True;lucia.martinez@empresa.com;
+25294253A;Pedro Sánchez;True;pedro.sanchez@empresa.com;
+proyectos
+Proyecto A;Desarrollo de software empresarial;2024-01-10;2024-01-30;5000;89131381X;64070692Y;
+Proyecto B;Implementación de sistema de gestión;2024-02-10;2024-02-25;75000;34623227Q;25294253A;
+Proyecto C;Actualización de infraestructuras TI;2024-03-01;2024-03-31;60000;68777904S;64070692Y;
+Proyecto D;Desarrollo de aplicación móvil;2024-04-20;2025-05-15;45000;68777904S;25294253A;
+Proyecto E;Consultoría en ciberseguridad;2024-06-10;1990-06-30;55000;68777904S;64070692Y;
+empleados_proyectos
+1;99466717C;
+1;62663280X;
+2;62663280X;
+2;99466717C;
+3;99466717C;
