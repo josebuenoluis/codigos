@@ -1,14 +1,12 @@
 from flask import Flask
-from flask import render_template,request,redirect,url_for
+from config import Config
+from flask_sqlalchemy import SQLAlchemy
+from routes.home import home
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="static", template_folder="templates")
 
-@app.route("/")
-def home():
-    return render_template("panelhab.html")
+app.config.from_object(Config)
 
+db = SQLAlchemy(app)
 
-
-if __name__ == '__main__':
-
-    app.run("localhost","8000")
+app.register_blueprint(home)

@@ -2,7 +2,7 @@
 	<head>
 		<title>lampara 2</title>
 		<meta charset="utf-8">
-		<meta http-equiv="refresh" content="2">
+		<!-- <meta http-equiv="refresh" content="2"> -->
 	<!-- <script type="text/javascript" src="https://www3.gobiernodecanarias.org/educacion/cau_ce/estadisticasweb/scripts/piwik-eforma.js"></script><link rel="stylesheet" type="text/css" href="https://www3.gobiernodecanarias.org/educacion/cau_ce/estadisticasweb/scripts/cookies/cookies.css"/><script  type="text/javascript" src="https://www3.gobiernodecanarias.org/educacion/cau_ce/estadisticasweb/scripts/cookies/cookies.js"></script><script type="text/javascript" src="https://www3.gobiernodecanarias.org/educacion/cau_ce/estadisticasweb/scripts/cookies/cookies-html.js"></script></head> -->
 	<body style="text-align:center;">
 		<button id="conmutador" onclick="llamada()">Llamada</button>
@@ -12,9 +12,9 @@
 		<br>
 		<br>
 		{% if lampara==0 %}
-			<img id="lampara" src="static/pic_bulboff.gif">
+			<img id="lampara" src="../static/pic_bulboff.gif">
 		{% else %}
-			<img id="lampara" src="static/pic_bulbon.gif">
+			<img id="lampara" src="../static/img/pic_bulbon.gif">
 		{% endif %}
 	</body>
 </html>
@@ -27,5 +27,5 @@
 	function presencia(){
 		fetch('https://paciente-enfermero.angelmelchor.pro/presencia/104/b') 
 			.then(response => response.json()) // Convierte la respuesta en JSON
-	}
+		}
 </script>
