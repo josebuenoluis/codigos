@@ -13,9 +13,31 @@
                         <h2 class="text-center border-bottom">Estadisticas</h2>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        
+                <div class="row d-flex justify-content-center flex-wrap mb-3">
+                    <div class="col-12 col-lg-5 mb-4 flex-column justify-content-center align-self-center">
+                        <canvas id="myChart" class="w-100 h-75"></canvas>
+                    </div>
+                    <div class="col-8 col-lg-5 mb-4">
+                        <canvas id="myChart2" class="w-100 h-100"></canvas>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-center mb-3 my-4">
+                    <div class="col-10 mb-4">
+                        <div class="table-responsive" style="max-height: 400px;min-height:400px; overflow-y: auto;">
+                            <table class="table text-center table-hover">
+                                <thead class="table-light" style="position:sticky; top: 0;">
+                                    <tr>
+                                        <th scope="col">Id</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Asistencias Atendidas</th>
+                                        <th scope="col">Asistencias No Atendidas</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -23,4 +45,9 @@
     </div>
 </main>
 
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='js/asistentes-estadisticas.js') }}"></script>
 {% endblock %}

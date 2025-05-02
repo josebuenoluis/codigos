@@ -34,6 +34,7 @@ header a .icon-user:hover{
 body{
     min-height: 100vh;
     background: #D1D7F3;
+    overflow:hidden;
 }
 
 .sidebar{
@@ -41,7 +42,13 @@ body{
     width: 270px;
     background-color: #151A2D;
     height: 100vh;
-    transition: 0.4s ease;
+    transition: 0.4s ease;    
+}
+
+.sidebar-nav{
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 70vh;
 }
 
 main {
@@ -161,5 +168,17 @@ main .container .card{
     }
     .sidebar-nav .custom-nav-link{
         font-size: 16px;
+    }
+}
+
+@media screen and (max-height:458px) {
+    .sidebar-nav{
+        max-height:60vh;
+    }
+}
+
+@media screen and (max-height:383px) {
+    .sidebar-nav{
+        max-height:50vh;
     }
 }
