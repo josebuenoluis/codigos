@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %} Historico-Asistencias {% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/asistencias-consultas.css') }}">
+{% endblock %}
+{% block content %}
+<main>
+    <div class="container">
+        <div class="card my-4">
+            <div class="card-body">
+                <div class="row d-flex justify-content-center mb-4">
+                    <div class="col-12 col-lg-8">
+                        <h2 class="text-center border-bottom">Consultas</h2>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-around flex-wrap mb-3">
+                    <div class="col-12 col-lg-10 mb-4 flex-column justify-content-center align-self-center">
+                        <canvas id="myChart" class="w-100 h-75"></canvas>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-around flex-wrap mb-3">
+                    <div class="col-12 col-lg-10 mb-4 flex-column justify-content-center align-self-center">
+                        <canvas id="myChart2" class="w-100 h-75"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='js/asistencias-consultas.js') }}"></script>
+{% endblock %}

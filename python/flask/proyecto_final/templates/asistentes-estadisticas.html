@@ -1,8 +1,5 @@
 {% extends 'base.html' %}
 {% block title %} Estadisticas-Asistente {% endblock %}
-{% block styles %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/crear-asistente.css') }}">
-{% endblock %}
 {% block content %}
 <main>
     <div class="container">
@@ -13,31 +10,84 @@
                         <h2 class="text-center border-bottom">Estadisticas</h2>
                     </div>
                 </div>
-                <div class="row d-flex justify-content-center flex-wrap mb-3">
+                <div class="row d-flex justify-content-around flex-wrap mb-3">
                     <div class="col-12 col-lg-5 mb-4 flex-column justify-content-center align-self-center">
                         <canvas id="myChart" class="w-100 h-75"></canvas>
                     </div>
-                    <div class="col-8 col-lg-5 mb-4">
+                    <div class="col-12 col-lg-4 mb-4">
                         <canvas id="myChart2" class="w-100 h-100"></canvas>
                     </div>
                 </div>
-                <div class="row d-flex justify-content-center mb-3 my-4">
-                    <div class="col-10 mb-4">
-                        <div class="table-responsive" style="max-height: 400px;min-height:400px; overflow-y: auto;">
+                <div class="row d-flex flex-wrap justify-content-around mb-4">
+                    <div class="col-12 col-lg-4 mb-3">
+                        <label for="planta" class="form-label fw-bold">Filtrar por planta</label>
+                        <select class="form-select" required id="planta" name="planta" aria-label="Planta">
+                            <option value="" disabled selected>Selecciona una planta...</option>
+                            <option value="1">Planta 1</option>
+                            <option value="2">Planta 2</option>
+                            <option value="3">Planta 3</option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-lg-4 mb-3">
+                        <div>
+                            <label for="buscar-asistentes" class="form-label fw-bold">Filtrar por nombre</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Buscar" id="buscar-asistentes"
+                                    aria-label="Search" aria-describedby="search-addon">
+                                <span class="input-group-text">
+                                    <i class="bi bi-search"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-center mb-3">
+                    <div class="col-12">
+                        <div class="table-responsive border border-1" style="max-height: 400px;min-height:400px; overflow-y: auto;">
                             <table class="table text-center table-hover">
                                 <thead class="table-light" style="position:sticky; top: 0;">
                                     <tr>
-                                        <th scope="col">Id</th>
                                         <th scope="col">Nombre</th>
+                                        <th scope="col">Planta</th>
                                         <th scope="col">Asistencias Atendidas</th>
                                         <th scope="col">Asistencias No Atendidas</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-
+                                    <tr>
+                                        <td>Asistente 1</td>
+                                        <td>Planta 1</td>
+                                        <td>10</td>
+                                        <td>2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Asistente 2</td>
+                                        <td>Planta 2</td>
+                                        <td>8</td>
+                                        <td>3</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Asistente 3</td>
+                                        <td>Planta 3</td>
+                                        <td>15</td>
+                                        <td>1</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-2 col-lg-4 d-flex justify-content-center">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                              <li class="page-item"><a class="page-link text-dark" href="#">Previous</a></li>
+                              <li class="page-item"><a class="page-link text-dark" href="#">1</a></li>
+                              <li class="page-item"><a class="page-link text-dark" href="#">2</a></li>
+                              <li class="page-item"><a class="page-link text-dark" href="#">3</a></li>
+                              <li class="page-item"><a class="page-link text-dark" href="#">Next</a></li>
+                            </ul>
+                          </nav>
                     </div>
                 </div>
             </div>

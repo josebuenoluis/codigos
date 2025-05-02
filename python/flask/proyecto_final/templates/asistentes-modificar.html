@@ -38,13 +38,23 @@
     
                                 </div>
                             </div>
-                            <div class="col-12 col-lg-4 mb-3">
+                            <div class="col-12 col-lg-2 mb-3">
+                                <label for="planta" class="form-label fw-bold">Filtrar por planta</label>
+                                <select class="form-select" required id="planta" name="planta" aria-label="Planta">
+                                    <option value="" disabled selected>Selecciona una planta...</option>
+                                    <option value="1">Planta 1</option>
+                                    <option value="2">Planta 2</option>
+                                    <option value="3">Planta 3</option>
+                                </select>
+                            </div>
+                            <div class="col-12 col-lg-2 mb-3">
                                 <div>
+                                    <label for="buscar-asistentes" class="form-label fw-bold">Filtrar por nombre</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" placeholder="Buscar" id="buscar-asistentes"
                                             aria-label="Search" aria-describedby="search-addon">
                                         <span class="input-group-text">
-                                            <i class="bi bi-search fs-5"></i>
+                                            <i class="bi bi-search"></i>
                                         </span>
                                     </div>
                                 </div>

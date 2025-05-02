@@ -48,7 +48,7 @@ body{
 .sidebar-nav{
     overflow-y: auto;
     overflow-x: hidden;
-    max-height: 70vh;
+    max-height: 75vh;
 }
 
 main {

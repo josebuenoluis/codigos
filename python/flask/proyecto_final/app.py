@@ -3,6 +3,7 @@ from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from routes.home import home
 from routes.asistentes import asistentes
+from routes.asistencias import asistencias
 
 app = Flask(__name__)
 
@@ -12,3 +13,4 @@ db = SQLAlchemy(app)
 
 app.register_blueprint(home)
 app.register_blueprint(asistentes)
+app.register_blueprint(asistencias)
