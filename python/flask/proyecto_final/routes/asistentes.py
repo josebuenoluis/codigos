@@ -9,3 +9,7 @@ def crear_asistente():
 @asistentes.route("/asistentes/modificar", methods=["GET"])
 def modificar_asistente():
     return render_template("asistentes-modificar.html")
+
+@asistentes.route("/asistentes/estadisticas", methods=["GET"])
+def estadisticas_asistente():
+    return render_template("asistentes-estadisticas.html")

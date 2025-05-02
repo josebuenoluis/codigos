@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from routes.home import home
 from routes.asistentes import asistentes
 
-app = Flask(__name__, static_folder="static", template_folder="templates")
+app = Flask(__name__)
 
 app.config.from_object(Config)
 

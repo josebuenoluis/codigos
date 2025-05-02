@@ -56,6 +56,10 @@ main {
     overflow: auto;
 }
 
+main .container .card{
+    box-shadow: 4px 4px 25px rgba(0, 0, 0, 0.5);
+}
+
 .sidebar.collapsed{
     min-width: 85px;
     width: 85px;

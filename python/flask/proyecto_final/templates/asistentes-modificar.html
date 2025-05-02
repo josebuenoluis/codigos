@@ -10,9 +10,9 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-12 mb-3">
-                                <h4 class="text-center">Entidades</h4>
+                        <div class="row d-flex justify-content-center mb-3">
+                            <div class="col-10 col-lg-6 mb-3">
+                                <h2 class="text-center border-bottom">Modificar asistentes</h2>
                             </div>
                         </div>
                         <div class="row">
@@ -32,7 +32,7 @@
                             <div class="col-12 col-lg-4 mb-3 d-flex justify-content-center">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <span class="lead">Entidades selecionadas: </span>
+                                        <span class="lead">Asistentes seleccionados: </span>
                                         <span class="lead fw-bold" id="n-items">0</span>
                                     </div>
     
@@ -41,9 +41,9 @@
                             <div class="col-12 col-lg-4 mb-3">
                                 <div>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Pesquisar" id="search-articles"
+                                        <input type="text" class="form-control" placeholder="Buscar" id="buscar-asistentes"
                                             aria-label="Search" aria-describedby="search-addon">
-                                        <span class="input-group-text" id="user-icon">
+                                        <span class="input-group-text">
                                             <i class="bi bi-search fs-5"></i>
                                         </span>
                                     </div>
@@ -55,17 +55,17 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="modalConfirmLabel">Janela de confirmação</h1>
+                                        <h1 class="modal-title fs-5" id="modalConfirmLabel">Ventana de confirmación</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <span class="lead">
-                                            Tem certeza de que deseja excluir os entidades selecionadas?
+                                            Esta seguro que desea eliminar los asistentes seleccionados?
                                         </span>
                                         <br />
                                         <span class="lead">
-                                            Esta ação não pode ser desfeita.
+                                            Esta accion no se puede deshacer.
                                         </span>
                                     </div>
                                     <div class="modal-footer">
@@ -77,47 +77,16 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="modal fade" id="modalValidate" tabindex="-1" aria-labelledby="modalValidateLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="modalValidateLabel">Janela informativa</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <span class="lead">
-                                            Não foi possível excluir, as seguintes entidades possuem documentos associados:
-                                        </span>
-                                        <ul #listInvalidIds class="list-group my-2"
-                                            style="max-height: 150px; overflow-y: auto;">
-    
-                                        </ul>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" id="btn-close-modal" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Fechar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="col">
-                                <div class="table-responsive" style="max-height: 300px;min-height:300px; overflow-y: auto;">
+                                <div class="table-responsive" style="max-height: 400px;min-height:400px; overflow-y: auto;">
                                     <table class="table text-center table-hover">
                                         <thead class="table-light" style="position:sticky; top: 0;">
                                             <tr>
-                                                <th scope="col">Cod.Entidade</th>
-                                                <th scope="col">Nome</th>
-                                                <th scope="col">Nome Comercial</th>
-                                                <th scope="col">Tipo</th>
-                                                <th scope="col">Morada</th>
-                                                <th scope="col">Localidade</th>
-                                                <th scope="col">Código postal</th>
-                                                <th scope="col">Cidade</th>
-                                                <th scope="col">País</th>
-                                                <th scope="col">Contribuinte</th>
+                                                <th scope="col">Id</th>
+                                                <th scope="col">Nombre</th>
+                                                <th scope="col">Activo</th>
+                                                <th scope="col">NºPlanta</th>
                                             </tr>
                                         </thead>
                                         <tbody>

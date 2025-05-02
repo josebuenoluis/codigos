@@ -1,10 +1,5 @@
-main {
-    display: flex;
-    position: absolute;
-    top: 86px;
-    left: 86px;
-    right: 0;
-    bottom: 0; 
+#generar-codigo:hover{
+    background-color: rgb(45, 45, 147);
     transition: 0.4s ease;
-    justify-content: center;
+    color: white;
 }

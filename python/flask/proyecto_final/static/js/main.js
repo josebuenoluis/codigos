@@ -38,3 +38,4 @@ function actualizarContenido(){
         // sidebarTogler.style.left = "86px";
     }
 }
+
