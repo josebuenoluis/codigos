@@ -1,7 +1,9 @@
 let canvas = document.getElementById("myChart");
 let canvas2 = document.getElementById("myChart2");
+let canvas3 = document.getElementById("myChart3");
 let ctx = canvas.getContext("2d");
 let ctx2 = canvas2.getContext("2d");
+let ctx3 = canvas3.getContext("2d");
 let myChart = new Chart(ctx,{
     type:"bar",
     data:{
@@ -35,6 +37,7 @@ let myChart2 = new Chart(ctx2,{
           }]
     },
     options:{
+        indexAxis:"y",
         scales: {
             y: {
                 beginAtZero: true
@@ -42,3 +45,19 @@ let myChart2 = new Chart(ctx2,{
         }
     }
 });
+
+let myChart3 = new Chart(ctx3,{
+    type:"pie",
+    data:{
+        labels:["col1","col2"],
+        datasets:[{
+            label:"Num datos",
+            data:[10,4],
+            backgroundColor:[
+                "rgba(255, 99, 132, 0.5)",
+                "rgba(54, 162, 235, 0.5)",
+            ],
+        }]
+    },
+});
+
