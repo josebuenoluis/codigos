@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 app.config.from_object(Config)
 
-db = SQLAlchemy(app)
+# SQLAlchemy(app)
 
 app.register_blueprint(home)
 app.register_blueprint(asistentes)
