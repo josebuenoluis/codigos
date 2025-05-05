@@ -54,6 +54,7 @@ def modificar_asistente():
 def estadisticas_asistente():
     asistentes_asistencias = db_service.asistencias_atendidas_asistente()
     plantas = db_service.obtener_plantas()
+    # db_service.cargarAsistencias()
     return render_template("asistentes-estadisticas.html",
     asistentes_asistencias=asistentes_asistencias,plantas=plantas)
 

@@ -13,9 +13,13 @@ def obtener_asistentes():
     return jsonify([asistente.to_dict() for asistente in asistentes])
 
 @api.route("/api/asistentes/estadisticas", methods=["GET"])
-def obtener_asistentes_estadisticas():
-    asistentes_asistencias = db_service.asistencias_atendidas_asistente()
-    return jsonify([asistente.to_dict() for asistente in asistentes_asistencias])
+@api.route("/api/asistentes/estadisticas/<int:n_planta>", methods=["GET"])
+def obtener_asistentes_estadisticas(n_planta:int=0):
+    if n_planta != 0:
+        asistentes_asistencias = db_service.asistencias_atendidas_asistente_planta(n_planta)
+    else:
+        asistentes_asistencias = db_service.asistencias_atendidas_asistente()
+    return asistentes_asistencias
 
 @api.route("/api/asistencias",methods=["GET"])
 @api.route("/api/asistencias/<int:n_planta>",methods=["GET"])
@@ -35,3 +39,8 @@ def asistencias_conteo(n_planta:int=0):
     else:
         conteo_asistencias = db_service.conteo_asistencias()
     return conteo_asistencias
+
+@api.route("/api/asistencias/historico",methods=["GET"])
+def asistencias_historico():
+    asistencias_historico = db_service.obtener_historico()
+    return asistencias_historico

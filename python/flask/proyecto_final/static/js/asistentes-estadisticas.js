@@ -4,14 +4,15 @@ let ctx = canvas.getContext("2d");
 let ctx2 = canvas2.getContext("2d");
 let n_atendidas = 0;
 let n_no_atendidas = 0;
+let asistencias_asistenes = [];
 
 let myChart = new Chart(ctx,{
     type:"bar",
     data:{
-        labels:["col1","col2","col3","col4","col5","col6","col7","col8","col9","col10"],
+        labels:[],
         datasets:[{
-            label:"Num datos",
-            data:[10,9,15,8,7,6,5,4,3,2],
+            label:"Por asistente",
+            data:[],
             backgroundColor:[
                 "rgba(255, 99, 132, 0.5)",
                 "rgba(54, 162, 235, 0.5)",
@@ -42,17 +43,66 @@ let myChart = new Chart(ctx,{
 let myChart2 = new Chart(ctx2,{
     type:"pie",
     data:{
-        labels:["col1","col2"],
+        labels:["Atendidas","Pendientes"],
         datasets:[{
-            label:"Num datos",
-            data:[10,4],
+            label:"Asistencias totales",
+            data:[],
             backgroundColor:[
-                "rgba(255, 99, 132, 0.5)",
-                "rgba(54, 162, 235, 0.5)",
+              "rgba(54, 162, 235, 0.5)",
+              "rgba(255, 99, 132, 0.5)",
             ],
         }]
     },
 });
+
+
+
+obtenerConteoAsistencias().then(data => {
+    n_atendidas = data.asistencias_atendidas;
+    n_no_atendidas = data.asistencias_pendientes;
+    myChart2.data.datasets[0].data[0] = n_atendidas;
+    myChart2.data.datasets[0].data[1] = n_no_atendidas;
+  });
+
+obtenerAsistenciasAsistentes().then(data => {
+  let lista_asistencias = [];
+  let lista_nombres = [];
+  // Guardamos en la lista el numero de asistencias atendidas y 
+  // nombre de asistentes
+  data.forEach(element => {
+    lista_nombres.push(element.nombre);
+    lista_asistencias.push(element.asistencias_atendidas);
+  });
+  myChart.data.labels = lista_nombres;
+  myChart.data.datasets[0].data = lista_asistencias;
+  myChart.update();
+});
+
+function mostrarAsistenciasAsistentes(n_planta=0){
+  // Para la grafica de Barras
+  obtenerAsistenciasAsistentes(n_planta).then(data => {
+    let lista_asistencias = [];
+    let lista_nombres = [];
+    // Guardamos en la lista el numero de asistencias atendidas y 
+    // nombre de asistentes
+    data.forEach(element => {
+      lista_nombres.push(element.nombre);
+      lista_asistencias.push(element.asistencias_atendidas);
+    });
+    myChart.data.labels = lista_nombres;
+    myChart.data.datasets[0].data = lista_asistencias;
+    myChart.update();
+  });
+  // Para la grafica de tipo Pie
+  obtenerConteoAsistencias(n_planta).then(data => {
+    console.log("Data: ",data);
+    n_atendidas = data.asistencias_atendidas;
+    n_no_atendidas = data.asistencias_pendientes;
+    myChart2.data.datasets[0].data[0] = n_atendidas;
+    myChart2.data.datasets[0].data[1] = n_no_atendidas;
+    myChart2.update();
+  });
+}
 
 function buscarAsistentes(){
     let table = document.querySelector("table");
@@ -88,4 +138,40 @@ function filtrarPlanta(){
         }
       }
     }
+    let n_planta = input.value == "" ? 0 : parseInt(input.value);
+    mostrarAsistenciasAsistentes(n_planta);
+}
+
+async function obtenerConteoAsistencias(n_planta=0){
+  let endpoint = "/api/asistencias/conteo";
+  if(n_planta != 0){
+    endpoint = endpoint+"/"+n_planta.toString();
+  }
+  return await fetch(endpoint,{
+    method:"GET",
+    headers:{
+      "Content-Type":"application/json"
+    }
+  }).then(data => {
+    return data.json();
+  }).catch(error => {
+    console.log("Error: ",error);
+  })
+}
+
+async function obtenerAsistenciasAsistentes(n_planta = 0){
+  let endpoint = "/api/asistentes/estadisticas";
+  if(n_planta != 0){
+    endpoint = endpoint+"/"+n_planta.toString();
+  }
+  return await fetch(endpoint,{
+    method:"GET",
+    headers:{
+      "Content-Type":"application/json"
+    }
+  }).then(data => {
+    return data.json();
+  }).catch(error => {
+    console.log("Error: ",error);
+  });
 }
