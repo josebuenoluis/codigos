@@ -78,46 +78,82 @@ function validarNif(){
 function getData(e){
     e.preventDefault();
     let formulario = document.getElementById("form-crear-asistente");
-    let formData = new FormData(formulario);
-    let data = {
-        nif: formData.get("nif"),
-        nombre: formData.get("nombre"),
-        telefono: formData.get("telefono"),
-        codigo: formData.get("codigo"),
-        planta: formData.get("planta")
-    };
-    console.log("Formulario data: ",data);
-    postAsistente(data).then(data => {
-        console.log(data);
-        // if(data.success){
-        //     alert("Asistente creado correctamente");
-        // }else{
-        //     alert("Error al crear el asistente");
-        // }
-    });
+    if(formulario.checkValidity()){   
+        let formData = new FormData(formulario);
+        let dataAsistente = {
+            nif: formData.get("nif").toUpperCase(),
+            nombre: formData.get("nombre"),
+            telefono: formData.get("telefono"),
+            codigo: formData.get("codigo"),
+            planta: formData.get("planta")
+        };
+        postAsistente(dataAsistente).then(data => {
+            abrirModal(data);
+        });
+    }else{
+        formulario.reportValidity();
+    }
 }
 
 async function postAsistente(data){
     let url = "/asistentes/crear";
-    fetch(url, {
+    return await fetch(url, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(data)
-    })
-    .then(response => {
-        if(response.ok){
-            return response.json();
-        }else{
-            throw new Error("Error en la respuesta del servidor");
-        }
-    })
-    .then(data => {
-        console.log(data);
-    })
-    .catch(error => {
-        console.error(error);
+    }).then(data => {
+        console.log("Respuesta del servidor: ",data);
+        return data.json();
+    }).catch(error => {
+        console.error("Error:", error);
     });
 
+}
+
+function abrirModal(respuestaServidor){
+    let modal = document.getElementById("modal-mensajes");
+    let fade = document.createElement("div");
+    let modalBody = document.getElementById("modal-body");
+    let btnCerrar = document.getElementById("btn-cerrar");
+    let formulario = document.getElementById("form-crear-asistente");
+    fade.classList.add("modal-backdrop");
+    fade.classList.add("fade");
+    fade.classList.add("show");
+    fade.style.zIndex = "1050";
+    setTimeout(() => {
+        fade.classList.add("in");
+        modal.classList.add("in");
+    }, 10);
+    document.body.appendChild(fade);
+    modal.classList.add("fade");
+    modal.classList.add("show");
+    modal.setAttribute("style","display: block;");
+    modal.style.zIndex = "1055";
+    btnCerrar.focus();
+    document.body.classList.add("modal-open");
+    if(respuestaServidor.success == true){
+        modalBody.innerHTML = `<div class="alert alert-success" role="alert">
+        ${respuestaServidor.message[0]}
+        </div>`;
+        formulario.reset();
+    }else{
+        for(let i = 0; i < respuestaServidor.message.length; i++){
+            modalBody.innerHTML += `<div class="alert alert-danger" role="alert">
+            ${respuestaServidor.message[i]}
+            </div>`;
+        }
+    }
+}
+
+function cerrarModal(){
+    let modal = document.getElementById("modal-mensajes");
+    let fade = document.querySelector(".modal-backdrop");
+    let modalBody = document.getElementById("modal-body");
+    modal.classList.remove("show");
+    modal.setAttribute("style","display: none;");
+    modalBody.innerHTML = "";
+    document.body.classList.remove("modal-open");
+    fade.remove();
 }

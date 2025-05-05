@@ -2,6 +2,9 @@ let canvas = document.getElementById("myChart");
 let canvas2 = document.getElementById("myChart2");
 let ctx = canvas.getContext("2d");
 let ctx2 = canvas2.getContext("2d");
+let n_atendidas = 0;
+let n_no_atendidas = 0;
+
 let myChart = new Chart(ctx,{
     type:"bar",
     data:{
@@ -50,3 +53,39 @@ let myChart2 = new Chart(ctx2,{
         }]
     },
 });
+
+function buscarAsistentes(){
+    let table = document.querySelector("table");
+    let tbody = table.querySelector('tbody');
+    let input = document.getElementById("buscar-asistentes");
+    if(tbody){
+      let rows = tbody.rows;
+      for (let row = 0; row < rows.length; row++) {
+        let rowTable = rows[row];
+        let refRowTable = rowTable.cells[1].textContent?.toLowerCase() || '';
+        if (!refRowTable.includes(input.value.toLowerCase())) {
+          rowTable.style.display = 'none';
+        } else {
+          rowTable.style.display = '';
+        }
+      }
+    }
+}
+
+function filtrarPlanta(){
+    let table = document.querySelector("table");
+    let tbody = table.querySelector('tbody');
+    let input = document.getElementById("planta");
+    if(tbody){
+      let rows = tbody.rows;
+      for (let row = 0; row < rows.length; row++) {
+        let rowTable = rows[row];
+        let refRowTable = rowTable.cells[2].textContent?.toLowerCase() || '';
+        if (!refRowTable.includes(input.value.toLowerCase())) {
+          rowTable.style.display = 'none';
+        } else {
+          rowTable.style.display = '';
+        }
+      }
+    }
+}

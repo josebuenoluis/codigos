@@ -5,3 +5,8 @@ class Plantas(db.Model):
     
     def __init__(self,numero) -> None:
         self.numero = numero
+
+    def to_dict(self) -> dict:
+        return {
+            "numero": self.numero
+        }

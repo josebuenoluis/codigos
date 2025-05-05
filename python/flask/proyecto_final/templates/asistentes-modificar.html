@@ -18,10 +18,10 @@
                         <div class="row">
                             <div class="col-12 col-lg-4 mb-3 d-flex justify-content-center">
                                 <div>
-                                    <button type="button" id="btn-update" class="btn border-0 btn-edit-row">
+                                    <button type="button" onclick="actualizarAsistentes()" id="btn-update" class="btn border-0 btn-edit-row">
                                         <i class="bi bi-pencil-square text-warning fs-1"></i>
                                     </button>
-                                    <button type="button" id="btn-clear" class="btn border-0 btn-delete-row">
+                                    <button type="button" onclick="limpiarSeleccion()" id="btn-clear" class="btn border-0 btn-delete-row">
                                         <i class="bi bi-eraser fs-1"></i>
                                     </button>
                                     <button type="button" id="btn-delete" class="btn border-0 btn-delete-row">
@@ -40,11 +40,11 @@
                             </div>
                             <div class="col-12 col-lg-2 mb-3">
                                 <label for="planta" class="form-label fw-bold">Filtrar por planta</label>
-                                <select class="form-select" required id="planta" name="planta" aria-label="Planta">
-                                    <option value="" disabled selected>Selecciona una planta...</option>
-                                    <option value="1">Planta 1</option>
-                                    <option value="2">Planta 2</option>
-                                    <option value="3">Planta 3</option>
+                                <select class="form-select" required id="planta" name="planta" onchange="filtrarPlanta()" aria-label="Planta">
+                                    <option value="" selected>Selecciona una planta...</option>
+                                    {% for planta in plantas %}
+                                    <option value="{{ planta.numero }}">Planta {{ planta.numero }}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
                             <div class="col-12 col-lg-2 mb-3">
@@ -52,7 +52,7 @@
                                     <label for="buscar-asistentes" class="form-label fw-bold">Filtrar por nombre</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" placeholder="Buscar" id="buscar-asistentes"
-                                            aria-label="Search" aria-describedby="search-addon">
+                                            aria-label="Search" aria-describedby="search-addon" oninput="buscarAsistentes()">
                                         <span class="input-group-text">
                                             <i class="bi bi-search"></i>
                                         </span>
@@ -82,7 +82,7 @@
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Cancelar</button>
                                         <button type="button" class="btn btn-danger"
-                                            data-bs-dismiss="modal">Confirmar</button>
+                                            data-bs-dismiss="modal" onclick="eliminarAsistentes()">Confirmar</button>
                                     </div>
                                 </div>
                             </div>
@@ -90,17 +90,32 @@
                         <div class="row">
                             <div class="col">
                                 <div class="table-responsive" style="max-height: 400px;min-height:400px; overflow-y: auto;">
-                                    <table class="table text-center table-hover">
+                                    <table class="table text-center table-hover" id="tabla-asistentes">
                                         <thead class="table-light" style="position:sticky; top: 0;">
                                             <tr>
-                                                <th scope="col">Id</th>
+                                                <th scope="col">NIF</th>
                                                 <th scope="col">Nombre</th>
-                                                <th scope="col">Activo</th>
+                                                <th scope="col">Telefono</th>
+                                                <th scope="col">Codigo</th>
                                                 <th scope="col">NºPlanta</th>
+                                                <th scope="col">Estado</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-    
+                                            {% for asistente in asistentes %}
+                                            <tr id="asistente-{{ asistente.dni }}" class="asistente-row" onclick="seleccionarAsistente(event)">
+                                                <td>{{ asistente.dni }}</td>
+                                                <td>{{ asistente.nombre }}</td>
+                                                <td>{{ asistente.telefono }}</td>
+                                                <td>{{ asistente.codigo }}</td>
+                                                <td>Planta {{ asistente.planta_fk }}</td>
+                                                {% if asistente.activo %}
+                                                    <td>Activo</td>
+                                                {% else %}
+                                                    <td>Inactivo</td>
+                                                {% endif %}
+                                            </tr>
+                                            {% endfor %}
                                         </tbody>
                                     </table>
                                 </div>
@@ -113,4 +128,7 @@
     </div>
 </main>
 
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/asistentes-modificar.js') }}"></script>
 {% endblock %}

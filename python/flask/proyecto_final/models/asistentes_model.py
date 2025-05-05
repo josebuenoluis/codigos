@@ -15,3 +15,13 @@ class Asistentes(db.Model):
         self.codigo = codigo
         self.planta_fk = planta_fk
         self.activo = False
+
+    def to_dict(self) -> dict:
+        return {
+            "dni": self.dni,
+            "nombre": self.nombre,
+            "telefono": self.telefono,
+            "codigo": self.codigo,
+            "planta_fk": self.planta_fk,
+            "activo": self.activo
+        }
