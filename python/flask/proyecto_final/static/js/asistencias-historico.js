@@ -7,7 +7,7 @@ let myChart = new Chart(ctx,{
             'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
         datasets: [{
             label: 'Historico de asistencias',
-            data: [],
+            data: [0,0,0,0,0,0,0,0,0,0,0,0],
             fill: false,
             borderColor: 'rgb(75, 192, 192)',
             tension: 0.1
