@@ -62,6 +62,7 @@ obtenerConteoAsistencias().then(data => {
     n_no_atendidas = data.asistencias_pendientes;
     myChart2.data.datasets[0].data[0] = n_atendidas;
     myChart2.data.datasets[0].data[1] = n_no_atendidas;
+    myChart2.update();
   });
 
 obtenerAsistenciasAsistentes().then(data => {

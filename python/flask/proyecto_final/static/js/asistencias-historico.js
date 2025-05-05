@@ -7,7 +7,7 @@ let myChart = new Chart(ctx,{
             'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
         datasets: [{
             label: 'Historico de asistencias',
-            data: [0,0,0,0,0,0,0,0,0,0,0,0],
+            data: [],
             fill: false,
             borderColor: 'rgb(75, 192, 192)',
             tension: 0.1
@@ -41,8 +41,8 @@ function mostrarHistorico(){
     obtenerHistorico().then(data => {
         data.forEach(element => {
             myChart.data.datasets[0].data.push(element.total_asistencias);
-            myChart.update();
         });
+        myChart.update();
     });
 }
 
