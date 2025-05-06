@@ -5,6 +5,7 @@ from models.habitaciones_model import Habitaciones
 from models.camas_model import Camas
 from models.db import db
 from sqlalchemy import func,extract
+from datetime import datetime
 
 def obtener_plantas() -> list[Plantas]:
     """"Funcion para obtener todas las plantas de la base de datos"""
@@ -216,13 +217,25 @@ def cargarAsistencias():
         print("Error al guardar asistencias: ",e)
         db.session.rollback()
 
-def obtener_historico() -> list[dict]:
+def obtener_historico(desde="",hasta="") -> list[dict]:
     """Funcion para obtener asistencias por mes y anio"""
-    asistencias_historico = db.session.query(
-        extract('year',Asistencias.fecha_llamada).label('anio'),
-        extract('month',Asistencias.fecha_llamada).label('mes'),
-        func.count(Asistencias.id).label("conteo_asistencias")
-    ).group_by('mes','anio').order_by('mes','anio').all()
+    if desde != "" and hasta != "":
+        print(desde,hasta)
+        desde = datetime.strptime(desde,"%Y-%m-%d")
+        hasta = datetime.strptime(hasta,"%Y-%m-%d")
+        asistencias_historico = db.session.query(
+            extract('year',Asistencias.fecha_llamada).label('anio'),
+            extract('month',Asistencias.fecha_llamada).label('mes'),
+            func.count(Asistencias.id).label("conteo_asistencias")
+        ).filter(
+            Asistencias.fecha_llamada >= desde, Asistencias.fecha_llamada <= hasta,
+        ).group_by('mes','anio').order_by('mes','anio').all()
+    else:    
+        asistencias_historico = db.session.query(
+            extract('year',Asistencias.fecha_llamada).label('anio'),
+            extract('month',Asistencias.fecha_llamada).label('mes'),
+            func.count(Asistencias.id).label("conteo_asistencias")
+        ).group_by('mes','anio').order_by('mes','anio').all()
     resultado_dict = [
         {
             "anio":asistencia[0],
@@ -231,3 +244,31 @@ def obtener_historico() -> list[dict]:
         } for asistencia in asistencias_historico
     ]
     return resultado_dict
+
+def obtener_conteo_asistencias_planta() -> dict:
+    """Funcion para devolver el numero de asistencias
+    atendidas y no atendidas por planta"""
+    asistencias_por_planta = db.session.query(
+        Habitaciones.planta_fk,
+        func.count(Asistencias.id).label("total_asistencias")
+    ).join(Habitaciones, Asistencias.habitacion_fk == Habitaciones.numero).filter(
+        Asistencias.estado=="atendida"
+    ).group_by(Habitaciones.planta_fk).all()
+
+    asistencias_atendidas_dict = [
+        {
+            "planta": asistencia[0],
+            "total_asistencias": asistencia[1]
+        } for asistencia in asistencias_por_planta
+    ]
+    return {"asistencias_atendidas":asistencias_atendidas_dict}
+
+def obtener_llamados_habitaciones() -> list[Asistencias]:
+    """Funcion para obtener las 10 habitaciones
+    con mas llamados"""
+    habitaciones = db.session.query(
+        Asistencias.habitacion_fk,
+        func.count(Asistencias.id).label("conteo_llamadas")
+    ).group_by(Asistencias.habitacion_fk).order_by(func.count(Asistencias.id).desc()).limit(10).all()
+    print(habitaciones)
+    return habitaciones

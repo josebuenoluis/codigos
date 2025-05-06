@@ -31,6 +31,11 @@ def obtener_asistencias(n_planta:int=0):
     print("Asistencias: ", asistencias)
     return jsonify([asistencia.to_dict() for asistencia in asistencias])
 
+@api.route("/api/asistencias/plantas",methods=["GET"])
+def obtener_asistencias_plantas():
+    asistencias = db_service.obtener_conteo_asistencias_planta()
+    return asistencias
+
 @api.route("/api/asistencias/conteo",methods=["GET"])
 @api.route("/api/asistencias/conteo/<int:n_planta>",methods=["GET"])
 def asistencias_conteo(n_planta:int=0):
@@ -42,5 +47,22 @@ def asistencias_conteo(n_planta:int=0):
 
 @api.route("/api/asistencias/historico",methods=["GET"])
 def asistencias_historico():
-    asistencias_historico = db_service.obtener_historico()
+    desde = request.args.get("desde","")
+    hasta = request.args.get("hasta","")
+    if desde != "" and hasta != "":
+        asistencias_historico = db_service.obtener_historico(desde,hasta)
+        pass
+    else:
+        asistencias_historico = db_service.obtener_historico()
     return asistencias_historico
+
+@api.route("/api/habitaciones/asistencias/conteo")
+def obtener_conteo_llamadas_habitaciones():
+    habitaciones_asistencias = db_service.obtener_llamados_habitaciones()
+    resultado_dict = [
+        {
+            "habitacion":habitacion[0],
+            "conteo_llamadas":habitacion[1]
+        } for habitacion in habitaciones_asistencias
+    ]
+    return {"success":True}
