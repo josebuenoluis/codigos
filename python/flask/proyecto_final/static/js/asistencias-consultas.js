@@ -4,7 +4,11 @@ let canvas3 = document.getElementById("myChart3");
 let ctx = canvas.getContext("2d");
 let ctx2 = canvas2.getContext("2d");
 let ctx3 = canvas3.getContext("2d");
+
+
 mostrarEstadisticasPlantas();
+mostrarAsistenciasHabitaciones();
+mostrarPorcentajeAsistenciaas();
 // Llamadas por planta
 let myChart = new Chart(ctx,{
     type:"bar",
@@ -42,7 +46,19 @@ let myChart2 = new Chart(ctx2,{
             data: [],
             fill: false,
             borderColor: 'rgb(75, 192, 192)',
-            tension: 0.1
+            tension: 0.1,
+            backgroundColor:[
+                "rgba(255, 99, 132, 0.5)",
+                "rgba(54, 162, 235, 0.5)",
+                "rgba(255, 206, 86, 0.5)",
+                "rgba(75, 192, 192, 0.5)",
+                "rgba(153, 102, 255, 0.5)",
+                "rgba(255, 159, 64, 0.5)",
+                "rgba(255, 99, 132, 0.5)",
+                "rgba(54, 162, 235, 0.5)",
+                "rgba(255, 206, 86, 0.5)",
+                "rgba(75, 192, 192, 0.5)"
+            ]
           }]
     },
     options:{
@@ -58,10 +74,10 @@ let myChart2 = new Chart(ctx2,{
 let myChart3 = new Chart(ctx3,{
     type:"pie",
     data:{
-        labels:["col1","col2"],
+        labels:["No atendidas","Atendidas"],
         datasets:[{
-            label:"Num datos",
-            data:[10,4],
+            label:"Asistencias sobre el total",
+            data:[],
             backgroundColor:[
                 "rgba(255, 99, 132, 0.5)",
                 "rgba(54, 162, 235, 0.5)",
@@ -122,6 +138,55 @@ function mostrarEstadisticasPlantas(){
     });
 }
 
-async function obtenerLlamadosHabitaciones(){
+function mostrarAsistenciasHabitaciones(){
+    obtenerLlamadosHabitaciones().then(data => {
+        let lista_asistencias = [];
+        let lista_habitaciones = [];
+        // Guardamos en la lista el numero de asistencias atendidas y 
+        // nombre de asistentes
+        data.forEach(element => {
+          lista_habitaciones.push(element.habitacion);
+          lista_asistencias.push(element.conteo_llamadas);
+        });
+        myChart2.data.labels = lista_habitaciones;
+        myChart2.data.datasets[0].data = lista_asistencias;
+        myChart2.update();
+    });2
+}
 
+async function obtenerLlamadosHabitaciones(){
+    let endpoint = "/api/habitaciones/asistencias/conteo";
+    return await fetch(endpoint,{
+        method:"GET",
+        headers:{
+            "Content-Type":"application/json"
+        }
+    }).then(data =>{
+        return data.json();
+    }).catch(error =>{
+        console.log("Error: ",error);
+    });
+}
+
+function mostrarPorcentajeAsistenciaas(){
+    obtenerPorcentajeAsistencias().then(data =>{
+        console.log("Porcentajes: ",data);
+        myChart3.data.datasets[0].data.push(data.porcentaje_atendidas);
+        myChart3.data.datasets[0].data.push(data.porcentaje_no_atendidas);
+        myChart3.update();
+    });
+}
+
+async function obtenerPorcentajeAsistencias(){
+    let endpoint = "/api/asistencias/porcentaje";
+    return await fetch("/api/asistencias/porcentaje",{
+        method:"GET",
+        headers:{
+            "Content-Type":"application/json"
+        }
+    }).then(data => {
+        return data.json();
+    }).catch(error =>{
+        console.log("Error: ",error);
+    });
 }

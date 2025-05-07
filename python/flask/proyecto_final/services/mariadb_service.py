@@ -272,3 +272,14 @@ def obtener_llamados_habitaciones() -> list[Asistencias]:
     ).group_by(Asistencias.habitacion_fk).order_by(func.count(Asistencias.id).desc()).limit(10).all()
     print(habitaciones)
     return habitaciones
+
+def calcular_porcentaje_asistencias_totales() -> dict:
+    """Funcion para calcular el porcentaje
+    de asistencias atendidas en comparacion
+    al de no atendidas"""
+    asistencias_totales = conteo_asistencias()
+    total_asistencias = asistencias_totales["asistencias_atendidas"] + asistencias_totales["asistencias_pendientes"]
+    porcentaje_atendidas = asistencias_totales["asistencias_atendidas"] / total_asistencias * 100
+    porcentaje_no_atendidas = asistencias_totales["asistencias_pendientes"] / total_asistencias * 100
+    print(f"Atendidas: {porcentaje_atendidas}%; No atendidas: {porcentaje_no_atendidas}%")
+    return {"porcentaje_atendidas":porcentaje_atendidas,"porcentaje_no_atendidas":porcentaje_no_atendidas}

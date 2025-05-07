@@ -26,8 +26,8 @@
                     <div class="col-10 col-sm-5 col-lg-3 mb-4">
                         <div class="input-group">
                             <input type="text" readonly class="form-control" id="input-csv"
-                                placeholder="Exportar CSV" style="cursor: pointer;">
-                            <button type="button" class="input-group-text" id="csv-button">
+                                placeholder="Exportar CSV" style="cursor: pointer;" onclick="obtenerAsistencias()">
+                            <button type="button" class="input-group-text" id="csv-button" onclick="obtenerAsistencias()">
                                 <i class="bi bi-download fs-4"></i>
                             </button>
                         </div>
@@ -36,12 +36,11 @@
                 <div class="row d-flex justify-content-center mb-3">
                     <div class="col-12">
                         <div class="table-responsive border border-1" style="max-height: 400px;min-height:400px; overflow-y: auto;">
-                            <table class="table text-center table-hover">
+                            <table class="table text-center table-hover" id="tabla-asistencias">
                                 <thead class="table-light" style="position:sticky; top: 0;">
                                     <tr>
-                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Id</th>
                                         <th scope="col">NIF</th>
-                                        <th scope="col">Planta</th>
                                         <th scope="col">Habitacion</th>
                                         <th scope="col">Cama</th>
                                         <th scope="col">Fecha llamada</th>
@@ -50,7 +49,17 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
+                                    {% for asistencia in asistencias %}
+                                        <tr>
+                                            <td>{{asistencia.id}}</td>
+                                            <td>{{asistencia.dni}}</td>
+                                            <td>{{asistencia.habitacion_fk}}</td>
+                                            <td>{{asistencia.cama_fk}}</td>
+                                            <td>{{asistencia.fecha_llamada}}</td>
+                                            <td>{{asistencia.fecha_presencia}}</td>
+                                            <td>{{asistencia.estado}}</td>
+                                        </tr>
+                                    {% endfor %}
                                 </tbody>
                             </table>
                         </div>

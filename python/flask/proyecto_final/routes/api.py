@@ -65,4 +65,9 @@ def obtener_conteo_llamadas_habitaciones():
             "conteo_llamadas":habitacion[1]
         } for habitacion in habitaciones_asistencias
     ]
-    return {"success":True}
+    return resultado_dict
+
+@api.route("/api/asistencias/porcentaje")
+def calcular_porcentaje_asistencias():
+    porcentajes_asistencias = db_service.calcular_porcentaje_asistencias_totales()
+    return porcentajes_asistencias

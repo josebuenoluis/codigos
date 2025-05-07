@@ -11,7 +11,17 @@ def historico_asistencias():
 def consultas_asistencias():
     return render_template("asistencias-consultas.html")
 
-@asistencias.route("/asistencias/exportar", methods=["GET"])
+@asistencias.route("/asistencias/exportar", methods=["GET","POST"])
 def exportar_asistencias():
-    return render_template("exportar-datos.html")
+    if request.method == "GET":
+        asistencias = db_service.obtener_asistencias()
+        return render_template("exportar-datos.html",asistencias=asistencias)
+    else:
+        print("Dentro de post")
+        data = request.get_json()
+        # print(data)
+        success = False
+        if data:
+            success = True
+        return {"success":success}
 
