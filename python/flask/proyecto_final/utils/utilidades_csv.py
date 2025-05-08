@@ -5,19 +5,24 @@ data = [
     {
         "dni":"12345678",
         "nombre":"jose bueno"
+    },
+    {
+        "dni":"12345678",
+        "nombre":"jose bueno"
     }
 ]
 
-# Funcion para exportar CSV
-def exportarCSV(data) -> None:
-    headers = ["dni","nombre"]
-    # writer = csv.DictWriter("",headers,dialect="csv")
-    file = open("C:/Users/jose_/Documents/codigos/python/flask/proyecto_final/utils/prueba.csv")
-    writer = csv.writer(
-        file,
-        delimiter=","
-    )
-    writer.writerow(("hola"))
-    # writer.writeheader()
+def exportarCSV(data:list[dict]) -> None:
+    """Funcion para exportar CSV, desde
+    una lista de diccionarios"""
+    #Obtenemos los encabezados de los datos recibidos
+    # para el csv
+    headers = [
+        header for header in data[0].keys()
+    ]
+    with open("utils/prueba.csv","w") as file:
+        writer = csv.DictWriter(file,fieldnames=headers,delimiter=";",lineterminator="\n")
+        writer.writeheader()
+        writer.writerows(data)
 
-exportarCSV(data)
+

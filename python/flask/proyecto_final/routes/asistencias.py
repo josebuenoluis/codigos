@@ -1,6 +1,7 @@
-from flask import render_template,Blueprint,request
+from flask import render_template,Blueprint,request,send_file
 from services import mariadb_service as db_service
-
+from utils.utilidades_csv import exportarCSV
+from os import path
 asistencias = Blueprint("asistencias",__name__)
 
 @asistencias.route("/asistencias/historico", methods=["GET"])
@@ -22,6 +23,16 @@ def exportar_asistencias():
         # print(data)
         success = False
         if data:
+            basepath = path.dirname(__file__)
+            url_file = path.join(basepath,"static/archivos","prueba.csv")
+            url_file = "C:/Users/Usuario/Documents/codigos/python/flask/proyecto_final/static/archivos/prueba.csv"
             success = True
+            exportarCSV(data)
+            return send_file(
+                url_file,
+                as_attachment=True,
+                download_name="prueba.csv"
+            )
+
         return {"success":success}
 

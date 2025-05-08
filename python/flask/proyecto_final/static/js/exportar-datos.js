@@ -21,11 +21,11 @@ function obtenerAsistencias(){
     }
     if(data.length > 0){
         postData(data).then(response =>{
-            if(response.success == true){
-                console.log(response);
-            }else{
-                console.log("Error: ",response);
-            }
+            // if(response.success == true){
+            //     console.log(response);
+            // }else{
+            //     console.log("Error: ",response);
+            // }
         });
     }
 }
@@ -39,7 +39,16 @@ async function postData(data){
         },
         body:JSON.stringify(data)
     }).then(response =>{
-        return response.json();
+        response.blob().then(blob =>{
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = "asistencias.csv";
+            document.body.appendChild(a);
+            a.click(); 
+            a.remove();
+            window.URL.revokeObjectURL(url);
+        });
     }).catch(error =>{
         console.log("Error: ",error);
     });
