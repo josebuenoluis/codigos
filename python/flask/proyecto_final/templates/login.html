@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesion</title>
+    <link rel="stylesheet" href="../static/css/login.css">
+    <link rel="icon" href="{{ url_for('static', filename='img/logo-icon.png') }}">
+</head>
+<body>
+    <main>
+        <section>
+            <article>
+                <div class="figure">
+                    <span>Iniciar sesion</span>
+                </div>
+                <img src="/static/img/icon-user.svg" alt="Fondo Web">
+                <form action="/login" method="post">
+                    <input type="text" name="username" class="user" placeholder="Usuario" id="user">
+                    <input type="password" name="password" class="password" placeholder="Contraseña" id="password">
+                    {% with messages = get_flashed_messages() %}
+
+                    {% if messages %}
+                        <br />
+                        {% for message in messages %}
+                            <span>{{message}}</span>
+                        {% endfor %}
+                    {% endif %}
+
+                    {% endwith %}
+                    <input type="submit">
+                </form>
+            </article>
+        </section>
+    </main>
+
+    <script src="../static/js/login.js"></script>
+</body>
+</html>

@@ -3,6 +3,7 @@ from models.asistentes_model import Asistentes
 from models.asistencias_model import Asistencias
 from models.habitaciones_model import Habitaciones
 from models.camas_model import Camas
+from models.user_model import User
 from models.db import db
 from sqlalchemy import func,extract
 from datetime import datetime
@@ -283,3 +284,33 @@ def calcular_porcentaje_asistencias_totales() -> dict:
     porcentaje_no_atendidas = asistencias_totales["asistencias_pendientes"] / total_asistencias * 100
     print(f"Atendidas: {porcentaje_atendidas}%; No atendidas: {porcentaje_no_atendidas}%")
     return {"porcentaje_atendidas":porcentaje_atendidas,"porcentaje_no_atendidas":porcentaje_no_atendidas}
+
+def crearUsuario(user:str,password:str) -> bool:
+    """Funcion para crear un usuario con hash"""
+    try:
+        user = User(user=user,password=password)
+        db.session.add(user)
+        db.session.commit()
+        print("Usuario creado con exito")
+        return True
+    except Exception as e:
+        print("Error al crear usuario: ",e)
+        return False
+
+def login(user:str,password:str) -> User:
+    """Funcion para consultar y iniciar sesion"""
+    try:
+        user_db = User.query.filter(User.user == user).first()
+        return user_db if user_db is not None and user_db.check_password(user_db.password,password) else None
+    except Exception as e:
+        print("Error al iniciar sesion: ",e)
+        return None
+    
+def getUser(id:int) -> User:
+    """Funcion para consultar un usuario por su id"""
+    try:
+        user_db = User.query.filter(User.id == id).first()
+        return user_db if user_db is not None else None
+    except Exception as e:
+        print("Error al iniciar sesion: ",e)
+        return None

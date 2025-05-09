@@ -1,5 +1,6 @@
 from flask import render_template,Blueprint,request,jsonify
 from services import mariadb_service as db_service
+from flask_login import login_required
 from models.db import db
 asistentes = Blueprint("asistentes",__name__)
 
@@ -27,6 +28,7 @@ def crear_asistente():
 
 
 @asistentes.route("/asistentes/modificar", methods=["GET","PUT","DELETE"])
+@login_required
 def modificar_asistente():
     if request.method == "GET":
         plantas = db_service.obtener_plantas()
